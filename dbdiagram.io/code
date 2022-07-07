@@ -1,0 +1,127 @@
+//// -- BlueClub Team Project
+
+// Creating tables
+Table member {
+  memID varchar2 [pk] // auto-increment
+  memPW varchar2
+  memName varchar2 
+  memAddr varchar2
+  memPhone varchar2
+  memEMail varchar2
+  memDate date
+  memBrith date
+  memRole int [ref: > role.roleCode]
+}
+
+Table role {
+  roleCode int [pk]
+  roloName varchar2
+}
+
+
+Table product{
+  proCode int [pk]
+  proName varchar2
+  proPrice int
+  proStock int
+  proDetail varchar2
+  proCount int
+  proCategory int [ref: > Category.categoryCode]
+  proGender int [ref: > Gender.genderCode]
+  proColor int [ref: > Color.colorCode]
+  proSize int [ref: > Size.sizeCode]
+  proMaterial int [ref: > Material.materialCode]
+  proSeason int [ref: > Season.seasonCode]
+  proPriceRange int [ref: > priceRange.priceRangeCode]
+  proAge int [ref: > age.ageCode]
+}
+
+Table Category {
+  categoryCode int [pk]
+  categorylargeName varchar2
+  categorysmallName varchar2
+}
+Table Gender {
+  genderCode int [pk]
+  genderName varchar2
+}
+Table Color {
+  colorCode int [pk]
+  colorName varchar2
+}
+Table Size {
+  sizeCode int [pk]
+  sizeName varchar2
+}
+Table Material{
+  materialCode int [pk]
+  materialName varchar2
+}
+Table Season {
+  seasonCode int [pk]
+  seasonName varchar2
+}
+Table priceRange{
+  priceRangeCode int [pk]
+  priceRangeName varchar2
+}
+Table age{
+  ageCode int [pk]
+  ageName varchar2
+}
+
+Table order{
+  orderCode int [pk]
+  memID varchar2 [ref: > member.memID]
+  proCode int [ref: > product.proCode]
+  orderPrice int
+  orderCount int
+  orderDate date
+  orderState int [ref: > orderState.orderStateCode]
+  orderStartDate date
+  orderFinishDate date
+}
+Table orderState{
+  orderStateCode int [pk]
+  orderStateName varchar2
+}
+
+Table reviewBoard{
+  reviewNo int [pk]
+  reviewWriter varchar2 [ref: > member.memID]
+  reviewProduct int [ref: > product.proCode]
+  reviewDate date
+  reviewTitle varchar2
+  reviewContent varchar2
+  reviewStar int
+  reviewPhoto varchar2
+}
+
+Table noticeBoard{
+  noticeNo int [pk]
+  noticeWriter varchar2 [ref: > member.memID]
+  noticeTitle varchar2
+  noticeDate date
+  noticeContent varchar2
+  noticeCount int
+}
+
+Table qnaBoard{
+  qnaNo int [pk]
+  qnaWriter varchar2 [ref: > member.memID]
+  qnaPW varchar2
+  qnaTitle varchar2
+  qnaDate date
+  qnaContent varchar2
+  qnaCount int
+}
+Table qnaComment{
+  qnaNo int [pk, ref: > qnaBoard.qnaNo]
+  qnaCoOrder int
+  qnaCoWriter varchar2 [ref: > member.memID]
+  qnaCoDate date
+  qnaCoContent varchar2
+}
+
+
+Ref: "priceRange"."priceRangeCode" < "priceRange"."priceRangeName"
