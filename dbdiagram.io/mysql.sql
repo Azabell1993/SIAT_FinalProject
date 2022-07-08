@@ -15,6 +15,14 @@ CREATE TABLE `role` (
   `roloName` varchar2
 );
 
+
+CREATE TABLE `cart` (
+  `seq` int PRIMARY KEY,
+  `proCode` int,
+  `cartCnt` int,
+  `memID` varchar2
+);
+
 CREATE TABLE `product` (
   `proCode` int PRIMARY KEY,
   `proName` varchar2,

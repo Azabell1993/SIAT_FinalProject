@@ -18,6 +18,12 @@ Table role {
   roloName varchar2
 }
 
+Table cart{
+  seq int [pk] //자동증가
+  proCode int [ref: > product.proCode]
+  cartCnt int
+  memID varchar2 [ref: > member.memID]
+}
 
 Table product{
   proCode int [pk]
