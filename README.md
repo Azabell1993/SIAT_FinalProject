@@ -6,11 +6,12 @@
 - this repo is final project 
 
 ## project team
-- 팀장 : 박지우  깃(https://github.com/Azabell1993) 
-- 팀원 1: 김호중 깃(https://github.com/HeartByte) 
-- 팀원 2: 채희상 깃(https://github.com/ds3569) 
-- 팀원 3: 이대관 깃(https://github.com/CodingBeginnerLDK) 
-
+|이름|팀원 역할|분담|깃 허브|
+|------|---|---|
+|박지우|팀장|관장, 풀 스택|https://github.com/Azabell1993|
+|이대관|프론트엔드|프론트 엔드 팀원|https://github.com/CodingBeginnerLDK|
+|김호중|백엔드|백엔드 팀원|https://github.com/HeartByte|
+|채희상|백엔드|백엔드 |https://github.com/ds3569|
 ## 팀원 소개
 |이름|개발 특기사항|개발 특기언어|
 |------|---|---|
