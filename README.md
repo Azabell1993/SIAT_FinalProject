@@ -6,10 +6,19 @@
 - this repo is final project 
 
 ## 0705 make project team
-- 팀장 : 박지우  깃(https://github.com/Azabell1993). 
+- 팀장 : 박지우  깃(https://github.com/Azabell1993) 
 - 팀원 1: 김호중 깃(https://github.com/HeartByte) 
 - 팀원 2: 채희상 깃(https://github.com/ds3569) 
 - 팀원 3: 이대관 깃(https://github.com/CodingBeginnerLDK) 
+
+## 팀원 소개
+|이름|개발 특기사항|개발 특기언어|
+|------|---|---|
+|박지우|system 개발|C언어|
+|이대관|||
+|김호중|||
+|채희상|||
+
 
 # DB 설계
 ![DB](https://user-images.githubusercontent.com/75885992/177923822-d4089267-5d6e-4448-8d25-7dd9e84974c9.png)
