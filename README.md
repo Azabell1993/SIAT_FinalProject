@@ -1,5 +1,6 @@
 # TEAM : Blue Club
 - 개인 웹 쇼핑몰 Site
+- 핵심은 '추천 알고리즘'
 
 # SIAT_FinalProject
 - siat full stack sw developer education
