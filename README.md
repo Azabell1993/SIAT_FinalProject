@@ -10,9 +10,9 @@
 |이름|팀원 역할|분담|기여도가 가장 큰 부분|깃 허브|
 |------|---|---|---|---|
 |박지우|팀장|풀 스택|전체적인 코드 관장|https://github.com/Azabell1993|
-|이대관|프론트엔드|DB설계|프론트 엔드 팀원|https://github.com/CodingBeginnerLDK|
-|김호중|백엔드|-|백엔드 팀원|https://github.com/HeartByte|
-|채희상|백엔드|DB설계|백엔드 |https://github.com/ds3569|
+|이대관|프론트엔드 팀원|프론트 엔드|DB설계|https://github.com/CodingBeginnerLDK|
+|김호중|백엔드 팀원|백엔드|-|https://github.com/HeartByte|
+|채희상|백엔드 팀원|백엔드|DB설계|https://github.com/ds3569|
 ## 팀원 소개
 |이름|개발 특기사항|개발 특기언어|
 |------|---|---|
