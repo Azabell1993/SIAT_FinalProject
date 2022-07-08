@@ -1,3 +1,6 @@
+# TEAM : Blue Club
+- 개인 웹 쇼핑몰 Site
+
 # SIAT_FinalProject
 - siat full stack sw developer education
 - this repo is final project 
