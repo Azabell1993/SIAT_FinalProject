@@ -10,7 +10,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Sat Jul  9 14:31:37 2022
+# Make data base, printed on Sat Jul  9 21:38:24 2022
+ 
 
 # Variables
 
@@ -18,8 +19,6 @@ make: *** No rule to make target `all'.  Stop.
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
@@ -30,8 +29,6 @@ VSCODE_LOG_NATIVE = false
 @F = $(notdir $@)
 # makefile
 CURDIR := /Users/azabell/Desktop/SIAT_FinalProject/TeamLeader_Pratice_Test_Workspace
-# environment
-GOLINK = HOME=/Applications/Golink
 # makefile
 SHELL = /bin/sh
 # environment
@@ -39,24 +36,19 @@ VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePac
 # environment
 _ = /usr/bin/make
 # makefile
- 
 MAKEFILE_LIST := 
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/6j/pbrq3whx1b5gf_7tp54td4z80000gp/T/vscode-ipc-578a9bb1-dc5e-403a-9c8d-f59258355c9b.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/6j/pbrq3whx1b5gf_7tp54td4z80000gp/T/vscode-ipc-61d94e4b-fb67-4c3a-a53b-2f45480bae3b.sock
 # environment
-VSCODE_CWD = /Users/azabell/Desktop/SIAT_FinalProject/TeamLeader_Pratice_Test_Workspace
+VSCODE_CWD = /
 # environment
-PATH = //Users/azabell/gcc-install/bin:/usr/local/opt/curl/bin:/usr/local/opt/llvm/bin:/Users/azabell/emsdk:/Users/azabell/emsdk/upstream/emscripten:/Users/azabell/emsdk/node/14.18.2_64bit/bin:/Users/azabell/.wasmtime/bin:/Volumes/azabellSSD/opt/anaconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/go/bin:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/azabell/.cargo/bin
+PATH = /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 # environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
-# environment
-EMSDK_NODE = /Users/azabell/emsdk/node/14.18.2_64bit/bin/node
-# environment
-LaunchInstanceID = 5D8D9407-A920-40DC-AD55-8DA07709D6AA
+LaunchInstanceID = C08AE0BB-F8AC-4266-BA49-2AB80AE26D58
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -64,21 +56,17 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Wfzyjq0LTC/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.6D1moMICZQ/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.G6XS3v1Vss/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.saUh9RqoHL/org.xquartz:0
 # environment
 VSCODE_PIPE_LOGGING = true
-# environment
-SSL_CERT_FILE = /Users/azabell/emsdk/python/3.9.2_64bit/lib/python3.9/site-packages/certifi/cacert.pem
 # environment
 PWD = /Users/azabell/Desktop/SIAT_FinalProject/TeamLeader_Pratice_Test_Workspace
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
-# environment
-EMSDK_PYTHON = /Users/azabell/emsdk/python/3.9.2_64bit/bin/python3
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -86,49 +74,34 @@ HOME = /Users/azabell
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CLI = 1
-# environment
 VSCODE_CODE_CACHE_PATH = /Users/azabell/Library/Application Support/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
 # environment
 LOGNAME = azabell
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
-WASMTIME_HOME = /Users/azabell/.wasmtime
-# environment
-ZSH = /Users/azabell/.oh-my-zsh
-# environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
 XPC_FLAGS = 0x0
-# environment
-COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
 # environment
-LC_TERMINAL = iTerm2
-# environment
-SHLVL = 3
+SHLVL = 1
+ 
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = azabell
 # makefile
 .DEFAULT_GOAL := 
-# default
-MAKECMDGOALS := all
-# environment
-TERM_SESSION_ID = w0t0p0:74BCEADA-C847-4232-BDD5-7672D7890D41
-# environment
-LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
-# environment
-TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
@@ -144,33 +117,19 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 3.4.16
-# environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.12961371358.12961371364.AEB6D1A3-A88C-4753-9E6D-3BC410B3460E
-# environment
-LC_TERMINAL_VERSION = 3.4.16
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.12961371358.12961371364
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
-# environment
-ITERM_SESSION_ID = w0t0p0:74BCEADA-C847-4232-BDD5-7672D7890D41
-# environment
-COLORFGBG = 15;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F6:0x3:0x33
 # environment
 COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
-# environment
-EM_CONFIG = /Users/azabell/emsdk/.emscripten
 # automatic
 <F = $(notdir $<)
-# environment
-ITERM_PROFILE = Default
-# environment
-PAGER = less
 # environment
 LC_ALL = C
 # environment
@@ -186,14 +145,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-TERM = xterm-256color
-# environment
-EMSDK = /Users/azabell/emsdk
-# environment
- 
-VSCODE_PID = 4489
+VSCODE_PID = 437
 # variable set hash-table stats:
-# Load=88/1024=9%, Rehash=0, Collisions=4/109=4%
+# Load=65/1024=6%, Rehash=0, Collisions=1/86=1%
 
 # Pattern-specific Variable Values
 
@@ -223,6 +177,7 @@ all:
 # Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -275,6 +230,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Sat Jul  9 14:31:37 2022
+# Finished Make data base on Sat Jul  9 21:38:24 2022
 
  

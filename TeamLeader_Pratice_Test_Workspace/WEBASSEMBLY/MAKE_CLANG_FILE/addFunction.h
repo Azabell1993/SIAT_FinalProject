@@ -62,16 +62,14 @@ extern "C" {
                                                                                                             \
     addFunction new_##addFunction(void)                                                                     \
     {                                                                                                       \
-        static addFunction temp =                                                                               \
-                {                                                                                               \
-                    .num1 = 0,                                                                                  \
-                    .num2 = 0,                                                                                  \
-                    .setAdd = addFunction##_set_Add,                                                            \
-                    .getAdd = addFunction##_get_Add,                                                            \
-                };                                                                                              \
+    static addFunction temp =                                                                               \
+            {                                                                                               \
+                .num1 = 0,                                                                                  \
+                .num2 = 0,                                                                                  \
+                .setAdd = addFunction##_set_Add,                                                            \
+                .getAdd = addFunction##_get_Add,                                                            \
+            };                                                                                              \
         return temp;                                                                                        \
     }
-#ifdef __cplusplus
-}
-#endif //__cplusplus
+
 #endif
