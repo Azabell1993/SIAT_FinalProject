@@ -270,7 +270,8 @@ if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
       onerror();
     };
     xhr.onerror = onerror;
-    xhr.send(null);
+    //xhr.send(null);
+    xhr.send(url);
   }
 
 // end include: web_or_worker_shell_read.js

@@ -8,7 +8,6 @@
 <body>
     <p>Hello World!</p>
     <input type=number size=20 id="numA"> + <input type=number size=20 id="numB">
-    <input type=text size=5 id="result">
     
     <button class="mybutton">Run myFunction</button>
     
@@ -17,15 +16,16 @@
         var a = document.getElementById("numA").value;
         var b = document.getElementById("numB").value;
 
+
         document.querySelector('.mybutton').addEventListener('click', function() {
-            var result = Module.ccall('AddResult', // name of C function
+            var result = Module.ccall(
+                'AddResult', // name of C function
                 'number', // return type
                 ['number'], // argument types
-                [a, b]      //arguments
-                ); 
-
-        }); 
-
+                [[a], [b]]      //arguments
+              );
+        });
+        
     </script>
 </body>
 </html>

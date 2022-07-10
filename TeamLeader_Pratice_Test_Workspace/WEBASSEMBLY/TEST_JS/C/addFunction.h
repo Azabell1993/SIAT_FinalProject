@@ -22,8 +22,8 @@ extern "C" {
 #ifdef _GNUC_
 #define NORETERN _attribute_ ((_noreturn_))
     /* 함수 전방 선언 */
-    public void addFunction##_set_Add(addFunction *, type, type);
-    public int addFunction##_get_Add(const addFunction *);
+    extern public void addFunction##_set_Add(addFunction *, type, type);
+    extern public int addFunction##_get_Add(const addFunction *);
 
     /* 비멤버 생성자 전방 선언 */
     addFunction new_##addFunction(void);
@@ -71,5 +71,7 @@ extern "C" {
             };                                                                                              \
         return temp;                                                                                        \
     }
-
+#ifdef __cplusplus
+}
+#endif //__cplusplus
 #endif
