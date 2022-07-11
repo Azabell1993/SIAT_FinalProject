@@ -1,3 +1,5 @@
-@param emcc -o addFunction.html addFunction.c -O3 -s WASM=1 --shell-file html_template/shell_minimal.html -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS='["ccall"]'
-
-emcc addFunction.c -o function.html -sEXPORTED_FUNCTIONS=_AddResult -sEXPORTED_RUNTIME_METHODS=ccall,cwrap
+1. write C header, Code file.
+2. emcc addFunction.c -o add.wasm --no-entry
+3. npm install http-server -g
+5. npx http-server
+6. input the html in C Function Code.
