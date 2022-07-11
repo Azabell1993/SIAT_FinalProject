@@ -25,8 +25,9 @@
 # 팀장의 C언어 ==> WebAssembly ==> Web 모듈 프론트엔드로의 연결을 테스트한 레포지토리
 [예제보기](https://github.com/Azabell1993/SIAT_FinalProject/tree/main/TeamLeader_Pratice_Test_Workspace/WEBASSEMBLY/TEST_JS_exam01/Suceess_)
 - Frontend, Backend에 있어서 WEB 서비스 전반에 사용할 엔진을 설계하고 구현할 방법을 C언어를 통해 설계하고자 하고 기반을 닦았습니다.
--- Frontend:C <-> WebAssembly <-> Javascript/Typescript
--- Backend:C <-> WebAssembly <-> Java
+- C언어를 통해 WebAssembly로 변환후 *.wasm으로 변환하였기 때문에 코드의 기밀성이 유지하는 데에 있어서 도움이 되지만 이 프로젝트는 연습이므로 공개를 하겠습니다.
+> * Frontend:C ↔ WebAssembly ↔  Javascript/Typescript  
+> * Backend:C ↔ WebAssembly ↔  Java  
 
 # DB 설계
 ![DB](https://user-images.githubusercontent.com/75885992/177923822-d4089267-5d6e-4448-8d25-7dd9e84974c9.png)
