@@ -3,8 +3,11 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/signup">Sign up</router-link> |
-    <router-link to="/login">Login</router-link>
+    <router-link to="/login">Login</router-link> |
+    <router-link to="/mycart">장바구니</router-link> |
+    <router-link to="/mypage">My Page</router-link>
   </nav>
+    <router-link to="/admin">Admin Page</router-link>
   <router-view></router-view>
 </div>
 </template>
