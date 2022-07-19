@@ -1,8 +1,8 @@
 <template>
   <ul id="productList">
     <li v-bind:key="item" v-for="item in items">
-        <img v-bind:src="item.imgurl"><br>
-        {{ item.message }}
+        <router-link to="/productdetail"><img v-bind:src="item.imgurl"></router-link>
+        {{ item.name }}
     </li>
   </ul>
 </template>
@@ -14,22 +14,27 @@ export default {
       items: [
         {
           imgurl: require('@/assets/image/top1.png'),
-          message: 'product1'
+          name: 'product1',
+          price: 1000,
+          stock: 30
         },
         {
           imgurl: require('@/assets/image/pants1.png'),
-          message: 'product2'
+          name: 'product2'
         },
         {
           imgurl: require('@/assets/image/outer1.png'),
-          message: 'product3'
+          name: 'product3'
         },
         {
           imgurl: require('@/assets/image/accessory1.png'),
-          message: 'product4'
+          name: 'product4'
         }
       ]
     }
+  },
+  methods: {
+
   }
 }
 </script>
