@@ -14,6 +14,7 @@
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/blueclub/domain/Season.java
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/domain/Gender.java
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/domain/reviewBoard.java
+/Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/blueclub/main_test/HelloWorld.java
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/blueclub/persistence/MaterialRepository.java
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/blueclub/persistence/AgeRepository.java
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/domain/Season.java
@@ -37,6 +38,7 @@
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/domain/qnaBoard.java
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/blueclub/persistence/ProductRepository.java
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/domain/Size.java
+/Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/blueclub/controller/HomeController.java
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/domain/cart.java
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/domain/priceRange.java
 /Users/azabell/Desktop/SIAT_FinalProject/PROJECT_PLACE/src/main/java/com/siat/blueclub/persistence/GenderRepository.java

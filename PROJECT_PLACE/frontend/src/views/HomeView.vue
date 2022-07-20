@@ -1,34 +1,32 @@
 <template>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
+    <button v-on:click="fetchData">Getdata</button>
     <HelloWorld msg="Welcome to My BlueClub"/>
   </div>
 </template>
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-// @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import axios from 'axios'
+
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 export default {
   name: 'HomeView',
   components: {
     HelloWorld
   },
-  created () {
-    return {
-      axios.get('/api/jsonTest',{
-        headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json; charset = utf-8'
-    }
-    })
-    .then(response => {
-    console.log(response.test);
-    })
-    .catch(e => {
-      console.log('error : ', e)
-    })
+  methods: {
+    fetchData () {
+      console.log('success')
+      axios.get('http://192.168.0.81:8081/jsonTest')
+        .then(function (response) {
+          console.log(response.data)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     }
   }
 }

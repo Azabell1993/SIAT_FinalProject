@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import TopView from '../views/product/TopView.vue'
 import PantsView from '../views/product/PantsView.vue'
 import OuterView from '../views/product/OuterView.vue'
-import AccessoryView from '../views/AccessoryView.vue'
+import AccessoryView from '../views/product/AccessoryView.vue'
 import ProductDetail from '../components/ProductDetail.vue'
 import Admin from '../components/AdminMain.vue'
 import MyPage from '../views/MyPage.vue'
@@ -15,7 +15,7 @@ import SelectOrder from '../views/mypage/SelectOrder.vue'
 import ModifyInfo from '../views/mypage/ModifyInfo.vue'
 import MemberResign from '../views/mypage/MemberResign.vue'
 
-const routes = [
+const routes = createRouter([
   {
     path: '/',
     name: 'home',
@@ -32,7 +32,7 @@ const routes = [
   {
     path: '/signup',
     name: 'signup',
-    component: () => import(/* webpackChunkName: "about" */ '../views/product/SignView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/SignView.vue')
   },
   {
     path: '/topview',
@@ -105,11 +105,12 @@ const routes = [
     name: 'MemberResign',
     component: MemberResign
   }
-]
+])
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
 
 export default router
