@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.siat.blueclub.persistence.RepositoryTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.825 s - in com.siat.blueclub.persistence.RepositoryTest
