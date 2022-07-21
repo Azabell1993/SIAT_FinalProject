@@ -8,7 +8,7 @@ public interface MemService {
 
 	Member getMem(Member mem);
 
-	boolean idCheck(String memID);
+	boolean idCheck(Member mem);
 
 	boolean signUp(Member mem);
 
