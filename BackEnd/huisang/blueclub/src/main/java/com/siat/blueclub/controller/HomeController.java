@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.siat.blueclub.domain.Member;
+import com.siat.blueclub.domain.Role;
 
 @Controller
 public class HomeController {
@@ -34,6 +35,7 @@ public class HomeController {
 		Member test = new Member();
 		test.setMemID("test");
 		test.setMemPW("1234");
+		test.setMemRole(new Role(1, "user"));
 		System.out.println("jsonTest check");
 		return test;
 	}
