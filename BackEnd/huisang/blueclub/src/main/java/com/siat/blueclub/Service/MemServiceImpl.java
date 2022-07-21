@@ -35,12 +35,11 @@ public class MemServiceImpl implements MemService {
 	}
 
 	@Override
-	public boolean idCheck(String memID) {
-		if (memberRepository.findById(memID).isEmpty()) {
+	public boolean idCheck(Member mem) {
+		if (memberRepository.findById(mem.getMemID()).isEmpty()) {
 			return false;
 		} else {
-
-			return false;
+			return true;
 		}
 	}
 
@@ -50,7 +49,7 @@ public class MemServiceImpl implements MemService {
 		if (memberRepository.findById(mem.getMemID()).isEmpty()) {
 			return false;
 		} else {
-			return false;
+			return true;
 		}
 	}
 

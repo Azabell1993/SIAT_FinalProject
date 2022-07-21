@@ -49,7 +49,7 @@ public class HomeController {
 	@ResponseBody
 	public Map<String, Object> loginProc(@RequestBody Member mem) {
 		Map<String, Object> data = new HashMap<>();
-
+		System.out.println(mem.toString());
 		if( memService.loginCheck(mem) ) { 
 			System.out.println(mem + " 로그인");
 			data.put("data", true);
@@ -63,10 +63,10 @@ public class HomeController {
 	@CrossOrigin
 	@PostMapping("idCheckProc")
 	@ResponseBody
-	public Map<String, Object> idCheckProc(@RequestBody String memID) {
+	public Map<String, Object> idCheckProc(@RequestBody Member mem) {
 		Map<String, Object> data = new HashMap<>();
-		System.out.println(memID);
-		if (memService.idCheck(memID)) {
+		System.out.println(mem.toString());
+		if (memService.idCheck(mem)) {
 			data.put("data", true);
 		} else {
 			data.put("data", false);
