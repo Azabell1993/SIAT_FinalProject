@@ -3,8 +3,6 @@
   <form v-on:submit.prevent="productsubmit">
     <input type="text" v-model="productsearch" id="productsearch" placeholder="제품을 입력하세요">
     <button type="submit">검색</button>
-    <inputField :title = "title" @titleFromChild="titleChange"/>    
-    {{ title }}
   </form>
   <nav>
     <router-link to="/">Home</router-link> |
@@ -17,7 +15,7 @@
   <router-view></router-view>
 </div>
 </template>
-<script lang="ts">
+<script>
 export default {
   data () {
     return {
@@ -25,7 +23,7 @@ export default {
     }
   },
   methods: {
-    productsubmit () : void {
+    productsubmit () {
       // console.log(this.productsearch)
     }
   }
