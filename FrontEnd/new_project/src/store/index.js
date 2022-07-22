@@ -1,17 +1,27 @@
 import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 export default createStore({
+ 
+  plugins: [
+    createPersistedState()
+  ],
   state: {
-    loginUser: {}
+    loginUser: {
+      memID: '',
+      memPW: '',
+      memName: '',
+      memAddr: '',
+      memPhone: '',
+      memEmail: '',
+      memBirth: '',
+    },
   },
   getters: {
-    isLogin(state) {
-      return state.loginUser
-    }
   },
   mutations: {
-    setUser(state, loginUser) {
-      state.loginUser = loginUser
+    updateloginUserID (state, loginUserID) {
+      state.loginUser.memID = loginUserID
     }
   },
   actions: {
