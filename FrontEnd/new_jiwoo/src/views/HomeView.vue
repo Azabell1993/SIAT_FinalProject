@@ -21,7 +21,7 @@ export default {
   methods: {
     fetchData () {
       console.log('success')
-      axios.get('http://192.168.0.81:8081/jsonTest')
+      axios.get('http://192.168.0.107:9292/jsonTest')
         .then(function (response) {
           console.log(response.data)
           console.log(response.data.memID)

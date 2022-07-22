@@ -25,7 +25,7 @@ export default {
   methods: {
     sendPost () {
       console.log('test')
-      axios.post('http://192.168.0.81:8081/loginProc', {
+      axios.post('http://192.168.0.107:9292/loginProc', {
         memID: this.memID,
         memPW: this.memPW
       })
