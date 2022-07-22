@@ -59,6 +59,7 @@ public class HomeController {
 			System.out.println(mem + " 로그인");
 			data.put("data", "true");
 			data.put("mem", memService.getMem(mem));
+			System.out.println(memService.getMem(mem));
 		} else { 
 			data.put("data", "false");
 			data.put("mem", null);
