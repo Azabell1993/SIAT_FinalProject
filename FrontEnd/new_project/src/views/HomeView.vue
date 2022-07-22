@@ -29,7 +29,7 @@ export default {
     fetchData () {
       const num = this.num
       console.log(num)
-      axios.post('http://192.168.0.107:9292/categoryData')
+      axios.post('http://192.168.219.191:9292/categoryData')
         .then(function (response) {
           console.log(response.data.모자)
         })
