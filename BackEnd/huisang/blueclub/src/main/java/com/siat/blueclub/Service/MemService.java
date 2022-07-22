@@ -1,4 +1,4 @@
-package com.siat.blueclub.Service;
+package com.siat.blueclub.service;
 
 import com.siat.blueclub.domain.Member;
 

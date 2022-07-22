@@ -1,6 +1,7 @@
 package com.siat.blueclub.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,15 +15,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.siat.blueclub.Service.MemService;
 import com.siat.blueclub.domain.Member;
 import com.siat.blueclub.domain.Role;
+import com.siat.blueclub.service.MemService;
+import com.siat.blueclub.service.CategoryService;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
 	private MemService memService;
+	@Autowired
+	private CategoryService categoryService;
+	
 	
 	@CrossOrigin
 	@GetMapping("test")
@@ -52,10 +57,10 @@ public class HomeController {
 		System.out.println(mem.toString());
 		if( memService.loginCheck(mem) ) { 
 			System.out.println(mem + " 로그인");
-			data.put("data", true);
+			data.put("data", "true");
 			data.put("mem", memService.getMem(mem));
 		} else { 
-			data.put("data", false);
+			data.put("data", "false");
 			data.put("mem", null);
 			}
 		return data;
@@ -66,10 +71,10 @@ public class HomeController {
 	public Map<String, Object> idCheckProc(@RequestBody Member mem) {
 		Map<String, Object> data = new HashMap<>();
 		System.out.println(mem.toString());
-		if (memService.idCheck(mem)) {
-			data.put("data", true);
+		if (memService.idCheck(mem)) { 
+			data.put("data", "true");
 		} else {
-			data.put("data", false);
+			data.put("data", "false");
 		}
 		return data;
 	}
@@ -83,6 +88,19 @@ public class HomeController {
 			data.put("data", true);
 		} else {
 			data.put("data", false);
+		}
+		
+		return data;
+	}
+	@CrossOrigin
+	@PostMapping("categoryData")
+	@ResponseBody
+	public Map<String, Object> categoryData() {
+		Map<String, Object> data = new HashMap<>();
+		Map<String, Object> categoryMap = categoryService.getCategoryMap();
+		List<String> largeName =  categoryService.getLargeNames();
+		for(int i = 0; i < largeName.size(); i++) {
+			data.put(largeName.get(i), categoryMap.get(largeName.get(i)));
 		}
 		
 		return data;
