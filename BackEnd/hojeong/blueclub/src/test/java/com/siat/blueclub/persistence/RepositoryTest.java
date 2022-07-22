@@ -216,6 +216,7 @@ public class RepositoryTest {
 		mem1.setMemBrith(new Date(1995, 2, 20));
 		mem1.setMemRole(roleRepository.findById(0).get());
 		memberRepository.save(mem1);
+		
 		Member mem2 = new Member();
 		mem2.setMemID("user1");
 		mem2.setMemName("채희상");
@@ -227,6 +228,7 @@ public class RepositoryTest {
 		mem2.setMemBrith(new Date(1999, 8, 20));
 		mem2.setMemRole(roleRepository.findById(1).get());
 		memberRepository.save(mem2);
+		
 		Member mem3 = new Member();
 		mem3.setMemID("user2");
 		mem3.setMemName("이대관");
@@ -238,6 +240,7 @@ public class RepositoryTest {
 		mem3.setMemBrith(new Date(1999, 8, 20));
 		mem3.setMemRole(roleRepository.findById(1).get());
 		memberRepository.save(mem3);
+		
 		Member mem4 = new Member();
 		mem4.setMemID("user3");
 		mem4.setMemName("박지우");
@@ -254,42 +257,91 @@ public class RepositoryTest {
 		sample1.setProName("sample1");
 		sample1.setProCategory(proCategoryRepository.findByCategorySmallName("반소매").get());
 		sample1.setProAge(ageRepository.findByAgeName("성인").get());
+		sample1.setProColor(colorRepository.findByColorName("화이트").get());
+		sample1.setProCount(1);
+		sample1.setProDetail("1");
+		sample1.setProGender(genderRepository.findByGenderName("남자").get());
+		sample1.setProMaterial(materialRepository.findByMaterialName("면").get());
+		sample1.setProPrice(20000);
+		sample1.setProPriceRange(priceRangeRepository.findByPriceRangeName("~ 2만원").get());
+		sample1.setProSeason(seasonRepository.findBySeasonName("봄").get());
+		sample1.setProStock(2);
 		
 		productRepository.save(sample1);
 		Product sample2 = new Product();
 		sample2.setProName("sample2");
 		sample2.setProCategory(proCategoryRepository.findByCategorySmallName("긴소매").get());
 		sample2.setProAge(ageRepository.findByAgeName("청소년").get());
+		sample2.setProColor(colorRepository.findByColorName("그레이").get());
+		sample2.setProCount(2);
+		sample2.setProDetail("2");
+		sample2.setProGender(genderRepository.findByGenderName("여자").get());
+		sample2.setProMaterial(materialRepository.findByMaterialName("린넨").get());
+		sample2.setProPrice(30000);
+		sample2.setProPriceRange(priceRangeRepository.findByPriceRangeName("2 ~ 4만원").get());
+		sample2.setProSeason(seasonRepository.findBySeasonName("여름").get());
+		sample2.setProStock(2);
 		
 		productRepository.save(sample2);
 		Product sample3 = new Product();
 		sample3.setProName("sample3");
 		sample3.setProCategory(proCategoryRepository.findByCategorySmallName("비니").get());
 		sample3.setProAge(ageRepository.findByAgeName("유아").get());
+		sample3.setProColor(colorRepository.findByColorName("블랙").get());
+		sample3.setProCount(3);
+		sample3.setProDetail("3");
+		sample3.setProGender(genderRepository.findByGenderName("여자").get());
+		sample3.setProMaterial(materialRepository.findByMaterialName("퍼").get());
+		sample3.setProPrice(40000);
+		sample3.setProPriceRange(priceRangeRepository.findByPriceRangeName("4 ~ 6만원").get());
+		sample3.setProSeason(seasonRepository.findBySeasonName("가을").get());
+		sample3.setProStock(3);
+		
 		productRepository.save(sample3);
 		Product sample4 = new Product();
 		sample4.setProName("sample4");
 		sample4.setProCategory(proCategoryRepository.findByCategorySmallName("반소매").get());
 		sample4.setProAge(ageRepository.findByAgeName("성인").get());
+		sample4.setProColor(colorRepository.findByColorName("블루").get());
+		sample4.setProCount(4);
+		sample4.setProDetail("4");
+		sample4.setProGender(genderRepository.findByGenderName("남자").get());
+		sample4.setProMaterial(materialRepository.findByMaterialName("면").get());
+		sample4.setProPrice(50000);
+		sample4.setProPriceRange(priceRangeRepository.findByPriceRangeName("2 ~ 4만원").get());
+		sample4.setProSeason(seasonRepository.findBySeasonName("여름").get());
+		sample4.setProStock(4);
+		
 		productRepository.save(sample4);
 		
 		Request testOrder1 = new Request();
 		testOrder1.setMemID(memberRepository.findById("user1").get());
 		testOrder1.setProCode(productRepository.findByProName("sample1").get());
 		testOrder1.setRequestStateCode(requestSateRepository.findByRequestStateName("주문확인중").get());
+		testOrder1.setRequestCode(1L);
+		testOrder1.setRequestCount(1);
+		testOrder1.setRequestFinishDate(new Date());
 		testOrder1.setRequestDate(new Date());
+		
 		requestRepository.save(testOrder1);
 		Request testOrder2 = new Request();
 		testOrder2.setMemID(memberRepository.findById("user1").get());
 		testOrder2.setProCode(productRepository.findByProName("sample2").get());
 		testOrder2.setRequestStateCode(requestSateRepository.findByRequestStateName("주문확인중").get());
 		testOrder2.setRequestDate(new Date());
+		testOrder2.setRequestCode(1L);
+		testOrder2.setRequestCount(2);
+		testOrder2.setRequestFinishDate(new Date());
+		
 		requestRepository.save(testOrder2);
 		Request testOrder3 = new Request();
 		testOrder3.setMemID(memberRepository.findById("user2").get());
 		testOrder3.setProCode(productRepository.findByProName("sample2").get());
 		testOrder3.setRequestStateCode(requestSateRepository.findByRequestStateName("주문확인중").get());
 		testOrder3.setRequestDate(new Date());
+		testOrder3.setRequestCode(1L);
+		testOrder3.setRequestCount(3);
+		testOrder3.setRequestFinishDate(new Date());
 		requestRepository.save(testOrder3);
 		
 		Cart cart1 = new Cart();

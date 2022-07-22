@@ -12,6 +12,7 @@
 </template>
 <script>
 import axios from 'axios'
+import store from '@/store/index.js'
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
@@ -20,6 +21,11 @@ export default {
     return {
       memID: '',
       memPW: ''
+    }
+  },
+  computed: {
+    loginUser () {
+      return this.$store.state.loginUser
     }
   },
   methods: {
@@ -33,9 +39,10 @@ export default {
           console.log(res.data)
           console.log(res.data.mem.memID)
           console.log(res.data.mem.memRole.roleCode)
-          this.$emit(res.data.mem.memID)
-        }).catch(function () {
-          console.log('failed')
+          // this.$emit(res.data.mem.memID)
+         
+        }).catch(function (error) {
+          console.log(error)
         })
     }
   }

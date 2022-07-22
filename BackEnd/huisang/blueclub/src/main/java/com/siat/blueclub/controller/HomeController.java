@@ -1,10 +1,12 @@
 package com.siat.blueclub.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +17,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.siat.blueclub.domain.Member;
 import com.siat.blueclub.domain.Role;
+import com.siat.blueclub.service.MemService;
+import com.siat.blueclub.service.CategoryService;
 
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private MemService memService;
+	@Autowired
+	private CategoryService categoryService;
+	
+	
 	@CrossOrigin
 	@GetMapping("test")
 	@ResponseBody
-	public Map<String, String> test() {
+	public Map<String, Object> test() {
 		System.out.println("test check");
-		Map<String, String> data = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
 		data.put("data", "이 텍스트가 보내지나요?");
 		return data;
 	}
@@ -40,13 +50,62 @@ public class HomeController {
 		return test;
 	}
 	@CrossOrigin
-	@PostMapping("loginTest")
+	@PostMapping("loginProc")
 	@ResponseBody
-	public Map<String, String> loginTest(@RequestBody Member mem) {
+	public Map<String, Object> loginProc(@RequestBody Member mem) {
+		Map<String, Object> data = new HashMap<>();
 		System.out.println(mem.toString());
-		Map<String, String> data = new HashMap<>();
-		data.put("data", mem.getMemID() + " | " + mem.getMemPW());
+		if( memService.loginCheck(mem) ) { 
+			System.out.println(mem + " 로그인");
+			data.put("data", "true");
+			data.put("mem", memService.getMem(mem));
+			System.out.println(memService.getMem(mem));
+		} else { 
+			data.put("data", "false");
+			data.put("mem", null);
+			}
 		return data;
 	}	
+	@CrossOrigin
+	@PostMapping("idCheckProc")
+	@ResponseBody
+	public Map<String, Object> idCheckProc(@RequestBody Member mem) {
+		Map<String, Object> data = new HashMap<>();
+		System.out.println(mem.toString());
+		if (memService.idCheck(mem)) { 
+			data.put("data", "true");
+		} else {
+			data.put("data", "false");
+		}
+		return data;
+	}
+	@CrossOrigin
+	@PostMapping("signUpProc")
+	@ResponseBody
+	public Map<String, Object> signUpProc(@RequestBody Member mem) {
+		Map<String, Object> data = new HashMap<>();
+		System.out.println(mem.toString());
+		if(memService.signUp(mem)) {
+			data.put("data", true);
+		} else {
+			data.put("data", false);
+		}
+		
+		return data;
+	}
+	@CrossOrigin
+	@PostMapping("categoryData")
+	@ResponseBody
+	public Map<String, Object> categoryData() {
+		Map<String, Object> data = new HashMap<>();
+		Map<String, Object> categoryMap = categoryService.getCategoryMap();
+		List<String> largeName =  categoryService.getLargeNames();
+		for(int i = 0; i < largeName.size(); i++) {
+			data.put(largeName.get(i), categoryMap.get(largeName.get(i)));
+		}
+		
+		return data;
+	}
+	
 
 }
