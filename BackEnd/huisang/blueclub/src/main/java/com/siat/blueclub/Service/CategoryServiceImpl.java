@@ -17,33 +17,35 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private ProCategoryRepository categoryRepository;
 
-	@Override
-	public List<String> getLargeNames() {
-		List<ProCategory> category = (List<ProCategory>) categoryRepository.findAll();
-		List<String> largeName = new ArrayList<String>();
-		for (ProCategory i : category) {
-			if (!largeName.contains(i.getCategoryLargeName()))
+	
+	public List<String> getLargeNames() { //카테고리 대분류 리스트를 반환하는 메소드
+		List<ProCategory> category = (List<ProCategory>) categoryRepository.findAll(); //전체 카테고리 데이터
+		List<String> largeName = new ArrayList<String>(); //카테고리 대분류 리스트
+		for (ProCategory i : category) { //전체 카테고리 데이터에서 대분류 이름만 저장용 리스트에 저장
+			if (!largeName.contains(i.getCategoryLargeName())) //전체 데이터를 조회하므로 대분류 이름이 중복됨, 이미 저장되어 있는 대분류는 저장하지 않음
 				largeName.add(i.getCategoryLargeName());
 		}
 		return largeName;
 	}
 
 	@Override
-	public Map<String, Object> getCategoryMap() {
-		Map<String, Object> categoryMap = new HashMap<>();
-		List<String> largeName = getLargeNames();
-		List<ProCategory> categoryData = (List<ProCategory>) categoryRepository.findAll();
+	public Map<String, Object> getCategoryMap() { //카테고리 전체 정보 -> {대분류 : [소분류]} 형식의 데이터로 retrun 
+		Map<String, Object> categoryMap = new HashMap<>(); //카테고리 전체 정보 Map
+		List<String> largeName = getLargeNames(); //Key값이 될 대분류 리스트
+		List<ProCategory> categoryData = (List<ProCategory>) categoryRepository.findAll(); //카테고리 전체 데이터
 		
-		for(String i :largeName) {
-			List<String> temp = new ArrayList<>();
-			for(ProCategory j : categoryData ) {
+		for(String i :largeName) {//대분류 리스트 조회
+			List<String> temp = new ArrayList<>(); //임시 소분류 리스트
+			for(ProCategory j : categoryData ) { //카테고리 전체 데이터 조회 -> 대분류 값이 같은 데이터만 임시 소분류 리스트에 삽입
 				if(j.getCategoryLargeName().equals(i)) {
 					temp.add(j.getCategorySmallName());
 				}
 			}
-			categoryMap.put(i, temp);
+		
+			categoryMap.put(i, temp); //{대분류 : [소분류]} 형식으로 저장
 			
 		}
+		
 		return categoryMap;
 	}
 

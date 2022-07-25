@@ -9,4 +9,6 @@ import com.siat.blueclub.domain.Product;
 public interface ProductRepository extends CrudRepository<Product, Long> {
 	Optional<Product> findByProName(String ProName);
 
+	Iterable<Product> findAllByOrderByProNameAsc();
+
 }
