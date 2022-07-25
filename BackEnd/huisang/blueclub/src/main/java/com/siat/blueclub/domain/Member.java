@@ -25,9 +25,9 @@ public class Member {
 	private String memName;
 	private String memAddr;
 	private String memPhone;
-	private String memEMail;
+	private String memEmail;
 	private Date memDate;
-	private Date memBrith;
+	private Date memBirth;
 	
 	@ManyToOne
 	@JoinColumn(name="roleCode")
@@ -36,8 +36,10 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [memID=" + memID + ", memPW=" + memPW + ", memName=" + memName + ", memAddr=" + memAddr
-				+ ", memPhone=" + memPhone + ", memEMail=" + memEMail + ", memDate=" + memDate + ", memBrith="
-				+ memBrith + ", memRole=" + memRole + "]";
+				+ ", memPhone=" + memPhone + ", memEmail=" + memEmail + ", memDate=" + memDate + ", memBirth="
+				+ memBirth + ", memRole=" + memRole + "]";
 	}
+
+	
 	
 }
