@@ -46,7 +46,7 @@ public class MemServiceImpl implements MemService {
 	@Override
 	public boolean signUp(Member mem) { //회원가입
 		mem.setMemRole(roleRepository.findById(1).get()); //멤버 role 기본(user)설정
-		mem.setMemBirth(new Date()); //회원 가입 일자 설정
+		mem.setMemDate(new Date()); //회원 가입 일자 설정
 		memberRepository.save(mem); //데이터 저장
 		if (memberRepository.findById(mem.getMemID()).isEmpty()) { //해당하는 아이디로 저장되 잘 되었는지 체크
 			return false; //해당하는 아이디의 멤버가 없으면 false 반환

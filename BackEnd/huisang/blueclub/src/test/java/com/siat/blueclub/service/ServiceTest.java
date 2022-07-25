@@ -2,6 +2,7 @@ package com.siat.blueclub.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,6 @@ public class ServiceTest {
 		System.out.println(categoryMap.toString());
 	}
 
-	@Disabled
 	@Test
 	public void proTest() {
 		List<Long> test = new ArrayList<>();
@@ -38,6 +38,5 @@ public class ServiceTest {
 		data.add(3);
 		test = proService.getRecommend(data);
 		System.out.println(test);
-		
 	}
 }
