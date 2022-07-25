@@ -1,0 +1,36 @@
+{
+  "name": "new_project",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "core-js": "^3.8.3",
+    "js-datepicker": "^5.18.0",
+    "luxon": "^3.0.1",
+    "node-pre-gyp": "^0.17.0",
+    "react-datepicker": "^4.8.0",
+    "vue": "^3.2.13",
+    "vue-datetime": "^1.0.0-beta.14",
+    "vue-router": "^4.0.3",
+    "vue3-datepicker": "^0.2.5",
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0",
+    "weekstart": "^1.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "~5.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}

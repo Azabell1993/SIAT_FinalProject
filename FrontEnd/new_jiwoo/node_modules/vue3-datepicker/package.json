@@ -1,0 +1,69 @@
+{
+  "author": {
+    "email": "icehaunter@gmail.com",
+    "name": "Ilya Borovitinov"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=10.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/icehaunter/vue3-datepicker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/icehaunter/vue3-datepicker/issues"
+  },
+  "private": false,
+  "name": "vue3-datepicker",
+  "version": "0.2.5",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "A simple Vue 3 datepicker component. Supports disabling of dates, translations. Dependent on date-fns.",
+  "keywords": [
+    "vue",
+    "vue 3",
+    "component",
+    "datepicker",
+    "date-picker",
+    "calendar",
+    "date-fns"
+  ],
+  "main": "dist/vue3-datepicker.cjs.js",
+  "module": "dist/vue3-datepicker.esm.js",
+  "style": "dist/vue3-datepicker.css",
+  "types": "dist/types/Datepicker.vue.d.ts",
+  "files": [
+    "src/datepicker",
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build:demo": "vite build",
+    "dev:docs": "vitepress dev docs",
+    "build:component": "rollup -c build/rollup.config.js",
+    "build:docs": "vitepress build docs"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.4",
+    "@vue/compiler-sfc": "^3.1.2",
+    "eslint": "^7.29.0",
+    "postcss": "^8.3.5",
+    "prettier": "^2.3.2",
+    "rollup": "^2.52.6",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "rollup-plugin-vue": "^6.0.0",
+    "typescript": "^4.3.5",
+    "vite": "^2.3.8",
+    "vitepress": "^0.15.5",
+    "vue": "^3.1.2"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "date-fns": "^2.22.1"
+  }
+}
