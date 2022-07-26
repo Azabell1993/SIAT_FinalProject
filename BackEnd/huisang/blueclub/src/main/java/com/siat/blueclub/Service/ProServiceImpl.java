@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.siat.blueclub.domain.Product;
+import com.siat.blueclub.domain.ProAddVO;
 import com.siat.blueclub.persistence.AgeRepository;
 import com.siat.blueclub.persistence.ColorRepository;
 import com.siat.blueclub.persistence.GenderRepository;
@@ -101,6 +102,33 @@ public class ProServiceImpl implements ProService {
 
 		return aver;
 	}
+	
+	@Override
+	public boolean proAdd(ProAddVO vo) { //상품 등록
+		Product product = new Product(); 
+		//vo객체의 데이터를 통해 Product 객체 데이터 set
+		product.setProAge(ageRepository.findByAgeName(vo.getAgeName()).get()); 
+		product.setProCategory(proCategoryRepository.findByCategorySmallName(vo.getCategorySmallName()).get());
+		product.setProColor(colorRepository.findByColorName(vo.getColorName()).get());
+		product.setProCount(0);
+		product.setProDetail(vo.getProDetail());
+		product.setProGender(genderRepository.findByGenderName(vo.getGenderName()).get());
+		product.setProMaterial(materialRepository.findByMaterialName(vo.getMaterialName()).get());
+		product.setProName(vo.getProName());
+		product.setProPrice(vo.getProPrice());
+		product.setProPriceRange(priceRangeRepository.findByPriceRangeName(vo.getPriceRangeName()).get());
+		product.setProSeason(seasonRepository.findBySeasonName(vo.getSeasonName()).get());
+		product.setProStock(vo.getProStock());
+		
+		productRepository.save(product); // DB에 상품 저장
+		if(productRepository.findById(product.getProCode()).isEmpty()) { //상품이 정상적으로 등록되지 않았을 경우
+			return false;
+		} else { //상품이 정상적으로 등록 되었을 경우
+			return true;
+		}
+		
+	}
+
 
 	public double[] averStatusArray(List<Integer> proCodeList) { //사용자가 조회한 상품의 스테이터스 평균 배열 생성 메소드
 		double age = 0.0;

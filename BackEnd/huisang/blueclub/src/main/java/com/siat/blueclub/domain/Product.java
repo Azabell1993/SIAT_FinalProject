@@ -28,6 +28,7 @@ public class Product {
 	private Integer proStock;
 	private String proDetail;
 	private Integer proCount;
+	private String proImage;
 	
 	@ManyToOne
 	@JoinColumn(name="categoryCode")

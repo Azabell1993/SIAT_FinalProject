@@ -17,7 +17,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private ProCategoryRepository categoryRepository;
 
-	
+	@Override
 	public List<String> getLargeNames() { //카테고리 대분류 리스트를 반환하는 메소드
 		List<ProCategory> category = (List<ProCategory>) categoryRepository.findAll(); //전체 카테고리 데이터
 		List<String> largeName = new ArrayList<String>(); //카테고리 대분류 리스트
