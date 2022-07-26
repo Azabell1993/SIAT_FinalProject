@@ -57,7 +57,6 @@ public class RepositoryTest {
 	
 	@Autowired
 	private CartRepository cartRepository;
-	
 	@Disabled
 	@BeforeEach
 	public void init() {
@@ -256,6 +255,7 @@ public class RepositoryTest {
 		sample1.setProCategory(proCategoryRepository.findByCategorySmallName("반소매").get());
 		sample1.setProAge(ageRepository.findByAgeName("성인").get());
 		sample1.setProColor(colorRepository.findByColorName("화이트").get());
+		sample1.setProImage("@/assets/image/top1.png");
 		sample1.setProCount(1);
 		sample1.setProDetail("1");
 		sample1.setProGender(genderRepository.findByGenderName("남자").get());
@@ -271,6 +271,7 @@ public class RepositoryTest {
 		sample2.setProCategory(proCategoryRepository.findByCategorySmallName("긴소매").get());
 		sample2.setProAge(ageRepository.findByAgeName("청소년").get());
 		sample2.setProColor(colorRepository.findByColorName("그레이").get());
+		sample2.setProImage("@/assets/image/top1.png");
 		sample2.setProCount(2);
 		sample2.setProDetail("2");
 		sample2.setProGender(genderRepository.findByGenderName("여자").get());
@@ -286,6 +287,7 @@ public class RepositoryTest {
 		sample3.setProCategory(proCategoryRepository.findByCategorySmallName("비니").get());
 		sample3.setProAge(ageRepository.findByAgeName("유아").get());
 		sample3.setProColor(colorRepository.findByColorName("블랙").get());
+		sample3.setProImage("@/assets/image/top1.png");
 		sample3.setProCount(3);
 		sample3.setProDetail("3");
 		sample3.setProGender(genderRepository.findByGenderName("여자").get());
@@ -301,6 +303,7 @@ public class RepositoryTest {
 		sample4.setProCategory(proCategoryRepository.findByCategorySmallName("반소매").get());
 		sample4.setProAge(ageRepository.findByAgeName("성인").get());
 		sample4.setProColor(colorRepository.findByColorName("블루").get());
+		sample4.setProImage("@/assets/image/top1.png");
 		sample4.setProCount(4);
 		sample4.setProDetail("4");
 		sample4.setProGender(genderRepository.findByGenderName("남자").get());

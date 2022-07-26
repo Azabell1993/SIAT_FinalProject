@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.siat.blueclub.domain.Member;
 import com.siat.blueclub.domain.Product;
-import com.siat.blueclub.domain.ProductVO;
+import com.siat.blueclub.domain.ProAddVO;
 import com.siat.blueclub.domain.Role;
 import com.siat.blueclub.service.MemService;
 import com.siat.blueclub.service.ProService;
@@ -124,7 +124,9 @@ public class HomeController {
 	@ResponseBody
 	public Map<String, Object> ProInfo(@RequestBody Product product) { //상품 코드를 기반으로 한 상품 정보 조회
 		Map<String, Object> data = new HashMap<>();
+		System.out.println(product.toString());
 		Product result = proService.getProInfo(product.getProCode()); ////상품 코드를 기반으로 한 상품 정보 조회 서비스 호출
+		
 		
 		data.put("data", result);
 		
@@ -133,14 +135,17 @@ public class HomeController {
 	@CrossOrigin
 	@PostMapping("ProAdd")
 	@ResponseBody
-	public Map<String, Object> ProAdd(@RequestBody ProductVO product) { 
+	public Map<String, Object> ProAdd(@RequestBody ProAddVO product) { 
 		//상품 등록
 		//Product Entity 클래스는 Join 때문에 클래스 타입의 필드가 많음
 		//-> 클래스 타입의 필드를 서비스에서 조회하고 set하기 위한 이름만을 필요로 하는 임의의 VO객체를 매게변수로 요청
 		Map<String, Object> data = new HashMap<>();
-		
-		data.put("data", product);
-		
+		if (proService.proAdd(product)) { //상품등록 서비스 호출
+			data.put("data", "true"); //상품 등록 성공 시 true 전송
+		} else {
+			data.put("data", "false"); //상품 등록 실패 시 false 전송
+		}
+			
 		return data;
 	}
 	

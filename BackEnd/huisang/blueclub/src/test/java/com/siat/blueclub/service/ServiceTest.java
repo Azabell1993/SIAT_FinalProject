@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.siat.blueclub.domain.Product;
+import com.siat.blueclub.persistence.ProductDao;
 
 @SpringBootTest
 public class ServiceTest {
@@ -21,6 +22,9 @@ public class ServiceTest {
 	private CategoryService categoryService;
 	@Autowired
 	private ProService proService;
+	@Autowired
+	private ProductDao proDao;
+	
 	@Disabled
 	@Test
 	public void categoryTest() {
@@ -29,7 +33,7 @@ public class ServiceTest {
 
 		System.out.println(categoryMap.toString());
 	}
-
+	@Disabled
 	@Test
 	public void proTest() {
 		List<Long> test = new ArrayList<>();
@@ -39,4 +43,10 @@ public class ServiceTest {
 		test = proService.getRecommend(data);
 		System.out.println(test);
 	}
+	@Test
+	public void mybatisTest() {
+		System.out.println(proDao.getProductsByCategoryCode(101));
+		System.out.println(proDao.getProductsByCategoryCodeRange(100, 200));
+	}
+	
 }
