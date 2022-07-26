@@ -1,0 +1,20 @@
+declare const _sfc_main: import("vue").DefineComponent<{
+    labelFor: {
+        type: StringConstructor;
+        required: false;
+    };
+    label: {
+        type: StringConstructor;
+        required: false;
+    };
+}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    labelFor: {
+        type: StringConstructor;
+        required: false;
+    };
+    label: {
+        type: StringConstructor;
+        required: false;
+    };
+}>>, {}>;
+export default _sfc_main;

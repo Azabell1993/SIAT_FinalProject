@@ -30,7 +30,7 @@ export default {
       const vm = this
       const num = this.num
       console.log(num)
-      axios.post('http://192.168.0.81:9292/categoryData', )
+      axios.post('http://192.168.0.81:9292/pro/categoryData', )
         .then(function (response) {
           console.log(response.data)
           vm.sentence = response.data
