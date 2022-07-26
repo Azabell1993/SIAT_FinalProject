@@ -12,9 +12,10 @@
             <button>아이디 사용 가능 체크</button>
         </form>
 
-        <form action="/PwTest" method="get" class="userpwcheck" @submit.prevent="checkPw">
+      <form action="/PwTest" class="userpwcheck" @submit.prevent="checkPw">
         <p>8 ~ 16자 대/소 영문, 숫자, 특수문자를 최소 한가지씩 조합하세요.</p>
-        <label for="memPW">비밀번호 : <input type="password" id="memPW" v-model="signup.memPW" @blur="passwordValid" ref="memPWck"></label><br>
+        <label for="memPW">비밀번호 : 
+        <input type="password" id="memPW" v-model="signup.memPW" @blur="passwordValid" ref="memPWck"></label><br>
         <label for="memPWCheck">비밀번호 확인 : <input type="password" id="memPWCheck" v-model="signup.memPWCheck" maxlength="16" @blur="passwordCheckValid" ref="signup.memPW"></label><br>
         <div v-if="!passwordValidFlag">유효하지 않은 비밀번호 입니다.</div>
         <!-- <button>비밀번호 체크</button> -->
@@ -99,7 +100,7 @@ export default {
         alert("사용할 수 없는 조합의 아이디입니다.");
       } else{
          /* DB와 비교하기 */
-      axios.post('http://192.168.0.81:9292/idCheckProc', {
+      axios.post('http://192.168.0.81:9292/mem/idCheckProc', {
         memID: this.signup.memID
       })
         .then(function (idchk) {
@@ -143,7 +144,7 @@ export default {
         this.$refs.memEmailck.focus(); //방식으로 선택자를 찾는다.
         return;
       } else {
-        axios.post('http://192.168.0.81:9292/signUpProc', {
+        axios.post('http://192.168.0.81:9292/mem/signUpProc', {
           memID: this.signup.memID,
           //memIDCheck: this.signup.memIDCheck,
           memPW: this.signup.memPW,
@@ -154,8 +155,12 @@ export default {
           memEmail: this.memEmail,
           memBirth: this.memBirth  
         }) .then(function (datatest) {
-            console.log(datatest.data);
-            alert("회원가입 완료");
+            if(datatest.data.data === 'false') {
+              alert("기존에 없는 아이디를 생성하시오.");
+            } else if(datatest.data.data !== 'true'){
+              alert("회원가입 완료");
+            }
+            //console.log(datatest.data);
           }).catch(function (error) {
             console.log(error)
           })
