@@ -33,7 +33,7 @@ export default {
       const userId = this.memID; //변수 선언 이 값을 그대로 쓰겠다. 자스 내에선 this 선언 부분이 다를 수있음. 당분간 이게 좀 안전할 듯
       console.log(userId);
 
-      axios.post('http://192.168.0.81:9292/loginProc', {
+      axios.post('http://192.168.0.81:9292/mem/loginProc', {
         memID: this.memID,
         memPW: this.memPW
       })
