@@ -27,33 +27,33 @@
             <nav v-bind:key="index" v-for="(item, index) in categorySmallNameIndex" >
 
 
-              <li class="li" v-if=" index==='상의'">상의
+              <li class="li" v-if=" index==='상의'">
                 <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
-                  <input type="radio" v-model="product.categoryLargeName" value="상의" id="상의" /> 
+                  <input type="radio" v-model="product.categoryLargeName" value="상의" id="상의" />상의 
                 </nav>
               </li>
 
-              <li class="li" v-if=" index==='바지'">바지
+              <li class="li" v-if=" index==='바지'">
                 <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
-                  <input type="radio" v-model="product.categoryLargeName" value="바지" id="바지" /> 
+                  <input type="radio" v-model="product.categoryLargeName" value="바지" id="바지" />바지
                 </nav>
               </li>
               
-              <li class="li" v-if=" index==='치마'">치마
+              <li class="li" v-if=" index==='치마'">
                 <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
-                  <input type="radio" v-model="product.categoryLargeName" value="치마" id="치마" /> 
+                  <input type="radio" v-model="product.categoryLargeName" value="치마" id="치마" />치마 
                 </nav>
               </li>
 
-              <li class="li" v-if=" index==='신발'">신발
+              <li class="li" v-if=" index==='신발'">
                 <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
-                  <input type="radio" v-model="product.categoryLargeName" value="신발" id="신발" /> 
+                  <input type="radio" v-model="product.categoryLargeName" value="신발" id="신발" />신발 
                 </nav>
               </li>
 
-              <li class="li" v-if=" index==='모자'">모자
+              <li class="li" v-if=" index==='모자'">
                 <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
-                  <input type="radio" v-model="product.categoryLargeName" value="모자" id="모자" /> 
+                  <input type="radio" v-model="product.categoryLargeName" value="모자" id="모자" />모자 
                 </nav>
               </li>
 
@@ -327,15 +327,57 @@ export default {
       // var value = select.options[select.selectedIndex].value;
       // console.log(value);
 
+      /*
+        proName: '울트라 모자',       // 상품명 
+        proPrice:'23000',      // 가격
+        proStock: '23',      // 재고
+        proDetail: '상세설명을 쓰세요',     // 상세설명
 
+        categoryLargeName: null,
+        categorySmallName: null, // 카테고리 소분류 이름
+        genderName: null,    //성별 속성 이름
+        colorName: null,     //색깔 속성 이름
+        materialName: null,  // 재질 속성 이름
+        ageName: null,       // 나이 속성 이름
+        priceRangeName: null, // 가격대 속성 이름
+        seasonName:null       // 계절 속성 이름
+      */
 
       /* export data code */
       var ve = this;
       if(!ve.product.categorySmallName) {
         alert("카테고리 소분류 정보를 결정해주세요!");
-        this.$refs.categorySmallName.focus(); //방식으로 선택자를 찾는다.
-        this.$refs.categoryLargeName.focus(); //방식으로 선택자를 찾는다.
-        return;
+        return false;
+      } else if(!ve.product.proName) {
+        alert("상품의 정보를 결정해주세요!");
+        return false;
+      } else if(!ve.product.proPrice) {
+        alert("상품의 가격을 결정해주세요!");
+        return false;
+      } else if(!ve.product.proStock) {
+        alert("상품의 재고를 입력해주세요. 수량단위로 입력해주셔야 합니다.");
+        return false;
+      } else if(!ve.product.proDetail) {
+        alert("상품의 상세설명을 입력해주세요.");
+        return false;
+      } else if(!ve.product.genderName) {
+        alert("상품의 성별 속성을 선택해주세요.");
+        return false;
+      } else if(!ve.product.colorName) {
+        alert("상품의 색상을 선택해 주세요.");
+        return false;
+      } else if(!ve.product.materialName) {
+        alert("상품의 나이를 선택해주세요.");
+        return false;
+      } else if(!ve.product.ageName) {
+        alert("상품의 연령대를 선택해주세요.");
+        return false;
+      } else if(!ve.product.priceRangeName) {
+        alert("상품의 가격대를 선택해주세요.");
+        return false;
+      } else if(!ve.product.seasonName) {
+        alert("상품의 계절을 선택해주세요.");
+        return false;
       } else {
         alert("전송이 완료 되었습니다!");
         axios.post('http://192.168.0.81:9292/pro/proAdd', {
