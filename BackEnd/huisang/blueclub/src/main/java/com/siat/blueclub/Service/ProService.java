@@ -14,22 +14,26 @@ import com.siat.blueclub.domain.ProAddVO;
 
 public interface ProService {
 
-	List<Long> getRecommend(List<Integer> proCodeList); //상품 리스트
+	public List<Long> getRecommend(List<Integer> proCodeList); //상품 리스트
 
-	Product getProInfo(Long proCode); //상품 코드를 기반으로 한 상품 정보 조회
+	public Product getProInfo(Long proCode); //상품 코드를 기반으로 한 상품 정보 조회
 
-	boolean proAdd(ProAddVO vo); //상품 등록
+	public boolean proAdd(ProAddVO vo); //상품 등록
+	
+	public List<Long> getRecommendByCategory(List<Integer> proCodeList, String categoryName, String categorySamllName);  //카테고리 별 상품 리스트 -> MyBatis 사용
 
-	List<Age> ageInfo();
+	public List<Age> ageInfo(); //age 테이블 정보
 
-	List<Color> colorInfo();
+	public List<Color> colorInfo(); //color 테이블 정보
 
-	List<Gender> genderInfo();
+	public List<Gender> genderInfo(); //gender 테이블 정보
 
-	List<Material> materialInfo();
+	public List<Material> materialInfo(); //material 테이블 정보
 
-	List<PriceRange> priceRangeInfo();
+	public List<PriceRange> priceRangeInfo(); //priceRange 테이블 정보
 
-	List<Season> seasonInfo();
+	public List<Season> seasonInfo(); //season 테이블 정보
+
+
 
 }
