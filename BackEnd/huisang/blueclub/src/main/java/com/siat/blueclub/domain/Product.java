@@ -1,5 +1,6 @@
 package com.siat.blueclub.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,7 @@ public class Product {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
     @SequenceGenerator(name = "id_Sequence", sequenceName = "PRO_ID_SEQ")	
 	private Long proCode;
+	@Column(unique = true)
 	private String proName;
 	private Integer proPrice;
 	private Integer proStock;

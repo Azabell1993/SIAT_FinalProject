@@ -18,8 +18,9 @@ public class ProAddVO {
 	private Integer proCount;
 	private String proImage;
 
+
 	private String categoryLargeName;
-	private String categorySmallName; //카테고리 소분류 이름
+	private String categorySmallName;
 	private String genderName; //성별 속성 이름
 	private String colorName; //색깔 속성 이름
 	private String materialName; //재질 속성 이름

@@ -49,4 +49,18 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryMap;
 	}
 
+	@Override
+	public Integer getCategoryRagneStart(String categoryLargeName) { //카테고리 대분류 범위 시작 찾기
+		List<ProCategory> list = (List<ProCategory>) categoryRepository.findAllByCategoryLargeName(categoryLargeName);
+		return list.get(0).getCategoryCode();
+	}
+
+	@Override
+	public Integer getCategoryRagneEnd(String categoryLargeName) { //카테고리 대분류 범위 끝 찾기
+		List<ProCategory> list = (List<ProCategory>) categoryRepository.findAllByCategoryLargeName(categoryLargeName);
+		int lastIndex = list.size()-1;
+		return list.get(lastIndex).getCategoryCode();
+	}
+
+
 }
