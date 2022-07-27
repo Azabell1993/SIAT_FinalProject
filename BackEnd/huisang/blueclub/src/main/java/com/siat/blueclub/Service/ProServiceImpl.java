@@ -12,6 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.siat.blueclub.domain.Product;
+import com.siat.blueclub.domain.Season;
+import com.siat.blueclub.domain.Age;
+import com.siat.blueclub.domain.Color;
+import com.siat.blueclub.domain.Gender;
+import com.siat.blueclub.domain.Material;
+import com.siat.blueclub.domain.PriceRange;
 import com.siat.blueclub.domain.ProAddVO;
 import com.siat.blueclub.persistence.AgeRepository;
 import com.siat.blueclub.persistence.ColorRepository;
@@ -170,6 +176,36 @@ public class ProServiceImpl implements ProService {
 	        normB += Math.pow(vectorB[i], 2);
 	    }   
 	    return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+	}
+
+	@Override
+	public List<Age> ageInfo() {
+		return (List<Age>) ageRepository.findAll();
+	}
+
+	@Override
+	public List<Color> colorInfo() {
+		return (List<Color>) colorRepository.findAll();
+	}
+
+	@Override
+	public List<Gender> genderInfo() {
+		return (List<Gender>) genderRepository.findAll();
+	}
+
+	@Override
+	public List<Material> materialInfo() {
+		return (List<Material>) materialRepository.findAll();
+	}
+
+	@Override
+	public List<PriceRange> priceRangeInfo() {
+		return (List<PriceRange>) priceRangeRepository.findAll();
+	}
+
+	@Override
+	public List<Season> seasonInfo() {
+		return (List<Season>) seasonRepository.findAll();
 	}
 
 }
