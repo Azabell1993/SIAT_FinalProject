@@ -38,27 +38,27 @@ const routes = [
   },
   {
     path: '/topview',
-    name: 'TopView',
+    name: '상의',
     component: TopView
   },
   {
     path: '/pantsview',
-    name: 'PantsView',
+    name: '바지',
     component: PantsView
   },
   {
     path: '/shoesview',
-    name: 'ShoesView',
+    name: '신발',
     component: ShoesView
   },
   {
     path: '/accessoryview',
-    name: 'AccessoryView',
+    name: '모자',
     component: AccessoryView
   },
   {
     path: '/skirtview',
-    name: 'SkirtView',
+    name: '치마',
     component: SkirtView
   },
   {

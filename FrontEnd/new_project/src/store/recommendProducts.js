@@ -8,15 +8,21 @@ export default createStore({
     ],
     state: {
         products: {
-            productsList: []
-          }
+            productsList: [],
+        },
+        originProductList: [1,2,3,4],
+        categoryTopList: []
     },
     getters: {
+
     },
     mutations: {
         updateProductList (state, proList) {
             state.products.productsList = proList
           },
+        updateCategoryTopList (state, categoryTopNewList) {
+            state.categoryTopList = categoryTopNewList
+        }
     },  
     actions:{
     },
