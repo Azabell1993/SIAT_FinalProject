@@ -13,9 +13,9 @@
     </form> -->
       <hr>
       <label for="proName"> 등록할 상품 이름 : <input type="text" id="proName" v-model="product.proName" mexlength="20" ></label><br/><hr>
-      <label for="proPrice"> 등록할 상품 가격 : <input type="text" id="proPrice" v-model="product.proPrice" mexlength="20" ></label><br/> <hr>
-      <label for="proStock"> 등록할 상품 재고 : <input type="text" id="proStock" v-model="product.proStock" mexlength="20" ></label><br/> <hr>
-      <label for="proDetail"> 등록할 상품 상세 설명 :<textarea id="proDetail" v-model="product.proDetail" mexlength="20" ></textarea></label><br/><hr>
+      <label for="proPrice"> 등록할 상품 가격 : <input type="text" id="proPrice" v-model="product.proPrice" mexlength="20" ></label> 원 <br/> <hr>
+      <label for="proStock"> 등록할 상품 재고 : <input type="text" id="proStock" v-model="product.proStock" mexlength="20" ></label> 개 <br/> <hr>
+      <label for="proDetail"> 등록할 상품 상세 설명 :<textarea id="proDetail" v-model="product.proDetail" mexlength="40" > 40자 내외로 작성해주세요. </textarea></label><br/><hr>
       
 
     <form action="/productAdd" method="get" class="productAdd" @submit.prevent="productAddSpace">
@@ -24,16 +24,43 @@
       <!-- 등록할 상품 카테고리 선택 -->
       <label for="categorySmallName" ><strong>등록할 상품 카테고리 선택</strong>
           <ul class="ul">
-            <nav v-bind:key="index" v-for="(item, index) in categoryIndex" >
-              <li class="li" v-if="index==='상의'">상의</li>
-              <li class="li" v-if="index==='바지'">바지</li>
-              <li class="li" v-if="index==='치마'">치마</li>
-              <li class="li" v-if="index==='신발'">신발</li>
-              <li class="li" v-if="index==='모자'">모자</li>
-                  <select name="count" v-model="product.categorySmallName" id="categorySmallNameOption">
-                    <option>{{index}}</option>
-                    <option v-bind:key="small" v-for="small in item">{{small}}</option>
-                  </select>
+            <nav v-bind:key="index" v-for="(item, index) in categorySmallNameIndex" >
+
+
+              <li class="li" v-if=" index==='상의'">상의
+                <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
+                  <input type="radio" v-model="product.categoryLargeName" value="상의" id="상의" /> 
+                </nav>
+              </li>
+
+              <li class="li" v-if=" index==='바지'">바지
+                <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
+                  <input type="radio" v-model="product.categoryLargeName" value="바지" id="바지" /> 
+                </nav>
+              </li>
+              
+              <li class="li" v-if=" index==='치마'">치마
+                <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
+                  <input type="radio" v-model="product.categoryLargeName" value="치마" id="치마" /> 
+                </nav>
+              </li>
+
+              <li class="li" v-if=" index==='신발'">신발
+                <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
+                  <input type="radio" v-model="product.categoryLargeName" value="신발" id="신발" /> 
+                </nav>
+              </li>
+
+              <li class="li" v-if=" index==='모자'">모자
+                <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
+                  <input type="radio" v-model="product.categoryLargeName" value="모자" id="모자" /> 
+                </nav>
+              </li>
+
+              <select name="count" v-model="product.categorySmallName" id="categorySmallNameOption">
+                <option v-bind:key="small" v-for="small in item">{{small}}</option>
+              </select>
+
             </nav>
           </ul>
       </label><hr><br>
@@ -45,10 +72,9 @@
           <label for="genderName" ><strong>등록할 상품의 주 성별 층 선택</strong>
           <ul class="ul">
             <nav v-bind:key="index" v-for="(item, index) in genderIndex" >
-              <li class="li" v-if="index==='남자'">성별 선택</li>
+              <li class="li" v-if=" index==='남자'">성별 선택</li>
                   <select name="count" v-model="product.genderName" id="genderNameOption">
-                    <option>{{index}}</option>
-                    <option v-bind:key="small" v-for="small in item">{{small}}</option>
+                    <option v-bind:key="small" v-for="small in item">{{small.genderName}}</option>
                   </select>
             </nav>
           </ul>
@@ -61,10 +87,9 @@
           <label for="colorName" ><strong>등록할 상품의 색깔 선택</strong>
           <ul class="ul">
             <nav v-bind:key="index" v-for="(item, index) in colorIndex" >
-              <li class="li" v-if="index==='화이트'">색깔 선택</li>
+              <li class="li" v-if=" index==='화이트'">색깔 선택</li>
                   <select name="count" v-model="product.colorName" id="colorNameOption">
-                    <option>{{index}}</option>
-                    <option v-bind:key="small" v-for="small in item">{{small}}</option>
+                    <option v-bind:key="small" v-for="small in item">{{small.colorName}}</option>
                   </select>
             </nav>
           </ul>
@@ -77,10 +102,9 @@
           <label for="materialName" ><strong>등록할 상품의 재질 선택</strong>
           <ul class="ul">
             <nav v-bind:key="index" v-for="(item, index) in meterialIndex" >
-              <li class="li" v-if="index==='면'">재질 선택</li>
+              <li class="li" v-if=" index==='면'">재질 선택</li>
                   <select name="count" v-model="product.materialName" id="materialNameOption">
-                    <option>{{index}}</option>
-                    <option v-bind:key="small" v-for="small in item">{{small}}</option>
+                    <option v-bind:key="small" v-for="small in item">{{small.materialName}}</option>
                   </select>
             </nav>
           </ul>
@@ -93,10 +117,9 @@
           <label for="ageName" ><strong>등록할 상품의 연령대 선택</strong>
           <ul class="ul">
             <nav v-bind:key="index" v-for="(item, index) in ageIndex" >
-              <li class="li" v-if="index==='유아'">연령대 선택</li>
+              <li class="li" v-if=" index==='유아'">연령대 선택</li>
                   <select name="count" v-model="product.ageName" id="ageNameOption">
-                    <option>{{index}}</option>
-                    <option v-bind:key="small" v-for="small in item">{{small}}</option>
+                    <option v-bind:key="small" v-for="small in item">{{small.ageName}}</option>
                   </select>
             </nav>
           </ul>
@@ -109,16 +132,29 @@
           <label for="priceRangeName" ><strong>등록할 상품의 가격대 책정</strong>
           <ul class="ul">
             <nav v-bind:key="index" v-for="(item, index) in priceIndex" >
-              <li class="li" v-if="index==='~ 2만원'">가격대 선택</li>
+              <li cl0ass="li" v-if=" index==='~ 2만원'">가격대 선택</li>
                   <select name="count" v-model="product.priceRangeName" id="priceRangeNameOption">
-                    <option>{{index}}</option>
-                    <option v-bind:key="small" v-for="small in item">{{small}}</option>
+                    <option v-bind:key="small" v-for="small in item">{{small.priceRangeName}}</option>
                   </select>
             </nav>
           </ul>
       </label><hr><br>
       <!-- ---------------------- -->
 
+      <!-- ---------------------- -->
+      <!-- 6 -->
+      <!-- 등록할 상품의 주 계절 책정 -->
+          <label for="seasonName" ><strong>등록할 상품의 계절대 선택</strong>
+          <ul class="ul">
+            <nav v-bind:key="index" v-for="(item, index) in seasonIndex" >
+              <li cl0ass="li" v-if=" index==='봄'">계절 선택</li>
+                  <select name="count" v-model="product.seasonName" id="seasonNameOption">
+                    <option v-bind:key="small" v-for="small in item">{{small.seasonName}}</option>
+                  </select>
+            </nav>
+          </ul>
+      </label><hr><br>
+      <!-- ---------------------- -->
       <!-- -->
         <input type="reset" value="초기화">
         <input type="submit" id="product_submit" value="제출">
@@ -143,121 +179,147 @@ export default {
   data() {
     return {
       product: {
-        proName:null,       // 상품명 
-        proPrice:null,      // 가격
-        proStock:null,      // 재고
-        proDetail:null,     // 상세설명
+        proName: '울트라 모자',       // 상품명 
+        proPrice:'23000',      // 가격
+        proStock: '23',      // 재고
+        proDetail: '상세설명을 쓰세요',     // 상세설명
 
         /* selector option value name */
-        categorySmallName:null, // 카테고리 소분류 이름
-        genderName:null,    //성별 속성 이름
-        colorName:null,     //색깔 속성 이름
-        materialName:null,  // 재질 속성 이름
-        ageName:null,       // 나이 속성 이름
-        priceRangeName:null // 가격대 속성 이름
+        categoryLargeName: null,
+        categorySmallName: null, // 카테고리 소분류 이름
+        genderName: null,    //성별 속성 이름
+        colorName: null,     //색깔 속성 이름
+        materialName: null,  // 재질 속성 이름
+        ageName: null,       // 나이 속성 이름
+        priceRangeName: null, // 가격대 속성 이름
+        seasonName:null       // 계절 속성 이름
       },
       categoryIndex : [],
       genderIndex: [],
       colorIndex: [],
       meterialIndex: [],
       ageIndex:[],
-      priceIndex : []
+      priceIndex : [],
+      seasonIndex: [],
+      categoryLargeNameIndex:[],
+      categorySmallNameIndex:[]
     };
   },
-  /* import data code */
-  /* 1 */
-  /* Category small name */
-  categoryMount () {
+
+  mounted () {
     var vm = this
-    axios.post('http://192.168.0.81:9292/pro/categoryData')
+
+    /* import data code */
+    /* 1 */
+    /* Category large name */
+    if(vm.categoryLargeNameIndex) {
+        axios.post('http://192.168.0.81:9292/pro/categoryData')
         .then(function (response) {
-          vm.categoryIndex = response.data
-          console.log('상품 카테고리 데이터 : ',response.data)
+          vm.categoryLargeNameIndex = response.data
+          console.log('상품 대분류 데이터 : ',response.data)
         })
         .catch(function (error) {
           console.log(error)
         })
-    },
-  /* 2 */
-  /* genderSelecter */
-  genderMount () {
-     var vm = this
-    axios.post('http://192.168.0.81:9292/pro/categoryData')
-    .then(function (response) {
+    } // vm.categoryIndex
+
+    /* import data code */
+    /* 1 */
+    /* Category small name */
+    if(vm.categorySmallNameIndex) {
+        axios.post('http://192.168.0.81:9292/pro/categoryData')
+        .then(function (response) {
+          vm.categorySmallNameIndex = response.data
+          console.log('상품 소분류 데이터 : ',response.data)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    } // vm.categoryIndex
+
+
+    /* 2 */
+    /* genderSelecter */
+    if(vm.genderIndex) {
+        axios.post('http://192.168.0.81:9292/pro/genderInfo')
+        .then(function (response) {
           vm.genderIndex = response.data
           console.log('상품 성별 데이터 : ',response.data)
         })
         .catch(function (error) {
           console.log(error)
         })
-  },
-  /* 3 */
-  /* colorSelecter */
-  colorMount () {
-     var vm = this
-    axios.post('http://192.168.0.81:9292/pro/categoryData')
-    .then(function (response) {
+    }
+
+    /* 3 */
+    /* colorSelecter */
+    if(vm.colorIndex) {
+        axios.post('http://192.168.0.81:9292/pro/colorInfo')
+        .then(function (response) {
           vm.colorIndex = response.data
           console.log('상품 색깔 데이터 : ',response.data)
         })
         .catch(function (error) {
           console.log(error)
         })
-  },
-  /* 4 */
-  /* material Selector*/
-    metarialMount () {
-     var vm = this
-    axios.post('http://192.168.0.81:9292/pro/categoryData')
-    .then(function (response) {
-          vm.meterialIndex = response.data
-          console.log('상품 재질 데이터 : ',response.data)
+    } // vm.colorIndex
+
+    /* 4 */
+    /* material Selector*/
+    if(vm.meterialIndex) {
+      axios.post('http://192.168.0.81:9292/pro/materialInfo')
+      .then(function (response) {
+            vm.meterialIndex = response.data
+            console.log('상품 재질 데이터 : ',response.data)
+          })
+          .catch(function (error) {
+            console.log(error)
         })
-        .catch(function (error) {
-          console.log(error)
+    } //  vm.meterialIndex
+
+    /* 5 */
+    /* age Selector*/
+    if(vm.ageIndex) {
+        axios.post('http://192.168.0.81:9292/pro/ageInfo')
+        .then(function (response) {
+              vm.ageIndex = response.data
+              console.log('상품 나이 데이터 : ',response.data)
+            })
+            .catch(function (error) {
+              console.log(error)
         })
-  },
-  /* 5 */
-  /* price Selector*/
-    metarialMount () {
-     var vm = this
-    axios.post('http://192.168.0.81:9292/pro/categoryData')
-    .then(function (response) {
-          vm.priceIndex = response.data
-          console.log('상품 재질 데이터 : ',response.data)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-  },
-  /* 6 */
-  /* age Selector*/
-    metarialMount () {
-     var vm = this
-    axios.post('http://192.168.0.81:9292/pro/categoryData')
-    .then(function (response) {
-          vm.ageIndex = response.data
-          console.log('상품 재질 데이터 : ',response.data)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-  },
-  /* 7 */
-  /* priceRangeName Selector*/
-    metarialMount () {
-     var vm = this
-    axios.post('http://192.168.0.81:9292/pro/categoryData')
-    .then(function (response) {
-          vm.priceIndex = response.data
-          console.log('상품 재질 데이터 : ',response.data)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-  },
+    } //  vm.ageIndex
+
+    /* 6 */
+    /* priceRangeName Selector*/
+    if(vm.meterialIndex) {
+        axios.post('http://192.168.0.81:9292/pro/priceRangeInfo')
+        .then(function (response) {
+              vm.priceIndex = response.data
+              console.log('상품 가격대 데이터 : ',response.data)
+            })
+            .catch(function (error) {
+              console.log(error)
+      })
+    } //  vm.meterialIndex
+
+    /* 7 */
+    /* seasonName Selector*/
+    if(vm.seasonIndex) {
+        axios.post('http://192.168.0.81:9292/pro/seasonInfo')
+        .then(function (response) {
+              vm.seasonIndex = response.data
+              console.log('상품 계절 데이터 : ',response.data)
+            })
+            .catch(function (error) {
+              console.log(error)
+      })
+    } //  vm.meterialIndex
+
+  }, // mounted
+// "{"proName":"울트라 모자","proPrice":"23000","proStock":"23","proDetail":"상세설명을 쓰세요","ccategorySmallName":"숏","genderName":"유니섹스","colorName":"블랙","materialName":"린넨","ageName":"청소년","priceRangeName":"6 ~ 9만원","seasonName":"가을"}"
+
   methods: {
-    /* export data code */
     productAddSpace() {
       
       console.log('product test')
@@ -265,28 +327,49 @@ export default {
       // var value = select.options[select.selectedIndex].value;
       // console.log(value);
 
+
+
+      /* export data code */
       var ve = this;
       if(!ve.product.categorySmallName) {
         alert("카테고리 소분류 정보를 결정해주세요!");
-        this.$refs.categorySmallNameClick.focus(); //방식으로 선택자를 찾는다.
+        this.$refs.categorySmallName.focus(); //방식으로 선택자를 찾는다.
+        this.$refs.categoryLargeName.focus(); //방식으로 선택자를 찾는다.
         return;
       } else {
-        axios.post('http://192.168.0.81:9292/pro/ProAdd', {
+        alert("전송이 완료 되었습니다!");
+        axios.post('http://192.168.0.81:9292/pro/proAdd', {
           proName: this.product.proName,
           proPrice: this.product.proPrice,
           proStock: this.product.proStock,
           proDetail: this.product.proDetail,
+          categoryLargeName: this.product.categoryLargeName,
           categorySmallName: this.product.categorySmallName,
           genderName: this.product.genderName,
           colorName: this.product.colorName,
           materialName: this.product.materialName,
           ageName: this.product.ageName,
-          priceRangeName: this.product.priceRangeName  
+          priceRangeName: this.product.priceRangeName,
+          seasonName : this.product.seasonName
       })
         .then(function (datatest) {
-          if(datatest.data.data !== 'true') {
+          if(datatest.data !== 'true') {
             alert("true");
+            // var value = select.options[select.selectedIndex].value;
             // select내 id에서 값을 참조하여 가져온다.
+            console.log(datatest);
+
+            console.log(data.proName);
+            console.log(data.proPrice);
+            console.log(data.proStock);
+            console.log(data.proDetail);
+
+            /* 0 */
+            /* Test Get Selector at Category Name Value */
+            var select = document.getElementById('categoryLargeNameOption');
+            var categoryLargeNameOption_value = select.options[select.selectedIndex].value;
+            console.log(categoryLargeNameOption_value);
+
 
             /* 1 */
             /* Test Get Selector at Category Name Value */
@@ -317,6 +400,18 @@ export default {
             var select = document.getElementById('ageNameOption');
             var ageNameOption_value = select.options[select.selectedIndex].value;
             console.log(ageNameOption_value);
+
+            /* 6 */
+            /* Test Get priceRangeNameOption Name Value */
+            var select = document.getElementById('priceRangeNameOption');
+            var priceRangeNameOption_value = select.options[select.selectedIndex].value;
+            console.log(priceRangeNameOption_value);
+
+            /* 7 */
+            /* Test Get priceRangeNameOption Name Value */
+            var select = document.getElementById('seasonNameOption');
+            var seasonNameOption_value = select.options[select.selectedIndex].value;
+            console.log(seasonNameOption_value);
       
           } else {
             alert("false");
@@ -330,7 +425,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 ul nav {
   display: inline-block;
 }
@@ -348,3 +443,4 @@ li { display:inline;
     line-height: 30px;
     margin-left: 10px;}
 </style>
+
