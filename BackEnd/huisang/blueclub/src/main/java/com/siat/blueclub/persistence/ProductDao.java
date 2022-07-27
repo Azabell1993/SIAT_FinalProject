@@ -10,6 +10,6 @@ import com.siat.blueclub.domain.ProductVO;
 @Mapper
 public interface ProductDao {
 
-	public List<ProductVO> getProductsByCategoryCode(Integer categoryCode);
+	public List<ProductVO> getProductsByCategoryNames(String categoryLargeName, String categorySmallName);
 	public List<ProductVO> getProductsByCategoryCodeRange(Integer categoryRange1, Integer categoryRange2);
 }
