@@ -1,5 +1,5 @@
 <template>
-  <div id="productList" v-bind:key="name" v-for=" name in recommendProduct">
+  <div id="productList" v-bind:key="name" v-for="name in recommendProduct">
     <router-link to="/productdetail"><img v-bind:src="require(`@/assets/image/${name.proImage}.png`)"></router-link>
     <p>{{ name.proName }}</p>
     <p>{{ name.proPrice }}</p>
@@ -41,7 +41,7 @@ export default {
   },
   created () {
     var vm = this
-    axios.post('http://192.168.0.81:9292/pro/ProList', //헤더 : url, value
+    axios.post('http://192.168.0.81:9292/pro/proList', //헤더 : url, value
     {proList: [1,2,3,4]}) //추천 알고리즘을 만든 곳으로 전달
         .then(async function (response) {
           console.log(response.data) 
@@ -53,12 +53,12 @@ export default {
           
           for(var i=0; i<proCodeList.length; i++) {
 	          console.log('proCode : ', proCodeList[i])            
-              await axios.post('http://192.168.0.81:9292/pro/ProInfo', 
+              await axios.post('http://192.168.0.81:9292/pro/proInfo', 
               { 
                 proCode: proCodeList[i]
               })
               .then(function (response) {
-                console.log(vm.recommendProduct)
+                console.log(vm.recommendProduct) 
                 vm.recommendProduct.push(response.data.data)
                 console.log(response.data.data)
               })
