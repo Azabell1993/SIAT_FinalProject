@@ -13,8 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.siat.blueclub.domain.Product;
+import com.siat.blueclub.domain.Age;
+import com.siat.blueclub.domain.Color;
+import com.siat.blueclub.domain.Gender;
+import com.siat.blueclub.domain.Material;
+import com.siat.blueclub.domain.PriceRange;
 import com.siat.blueclub.domain.ProAddVO;
+import com.siat.blueclub.domain.Product;
+import com.siat.blueclub.domain.Season;
 import com.siat.blueclub.service.CategoryService;
 import com.siat.blueclub.service.ProService;
 
@@ -36,9 +42,9 @@ public class ProductController {
 		return categoryMap;
 	}
 	@CrossOrigin
-	@PostMapping("ProList")
+	@PostMapping("proList")
 	@ResponseBody
-	public Map<String, Object> ProList(@RequestBody Map<String, Object> proList) { 
+	public Map<String, Object> proList(@RequestBody Map<String, Object> proList) { 
 		//상품 리스트 메소드 -> 매게변수는 사용자가 이전에 조회한 상품의 코드 목록 
 		//-> 코드 목록이 비어있으면 이름순, 비어있지 않으면 추천 순으로 상품 리스트 전송
 		Map<String, Object> data = new HashMap<>();
@@ -51,9 +57,9 @@ public class ProductController {
 		return data;
 	}
 	@CrossOrigin
-	@PostMapping("ProInfo")
+	@PostMapping("proInfo")
 	@ResponseBody
-	public Map<String, Object> ProInfo(@RequestBody Product product) { //상품 코드를 기반으로 한 상품 정보 조회
+	public Map<String, Object> proInfo(@RequestBody Product product) { //상품 코드를 기반으로 한 상품 정보 조회
 		Map<String, Object> data = new HashMap<>();
 		System.out.println(product.toString());
 		Product result = proService.getProInfo(product.getProCode()); ////상품 코드를 기반으로 한 상품 정보 조회 서비스 호출
@@ -64,9 +70,9 @@ public class ProductController {
 		return data;
 	}
 	@CrossOrigin
-	@PostMapping("ProAdd")
+	@PostMapping("proAdd")
 	@ResponseBody
-	public Map<String, Object> ProAdd(@RequestBody ProAddVO product) { 
+	public Map<String, Object> proAdd(@RequestBody ProAddVO product) { 
 		//상품 등록
 		//Product Entity 클래스는 Join 때문에 클래스 타입의 필드가 많음
 		//-> 클래스 타입의 필드를 서비스에서 조회하고 set하기 위한 이름만을 필요로 하는 임의의 VO객체를 매게변수로 요청
@@ -77,9 +83,64 @@ public class ProductController {
 //		} else {
 //			data.put("data", "false"); //상품 등록 실패 시 false 전송
 //		}
-
-			
+	
 		return data;
 	}
+	@CrossOrigin
+	@PostMapping("ageInfo")
+	@ResponseBody
+	public Map<String, Object> ageInfo() { 
+		Map<String, Object> data = new HashMap<>();
+		List<Age> list = proService.ageInfo();
+		data.put("data", list);
+		return data;
+	}
+	@CrossOrigin
+	@PostMapping("colorInfo")
+	@ResponseBody
+	public Map<String, Object> colorInfo() { 
+		Map<String, Object> data = new HashMap<>();
+		List<Color> list = proService.colorInfo();
+		data.put("data", list);
+		return data;
+	}
+	@CrossOrigin
+	@PostMapping("genderInfo")
+	@ResponseBody
+	public Map<String, Object> genderInfo() { 
+		Map<String, Object> data = new HashMap<>();
+		List<Gender> list = proService.genderInfo();
+		data.put("data", list);
+		return data;
+	}
+	@CrossOrigin
+	@PostMapping("materialInfo")
+	@ResponseBody
+	public Map<String, Object> materialInfo() { 
+		Map<String, Object> data = new HashMap<>();
+		List<Material> list = proService.materialInfo();
+		data.put("data", list);
+		return data;
+	}
+	@CrossOrigin
+	@PostMapping("priceRangeInfo")
+	@ResponseBody
+	public Map<String, Object> priceRangeInfo() { 
+		Map<String, Object> data = new HashMap<>();
+		List<PriceRange> list = proService.priceRangeInfo();
+		data.put("data", list);
+		return data;
+	}
+	@CrossOrigin
+	@PostMapping("seasonInfo")
+	@ResponseBody
+	public Map<String, Object> seasonInfo() { 
+		Map<String, Object> data = new HashMap<>();
+		List<Season> list = proService.seasonInfo();
+		data.put("data", list);
+		return data;
+	}
+	
+	
 
 }
