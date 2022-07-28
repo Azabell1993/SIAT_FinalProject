@@ -213,7 +213,7 @@ export default {
     /* 1 */
     /* Category large name */
     if(vm.categoryLargeNameIndex) {
-        axios.post('http://192.168.0.81:9292/pro/categoryData')
+        axios.post('http://192.168.0.88:9292/pro/categoryData')
         .then(function (response) {
           vm.categoryLargeNameIndex = response.data
           console.log('상품 대분류 데이터 : ',response.data)
@@ -227,7 +227,7 @@ export default {
     /* 1 */
     /* Category small name */
     if(vm.categorySmallNameIndex) {
-        axios.post('http://192.168.0.81:9292/pro/categoryData')
+        axios.post('http://192.168.0.88:9292/pro/categoryData')
         .then(function (response) {
           vm.categorySmallNameIndex = response.data
           console.log('상품 소분류 데이터 : ',response.data)
@@ -241,7 +241,7 @@ export default {
     /* 2 */
     /* genderSelecter */
     if(vm.genderIndex) {
-        axios.post('http://192.168.0.81:9292/pro/genderInfo')
+        axios.post('http://192.168.0.88:9292/pro/genderInfo')
         .then(function (response) {
           vm.genderIndex = response.data
           console.log('상품 성별 데이터 : ',response.data)
@@ -254,7 +254,7 @@ export default {
     /* 3 */
     /* colorSelecter */
     if(vm.colorIndex) {
-        axios.post('http://192.168.0.81:9292/pro/colorInfo')
+        axios.post('http://192.168.0.88:9292/pro/colorInfo')
         .then(function (response) {
           vm.colorIndex = response.data
           console.log('상품 색깔 데이터 : ',response.data)
@@ -267,7 +267,7 @@ export default {
     /* 4 */
     /* material Selector*/
     if(vm.meterialIndex) {
-      axios.post('http://192.168.0.81:9292/pro/materialInfo')
+      axios.post('http://192.168.0.88:9292/pro/materialInfo')
       .then(function (response) {
             vm.meterialIndex = response.data
             console.log('상품 재질 데이터 : ',response.data)
@@ -280,7 +280,7 @@ export default {
     /* 5 */
     /* age Selector*/
     if(vm.ageIndex) {
-        axios.post('http://192.168.0.81:9292/pro/ageInfo')
+        axios.post('http://192.168.0.88:9292/pro/ageInfo')
         .then(function (response) {
               vm.ageIndex = response.data
               console.log('상품 나이 데이터 : ',response.data)
@@ -293,7 +293,7 @@ export default {
     /* 6 */
     /* priceRangeName Selector*/
     if(vm.meterialIndex) {
-        axios.post('http://192.168.0.81:9292/pro/priceRangeInfo')
+        axios.post('http://192.168.0.88:9292/pro/priceRangeInfo')
         .then(function (response) {
               vm.priceIndex = response.data
               console.log('상품 가격대 데이터 : ',response.data)
@@ -306,7 +306,7 @@ export default {
     /* 7 */
     /* seasonName Selector*/
     if(vm.seasonIndex) {
-        axios.post('http://192.168.0.81:9292/pro/seasonInfo')
+        axios.post('http://192.168.0.88:9292/pro/seasonInfo')
         .then(function (response) {
               vm.seasonIndex = response.data
               console.log('상품 계절 데이터 : ',response.data)
@@ -345,10 +345,7 @@ export default {
 
       /* export data code */
       var ve = this;
-      if(!ve.product.categorySmallName) {
-        alert("카테고리 소분류 정보를 결정해주세요!");
-        return false;
-      } else if(!ve.product.proName) {
+      if(!ve.product.proName) {
         alert("상품의 정보를 결정해주세요!");
         return false;
       } else if(!ve.product.proPrice) {
@@ -360,14 +357,20 @@ export default {
       } else if(!ve.product.proDetail) {
         alert("상품의 상세설명을 입력해주세요.");
         return false;
-      } else if(!ve.product.genderName) {
+      } else if(!ve.product.categoryLargeName) {
+        alert("카테고리 대분류 정보를 결정해주세요!");
+        return false;
+      } else if(!ve.product.categorySmallName) {
+        alert("카테고리 소분류 정보를 결정해주세요!");
+        return false;
+      }  else if(!ve.product.genderName) {
         alert("상품의 성별 속성을 선택해주세요.");
         return false;
       } else if(!ve.product.colorName) {
         alert("상품의 색상을 선택해 주세요.");
         return false;
       } else if(!ve.product.materialName) {
-        alert("상품의 나이를 선택해주세요.");
+        alert("상품의 재질을 선택해주세요.");
         return false;
       } else if(!ve.product.ageName) {
         alert("상품의 연령대를 선택해주세요.");
@@ -380,7 +383,7 @@ export default {
         return false;
       } else {
         alert("전송이 완료 되었습니다!");
-        axios.post('http://192.168.0.81:9292/pro/proAdd', {
+        axios.post('http://192.168.0.88:9292/pro/proAdd', {
           proName: this.product.proName,
           proPrice: this.product.proPrice,
           proStock: this.product.proStock,
@@ -396,67 +399,9 @@ export default {
       })
         .then(function (datatest) {
           if(datatest.data !== 'true') {
-            alert("true");
-            // var value = select.options[select.selectedIndex].value;
-            // select내 id에서 값을 참조하여 가져온다.
-            console.log(datatest);
-
-            console.log(data.proName);
-            console.log(data.proPrice);
-            console.log(data.proStock);
-            console.log(data.proDetail);
-
-            /* 0 */
-            /* Test Get Selector at Category Name Value */
-            var select = document.getElementById('categoryLargeNameOption');
-            var categoryLargeNameOption_value = select.options[select.selectedIndex].value;
-            console.log(categoryLargeNameOption_value);
-
-
-            /* 1 */
-            /* Test Get Selector at Category Name Value */
-            var select = document.getElementById('categorySmallNameOption');
-            var categorySmallNameOption_value = select.options[select.selectedIndex].value;
-            console.log(categorySmallNameOption_value);
-
-            /* 2 */
-            /* Test Get Selector Value */
-            var select = document.getElementById('genderNameOption');
-            var genderNameOption_value = select.options[select.selectedIndex].value;
-            console.log(genderNameOption_value);
-
-            /* 3 */
-            /* Test Get Selector Value */
-            var select = document.getElementById('colorNameOption');
-            var colorNameOption_value = select.options[select.selectedIndex].value;
-            console.log(colorNameOption_value);
-
-            /* 4 */
-            /* Test Get materialNameOption Name Value */
-            var select = document.getElementById('materialNameOption');
-            var materialNameOption_value = select.options[select.selectedIndex].value;
-            console.log(materialNameOption_value);
-  
-            /* 5 */
-            /* Test Get ageNameOption Name Value */
-            var select = document.getElementById('ageNameOption');
-            var ageNameOption_value = select.options[select.selectedIndex].value;
-            console.log(ageNameOption_value);
-
-            /* 6 */
-            /* Test Get priceRangeNameOption Name Value */
-            var select = document.getElementById('priceRangeNameOption');
-            var priceRangeNameOption_value = select.options[select.selectedIndex].value;
-            console.log(priceRangeNameOption_value);
-
-            /* 7 */
-            /* Test Get priceRangeNameOption Name Value */
-            var select = document.getElementById('seasonNameOption');
-            var seasonNameOption_value = select.options[select.selectedIndex].value;
-            console.log(seasonNameOption_value);
-      
+                  
           } else {
-            alert("false");
+            alert("전송 오류. 다시 작성해서 제출해주십시오.");
           }
         }).catch(function (error) {
           console.log(error)
