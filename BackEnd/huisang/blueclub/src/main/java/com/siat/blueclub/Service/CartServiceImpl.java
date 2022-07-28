@@ -1,6 +1,7 @@
 package com.siat.blueclub.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,8 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public boolean addCart(Long proCode, Integer cartCount, String memID) {
 		Cart cart = new Cart();
-		if(cartRepository.findByMemIDAndProCode(memberRepository.findById(memID).get(), productRepository.findById(proCode).get()).isEmpty()) {
+		Optional<Cart> optional = cartRepository.findByMemIDAndProCode(memberRepository.findById(memID).get(), productRepository.findById(proCode).get());
+		if(optional.isEmpty()) {
 			//해당 사용자의 장바구니에 해당 상품이 이미 담겨 있지 않은 경우 -> 일반적인 장바구니 추가
 			cart.setMemID(memberRepository.findById(memID).get());
 			cart.setProCode(productRepository.findById(proCode).get());
@@ -38,7 +40,7 @@ public class CartServiceImpl implements CartService {
 			
 		} else {
 			//헤당 사용자의 장바구니에 해당 상품이 이미 담겨 있는 경우 -> cartCount 필드 update
-			cart = cartRepository.findByMemIDAndProCode(memberRepository.findById(memID).get(), productRepository.findById(proCode).get()).get();
+			cart = optional.get();
 			cart.setCartCount(cartCount);
 			cartRepository.save(cart);
 		}

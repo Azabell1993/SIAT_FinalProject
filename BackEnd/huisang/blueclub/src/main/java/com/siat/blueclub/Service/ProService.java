@@ -34,6 +34,8 @@ public interface ProService {
 
 	public List<Season> seasonInfo(); //season 테이블 정보
 
+	public boolean proView(Long product); //상품 조회 -> 조회수 증가
+
 
 
 }
