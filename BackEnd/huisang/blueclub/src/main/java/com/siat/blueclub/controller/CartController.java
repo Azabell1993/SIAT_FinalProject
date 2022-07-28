@@ -1,9 +1,12 @@
 package com.siat.blueclub.controller;
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +28,13 @@ public class CartController {
 	@CrossOrigin
 	@PostMapping("cartInfo")
 	@ResponseBody
-	public Map<String, Object> cartInfo(Member mem) { //해당 member의 장바구니 목록
+	public Map<String, Object> cartInfo(Member mem, HttpServletRequest req) { //해당 member의 장바구니 목록
 		Map<String, Object> data = new HashMap<>();
+		String ip = req.getHeader("X-Forwarded-For");
+		if (ip == null) {
+			ip = req.getRemoteAddr();
+		}
+		System.out.println(new Date() + " | " + ip + "| cartInfo");
 		List<Cart> list = cartService.getCartBymemID(mem); //해당 member의 장바구니 목록 서비스
 		data.put("data", list);
 		return data;
@@ -34,8 +42,13 @@ public class CartController {
 	@CrossOrigin
 	@PostMapping("addCart")
 	@ResponseBody
-	public Map<String, Object> addCart(Map<String, Object> cartMap) { 
+	public Map<String, Object> addCart(Map<String, Object> cartMap, HttpServletRequest req) { 
 		Map<String, Object> data = new HashMap<>();
+		String ip = req.getHeader("X-Forwarded-For");
+		if (ip == null) {
+			ip = req.getRemoteAddr();
+		}
+		System.out.println(new Date() + " | " + ip + " | addCart | " + cartMap);
 		Long proCode = (Long) cartMap.get("proCode");
 		Integer cartCount = (Integer) cartMap.get("cartCount");
 		String memID = (String) cartMap.get("memID");
@@ -49,8 +62,13 @@ public class CartController {
 	@CrossOrigin
 	@PostMapping("deleteCart")
 	@ResponseBody
-	public Map<String, Object> deleteCart(Map<String, Object> cartMap) { 
+	public Map<String, Object> deleteCart(Map<String, Object> cartMap, HttpServletRequest req) { 
 		Map<String, Object> data = new HashMap<>();
+		String ip = req.getHeader("X-Forwarded-For");
+		if (ip == null) {
+			ip = req.getRemoteAddr();
+		}
+		System.out.println(new Date() + " | " + ip + " | deleteCart | " + cartMap );
 		Long proCode = (Long) cartMap.get("proCode");
 		String memID = (String) cartMap.get("memID");
 		if( cartService.deleteCart(proCode, memID)) { //장바구니 삭제 서비스

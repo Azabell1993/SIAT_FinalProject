@@ -56,9 +56,10 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [proCode=" + proCode + ", proName=" + proName + ", proPrice=" + proPrice + ", proStock="
-				+ proStock + ", proDetail=" + proDetail + ", proCount=" + proCount + ", proCategory=" + proCategory
-				+ ", proGender=" + proGender + ", proColor=" + proColor + ", proMaterial=" + proMaterial
-				+ ", proSeason=" + proSeason + ", proAge=" + proAge + ", proPriceRange=" + proPriceRange + "]";
+				+ proStock + ", proDetail=" + proDetail + ", proCount=" + proCount + ", proImage=" + proImage
+				+ ", proCategory=" + proCategory + ", proGender=" + proGender + ", proColor=" + proColor
+				+ ", proMaterial=" + proMaterial + ", proSeason=" + proSeason + ", proAge=" + proAge
+				+ ", proPriceRange=" + proPriceRange + "]";
 	}
 
 }
