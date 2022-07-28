@@ -23,6 +23,9 @@ export default createStore({
     updateloginUserID (state, loginUserID) {
       state.loginUser.memID = loginUserID
     },
+    updateloginUserPW(state, loginUserPW) {
+      state.loginUser.memPW = loginUserPW
+    }
   },
   actions: {
   },

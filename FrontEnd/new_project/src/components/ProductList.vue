@@ -41,26 +41,23 @@ export default {
   },
   created () {
     var vm = this
-    axios.post('http://192.168.0.81:9292/pro/proList', //헤더 : url, value
+    axios.post('http://192.168.0.88:9292/pro/proList', //헤더 : url, value
     {proList: [1,2,3,4]}) //추천 알고리즘을 만든 곳으로 전달
         .then(async function (response) {
-          console.log(response.data) 
           vm.productInfos = response.data
-          
-          console.log(response.data.data)
-
+          //console.log(response.data.data)
           const proCodeList = response.data.data
           
           for(var i=0; i<proCodeList.length; i++) {
-	          console.log('proCode : ', proCodeList[i])            
-              await axios.post('http://192.168.0.81:9292/pro/proInfo', 
+	          // console.log('proCode : ', proCodeList[i])
+              await axios.post('http://192.168.0.88:9292/pro/proInfo', 
               { 
                 proCode: proCodeList[i]
               })
               .then(function (response) {
-                console.log(vm.recommendProduct) 
-                vm.recommendProduct.push(response.data.data)
                 console.log(response.data.data)
+                // console.log(vm.recommendProduct)
+                vm.recommendProduct.push(response.data.data)
               })
           }
         })
