@@ -18,34 +18,40 @@ import store from '@/store/index'
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 export default {
-  computed: {
-    memID: {
-      get () {
-        return store.state.loginUser.memID //store에 있는 값 가져오기 (초기값을 가져옴)
-      },
-      set(value) {
-        this.$store.commit('updateloginUserID', value) //input에 친 값을 다시 세팅
-      }
-    }
-  },
   methods: {
     sendPost () {
       const userId = this.memID; //변수 선언 이 값을 그대로 쓰겠다. 자스 내에선 this 선언 부분이 다를 수있음. 당분간 이게 좀 안전할 듯
       console.log(userId);
 
-      axios.post('http://192.168.0.81:9292/mem/loginProc', {
+      axios.post('http://192.168.0.88:9292/mem/loginProc', {
         memID: this.memID,
         memPW: this.memPW
       })
-        .then(function (res) {
-          if(res.data.mem.memID == userId){
+        .then(function (response) { //될떄 실행하는 함수
+          console.log(response.data)
+          if(response.data.mem.memID == userId){
             console.log("ID가 일치합니다.")
-            location.href = "http://localhost:8080/"
+            // location.href = "http://localhost:8080/"
+            
+            axios.post('http://192.168.0.88:9292/mem/memberInfo', 
+            {
+              memID: userId
+            })
+            .then(function(response) {
+              // console.log(response.data)
+              // console.log('memPW : ',response.data.data.memPW)
+              // store.commit('updateloginUserID', userId) //로그인이 성공하는 과정에서 memID를 조회해서 정보를 가져오는건가?
+              store.commit('updateloginUserPW', response.data.data.memPW)
+              // console.log('store에 있는 PW : ',store.state.loginUser.memPW)
+            })
+          }
+          else{
+            alert('ID 혹은 비밀번호가 틀렸습니다')
           }
           //store.commit('updateloginUserID',this.memID)
           console.log(`login : ${store.state.loginUser.memID}`) //store에 있는 ID 값 체크
-        }).catch(function () {
-          alert('ID 혹은 비밀번호가 틀렸습니다')
+        }).catch(function (error) { // 뭔가 실패할때 쓰는 함수
+          console.log(error);
         })
         console.log("end")
     }
