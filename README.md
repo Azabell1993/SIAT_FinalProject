@@ -22,7 +22,7 @@
 |김호중|Web개발|java|
 |채희상|Web개발|java|
 
-# 팀장의 C언어 ==> WebAssembly ==> Web 모듈 프론트엔드로의 연결을 테스트한 레포지토리
+# 팀장의 C언어 ==> WebAssembly ==> Web 모듈 프론트엔드로의 연결을 테스트한 레포지토리(아직 적용예정은 없지만 나중에 따로 BASE64구현을 해보기 위해 만든 번외 파트입니다.)
 [예제보기](https://github.com/Azabell1993/SIAT_FinalProject/tree/main/TeamLeader_Pratice_Test_Workspace/WEBASSEMBLY/TEST_JS_exam01/Suceess_)
 - Frontend, Backend에 있어서 WEB 서비스 전반에 사용할 엔진을 설계하고 구현할 방법을 C언어를 통해 설계하고자 하고 기반을 닦았습니다.
 - C언어로 객체를 구현하였으며 캡슐화와 메모리 해제등이 객체지향 기반의 고급언어와 유사하게 적성되어 있습니다.
@@ -37,13 +37,12 @@
 # DB 설계
 ![DB](https://user-images.githubusercontent.com/75885992/177923822-d4089267-5d6e-4448-8d25-7dd9e84974c9.png)
 
-# Class 설계
-- 구현 중
 
 # 팀원 각 개발파트 분담
 |이름|개발파트|기타|
 |------|---|---|
-|박지우|프론트엔드, 백엔드|풀 스택|
-|이대관|프론트엔드|-|
+|박지우|프론트엔드|JavaScript, Vue|
+|이대관|프론트엔드|JavaScript, Vue|
+|채희상|백엔드|Java, Spring|
 |김호중|백엔드|-|
-|채희상|백엔드|-|
+
