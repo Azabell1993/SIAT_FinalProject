@@ -12,8 +12,10 @@
 <script type="text/javascript">
 function test(){
 	$.ajax({
-		url: "/imageload?fileName=testImage2.jpg",
-		type: "get",
+		url: "/imageload",
+		type: "post",
+		contentType: 'application/json',
+		data: JSON.stringify({fileName:"testImage2.jpg"}),
 		success: function(data){
 			console.log(data);
 		},

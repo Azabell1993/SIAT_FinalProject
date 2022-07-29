@@ -31,6 +31,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -85,7 +86,7 @@ public class HomeController {
 				File newFile = new File(path, image.getUuid() + "_" + image.getImageName());
 				try {
 					file.transferTo(newFile);
-					//imageRepository.save(image);
+					imageRepository.save(image);
 				} catch (IllegalStateException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -97,12 +98,14 @@ public class HomeController {
 		return data;
 	}
 
-	@GetMapping("imageload")
+	@PostMapping("imageload")
 	@ResponseBody
-	public ResponseEntity<Resource> getItemImageByName(@RequestParam("fileName") String fileName)
+	public ResponseEntity<Resource> getItemImageByName(@RequestBody Map<String, Object> fileNameData)
 			throws NotFoundException {
+		String fileName = (String) fileNameData.get("fileName");
 		try {
 			UploadedImage image = imageRepository.findByImageName(fileName).orElse(null);
+			System.out.println(image.toString());
 			FileSystemResource resource = new FileSystemResource(
 					image.getSavaPath() + "/" + image.getUuid() + "_" + image.getImageName());
 			if (!resource.exists()) {
