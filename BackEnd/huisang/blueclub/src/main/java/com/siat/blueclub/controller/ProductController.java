@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.siat.blueclub.domain.Age;
 import com.siat.blueclub.domain.Color;
@@ -25,6 +27,7 @@ import com.siat.blueclub.domain.Gender;
 import com.siat.blueclub.domain.Material;
 import com.siat.blueclub.domain.PriceRange;
 import com.siat.blueclub.domain.ProAddVO;
+import com.siat.blueclub.domain.ProImage;
 import com.siat.blueclub.domain.Product;
 import com.siat.blueclub.domain.Season;
 import com.siat.blueclub.service.CategoryService;
@@ -75,7 +78,8 @@ public class ProductController {
 	@CrossOrigin
 	@PostMapping("proListByCategory")
 	@ResponseBody
-	public Map<String, Object> proListByCategory(@RequestBody Map<String, Object> proListandCategory, HttpServletRequest req) { // 카테고리 별 상품 리스트
+	public Map<String, Object> proListByCategory(@RequestBody Map<String, Object> proListandCategory,
+			HttpServletRequest req) { // 카테고리 별 상품 리스트
 		// 매개변수로 사용자가 이전에 조회한 상품 목록과 카테고리 이름을 가지는 Map객체를 요청
 		// 카테고리 이름이 대분류면 범위 지정, 카테고리 이름이 소분류면 단독으로 탐색
 		// 코드 목록이 비어있으면 이름순, 코드 목록이 비어있지 않으면 추천순으로 상품 코드 목록을 전송
@@ -131,6 +135,25 @@ public class ProductController {
 
 		return data;
 	}
+	@CrossOrigin
+	@PostMapping(value = "imageUpload",  consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	@ResponseBody
+	public Map<String, Object> iamgeUpload(@RequestParam String proName, MultipartFile[] proImage, HttpServletRequest req) {
+		String path = "D:\\study\\springboot\\fileUploadTest";
+		String ip = req.getHeader("X-Forwarded-For");
+		if (ip == null) {
+			ip = req.getRemoteAddr();
+		}
+		System.out.println(new Date() + " | " + ip + " | imageUpload");
+		Map<String, Object> data = new HashMap<>();
+		if( proService.imageUpload(proName, proImage)) {
+			data.put("data", "true");
+		}else {
+			data.put("data", "false");
+		}
+
+		return data;
+	}
 
 	@CrossOrigin
 	@GetMapping("proView")
@@ -143,7 +166,7 @@ public class ProductController {
 			ip = req.getRemoteAddr();
 		}
 		System.out.println(new Date() + " | " + ip + " | proView");
-		if(proService.proView(product)) {
+		if (proService.proView(product)) {
 			data.put("data", "true");
 		} else {
 			data.put("data", "false");

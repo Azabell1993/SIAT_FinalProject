@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<body>
+<h1>load</h1>
+<button onclick="test()">test</button>
+
+<script type="text/javascript">
+function test(){
+	$.ajax({
+		url: "/imageload?fileName=testImage2.jpg",
+		type: "get",
+		success: function(data){
+			console.log(data);
+		},
+		error: function(xhr, status, error){
+		       alert(xhr.responseText);
+		    }
+	})
+}
+</script>
+
+
+</body>
+</html>

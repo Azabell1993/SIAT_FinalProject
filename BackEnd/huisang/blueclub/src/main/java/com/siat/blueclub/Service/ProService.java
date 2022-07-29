@@ -2,6 +2,8 @@ package com.siat.blueclub.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.siat.blueclub.domain.Product;
 import com.siat.blueclub.domain.Season;
 import com.siat.blueclub.domain.Age;
@@ -10,6 +12,7 @@ import com.siat.blueclub.domain.Gender;
 import com.siat.blueclub.domain.Material;
 import com.siat.blueclub.domain.PriceRange;
 import com.siat.blueclub.domain.ProAddVO;
+import com.siat.blueclub.domain.ProImage;
 
 
 public interface ProService {
@@ -35,6 +38,8 @@ public interface ProService {
 	public List<Season> seasonInfo(); //season 테이블 정보
 
 	public boolean proView(Long product); //상품 조회 -> 조회수 증가
+
+	public boolean imageUpload(String proName, MultipartFile[] proImage);
 
 
 
