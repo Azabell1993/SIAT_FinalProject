@@ -16,6 +16,7 @@ export default createStore({
         categoryShoesList: [],
         categorySkirtList: [],
         categoryHatList: [],
+        selectOneProductCode : []
     },
     getters: {
 
@@ -39,6 +40,9 @@ export default createStore({
         updateCategoryHatList (state, categoryHatNewList) {
             state.categoryHatList = categoryHatNewList
         },
+        updateSelectOneProductCode (state, selectOne) {
+            state.selectOneProductCode = selectOne
+        }
     },  
     actions:{
     },

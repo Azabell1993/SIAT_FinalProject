@@ -3,7 +3,9 @@
   <CategoryList></CategoryList>
   <h1>치마 페이지입니다.</h1>
   <div id="productList" v-bind:key="item" v-for="item in productSkirtInfos">
-    <router-link to="/productdetail"><img v-bind:src="require(`@/assets/image/${item.proImage}.png`)"></router-link>
+    <router-link to="/productdetail">
+      <!-- <img v-bind:src="require(`@/assets/image/${item.proImage}.png`)"> -->
+    </router-link>
     <p>{{item.proName}}</p>
     <p>{{item.proPrice}}</p>
   </div>
@@ -39,7 +41,7 @@ export default {
     
       for (var i=0 ;i < skirtList.length; i++) {
         console.log(skirtList[i])
-        await axios.post('http://192.168.0.88:9292/pro/proInfo', 
+        await axios.post('http://192.168.0.81:9292/pro/proInfo', 
         {proCode : skirtList[i]})
         .then(function (response) {
           console.log(response.data.data);
