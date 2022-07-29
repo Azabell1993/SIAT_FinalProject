@@ -382,6 +382,7 @@ export default {
         alert("상품의 계절을 선택해주세요.");
         return false;
       } else {
+        
         alert("전송이 완료 되었습니다!");
         axios.post('http://192.168.0.81:9292/pro/proAdd', {
           proName: this.product.proName,
@@ -398,8 +399,25 @@ export default {
           seasonName : this.product.seasonName
       })
         .then(function (datatest) {
-          if(datatest.data !== 'true') {
-                  
+          if(datatest.data.data !== true) {
+            alert("전송 완료 2");
+
+            /* Image Form export Argc */
+            /* 기본 품 전송이 모두 true일 때 */
+            axios.post('http://192.168.0.88:9292/pro/imageUpload', {
+              // argc : this.argc…
+              // …………….
+              
+
+            }).then(function (datatest) {
+              if(datatest.data !== 'true') {
+                alert("사진까지 전송이 완료되었습니다.");
+              }
+            }).catch(function (error) {
+              console.log(error)
+            })
+            /* Image Form export Argc */
+
           } else {
             alert("전송 오류. 다시 작성해서 제출해주십시오.");
           }
@@ -430,4 +448,3 @@ li { display:inline;
     line-height: 30px;
     margin-left: 10px;}
 </style>
-

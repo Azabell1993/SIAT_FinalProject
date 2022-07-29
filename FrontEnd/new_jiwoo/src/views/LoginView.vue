@@ -80,8 +80,8 @@ export default {
               // console.log('memEmail : ', response.data.data.memEmail)
              
             })
-          }
-          else{
+          } else{
+            console.log('error test');
             alert('ID 혹은 비밀번호가 틀렸습니다')
           }
           // store.commit('updateloginUserID',this.memID)

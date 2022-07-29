@@ -105,9 +105,7 @@ export default {
           //console.log(res.data.data);
           if(res.data.data === 'true') {
             alert("회원탈퇴 완료");
-          } else {
-            alert("취소");
-          }
+          } 
 
         }).catch(function (error) {
             console.log(error)
