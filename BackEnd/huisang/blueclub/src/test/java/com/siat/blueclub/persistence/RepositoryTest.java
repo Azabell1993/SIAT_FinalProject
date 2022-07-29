@@ -72,7 +72,7 @@ public class RepositoryTest {
 	
 		int pk = 0;
 		
-		String[] genderList = {"남자", "여자"," 유니섹스"};
+		String[] genderList = {"남자", "여자","유니섹스"};
 		for(String i : genderList ) {
 			Gender gender = new Gender();
 			gender.setGenderCode(pk);

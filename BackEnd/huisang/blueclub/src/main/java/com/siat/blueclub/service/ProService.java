@@ -2,6 +2,9 @@ package com.siat.blueclub.service;
 
 import java.util.List;
 
+import org.springframework.core.io.Resource;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.siat.blueclub.domain.Product;
@@ -40,6 +43,8 @@ public interface ProService {
 	public boolean proView(Long product); //상품 조회 -> 조회수 증가
 
 	public boolean imageUpload(String proName, MultipartFile[] proImage);
+
+	public ResponseEntity<Resource> imageLoad(String imageID) throws NotFoundException;
 
 
 

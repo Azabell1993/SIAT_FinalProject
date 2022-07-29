@@ -1,0 +1,24 @@
+1. application.propertires에서 본인이 사용할 DB의 username과 password를 설정한다.
+
+2. spring.jpa.hibernate.ddl-auto 값 -> create
+
+3. RepositoryTest의 @Disabled 어노테이션을 모두 제거한다(총 2개) -> Junit Test 실행 -> 이때 DB에서 기본 데이터가 잘 들어갔는지 확인하는 것이 좋다 -> 기본 데이터 및 샘플 데이터 설정 완료
+-> 이후에 DB 설계 변경이 없다면 다음부터는 이 과정을 생략해도 좋다.
+
+4. . RepositoryTest의 @Disabled 어노테이션을 모든 test메소드에 붙인다 (총 2개)
+
+5. spring.jpa.hibernate.ddl-auto 값 -> update
+
+6. BlueclubApplication 실행 -> 이때 부터 서버를 사용해도 좋다
+-> 프론트앤드에서 호출되는 axios 메소드의 주소값을 본인의 ip로 변경해야 한다.
+
++ 셈플 이미지 추가 방법
+1. ProductController의 imageUpload 메소드의 필드 path의 값을 본인이 원하는 위치의 절대 경로로 설정한다.
+
+2. 서버가 사용가능한 상태에서 브라우저 url에 /index 입력해 접근
+ex) 192.168.0.81:9292/index -> ip 주소는 본인 것이여야 함
+
+3. 파일을 추가하고 제출하기 버튼을 누른다 -> sample1 상품의 이미지가 등록됨 -> 잘 등록되었는지 확인하는 것이 좋다.
+
+4. 다른 상품의 이미지를 등록하고 싶다면 index.html에서 	26번 라인 formData.append("proName", "sample1");를 수정한다.
+ex) sample2 이미지 등록 -> formData.append("proName", "sample2");
