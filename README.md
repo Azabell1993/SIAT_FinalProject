@@ -14,13 +14,15 @@
 |김호중|백엔드 팀원|백엔드|https://github.com/HeartByte|
 |채희상|백엔드 팀원|백엔드|https://github.com/ds3569|
 
+
 ## 팀원 소개
 |이름|개발 특기사항|개발 특기언어|
 |------|---|---|
-|박지우|system 개발|C언어|
-|이대관|Web개발|java,vue|
-|김호중|Web개발|java|
+|박지우|system개발|C언어|
+|이대관|Web개발|java|
 |채희상|Web개발|java|
+|김호중|-|-|
+
 
 # 팀장의 C언어 ==> WebAssembly ==> Web 모듈 프론트엔드로의 연결을 테스트한 레포지토리(아직 적용예정은 없지만 나중에 따로 BASE64구현을 해보기 위해 만든 번외 파트입니다.)
 [예제보기](https://github.com/Azabell1993/SIAT_FinalProject/tree/main/TeamLeader_Pratice_Test_Workspace/WEBASSEMBLY/TEST_JS_exam01/Suceess_)
