@@ -11,7 +11,7 @@
 |------|---|---|---|
 |박지우|팀장|풀 스택|https://github.com/Azabell1993|
 |이대관|프론트엔드 팀원|프론트 엔드|https://github.com/CodingBeginnerLDK|
-|김호중|백엔드 팀원|백엔드|https://github.com/HeartByte|
+|김호중|CSS 적용 팀원|디자인|https://github.com/HeartByte|
 |채희상|백엔드 팀원|백엔드|https://github.com/ds3569|
 
 
@@ -46,5 +46,5 @@
 |박지우|프론트엔드|JavaScript, Vue|
 |이대관|프론트엔드|JavaScript, Vue|
 |채희상|백엔드|Java, Spring|
-|김호중|백엔드|-|
+|김호중|CSS|-|
 
