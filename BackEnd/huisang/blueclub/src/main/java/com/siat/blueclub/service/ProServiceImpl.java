@@ -2,6 +2,9 @@ package com.siat.blueclub.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +16,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -362,6 +371,29 @@ public class ProServiceImpl implements ProService {
 			normB += Math.pow(vectorB[i], 2);
 		}
 		return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+	}
+
+	@Override
+	public ResponseEntity<Resource> imageLoad(String imageID) throws NotFoundException {
+
+		try {
+			ProImage image = imageRepository.findById(imageID).orElse(null);
+			System.out.println(image.toString());
+			FileSystemResource resource = new FileSystemResource(
+					image.getSavaPath() + "/" + image.getSaveName());
+			if (!resource.exists()) {
+				throw new NotFoundException();
+			}
+
+			System.out.println(resource);
+			HttpHeaders header = new HttpHeaders();
+			Path filePath = null;
+			filePath = Paths.get(image.getSavaPath() + "/" + image.getSaveName());
+			header.add("Content-Type", Files.probeContentType(filePath));
+			return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
+		} catch (Exception e) {
+			throw new NotFoundException();
+		}
 	}
 
 }

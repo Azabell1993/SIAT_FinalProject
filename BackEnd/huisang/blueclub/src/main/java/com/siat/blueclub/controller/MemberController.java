@@ -35,7 +35,7 @@ public class MemberController {
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + "| loginProc | " + mem.toString());
+		System.out.println(new Date() + " | " + ip + " | loginProc | " + mem.toString());
 		if( memService.loginCheck(mem) ) { //로그인 서비스 호출
 			data.put("data", "true"); //로그인 성공 시 true 전송
 			data.put("mem", memService.getMem(mem)); //로그인 성공시 멤버 정보 전송
@@ -54,7 +54,7 @@ public class MemberController {
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + "| idCheckProc | " + mem.toString());
+		System.out.println(new Date() + " | " + ip + " | idCheckProc | " + mem.toString());
 		if (memService.idCheck(mem)) { //아이디 중복 체크 서비스 호출 -> 해당하는 아이디가 있을 시
 			data.put("data", "true"); //true 전송
 		} else { //해당하는 아이디가 없을 시
@@ -71,7 +71,7 @@ public class MemberController {
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + "| singUpProc | " + mem.toString());
+		System.out.println(new Date() + " | " + ip + " | singUpProc | " + mem.toString());
 		if(memService.signUp(mem)) { //회원가입 서비스 호출 -> 회원가입 성공 시
 			data.put("data", "true"); //true 전송
 		} else { //회원가입 실패 시
@@ -89,7 +89,7 @@ public class MemberController {
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + "| updateProc | " + mem.toString());
+		System.out.println(new Date() + " | " + ip + " | updateProc | " + mem.toString());
 		if(memService.update(mem)) { //회원 정보 수정 서비스 호출 -> 회원 정보 수정 성공 시
 			data.put("data", "true"); //true 전송
 		} else { //회원가입 실패 시

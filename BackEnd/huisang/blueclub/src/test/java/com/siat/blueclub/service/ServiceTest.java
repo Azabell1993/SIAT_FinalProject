@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.siat.blueclub.domain.Member;
 import com.siat.blueclub.domain.Product;
 import com.siat.blueclub.persistence.CartRepository;
+import com.siat.blueclub.persistence.GenderRepository;
 import com.siat.blueclub.persistence.MemberRepository;
 import com.siat.blueclub.persistence.ProCategoryRepository;
 import com.siat.blueclub.persistence.ProductDao;
@@ -39,6 +40,8 @@ public class ServiceTest {
 	private CartRepository cartRepository;
 	@Autowired
 	private MemberRepository memberRepository;
+	@Autowired
+	private GenderRepository genderRepository;
 	
 	@Disabled
 	@Test
@@ -49,10 +52,9 @@ public class ServiceTest {
 		System.out.println(categoryMap.toString());
 	}
 	
-	
 	@Test
 	public void proTest() {
-		System.out.println(proService.getProInfo((long) 1).toString());
+		System.out.println(genderRepository.findByGenderName("유니섹스").get().toString());
 	}
 	
 	@Disabled
