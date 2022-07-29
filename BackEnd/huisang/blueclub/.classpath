@@ -30,6 +30,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+<<<<<<< HEAD
 	<classpathentry kind="src" path="target/generated-sources/annotations">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -58,5 +59,7 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
+=======
+>>>>>>> 3dd42d2d24c44c7527f4195cd1a0ee7aee6c87a4
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

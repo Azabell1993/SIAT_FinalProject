@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -166,6 +167,8 @@ public class ProServiceImpl implements ProService {
 		product.setProPriceRange(priceRangeRepository.findByPriceRangeName(vo.getPriceRangeName()).get());
 		product.setProSeason(seasonRepository.findBySeasonName(vo.getSeasonName()).get());
 		product.setProStock(vo.getProStock());
+		
+		product.setProImage("top1"); //임시 이미지 추후 vo 객체의 값으로 set
 
 		productRepository.save(product); // DB에 상품 저장
 		if (productRepository.findById(product.getProCode()).isEmpty()) { // 상품이 정상적으로 등록되지 않았을 경우
@@ -174,6 +177,20 @@ public class ProServiceImpl implements ProService {
 			return true;
 		}
 
+	}
+	
+	@Override
+	public boolean proView(Long product) { //상품 조회 -> 조회수 증가
+		Optional<Product> optional = productRepository.findById(product);
+		if(optional.isEmpty()) {
+			return false;
+		} else {
+			Product temp = optional.get();
+			int count = temp.getProCount() + 1;
+			temp.setProCount(count);
+			productRepository.save(temp);
+			return true;
+		}
 	}
 
 	@Override
@@ -292,5 +309,7 @@ public class ProServiceImpl implements ProService {
 		}
 		return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
 	}
+
+	
 
 }
