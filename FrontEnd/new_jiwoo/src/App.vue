@@ -28,12 +28,12 @@
 </div>
 </template>
 <script>
-import store from '@/store'
+import store from '@/store/index'
 
 export default {
   data () {
     return {
-      productsearch: '',
+      productsearch: '', 
       loginuserid: store.state.loginUser.memID
     }
   },
@@ -49,7 +49,7 @@ export default {
     userlogout () {
       this.loginuserid = ''
       this.$store.commit('updateloginUserID', this.loginuserid)
-      location.href = "http://localhost:8080/"
+      location.href = "http://localhost:8081/"
     }
   }
 }

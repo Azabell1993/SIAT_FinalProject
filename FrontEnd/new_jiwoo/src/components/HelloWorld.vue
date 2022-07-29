@@ -13,7 +13,7 @@ import ProductList from '@/components/ProductList.vue'
 export default {
   components: {
     CategoryList,
-    ProductList
+    ProductList 
   },
   props: {
     msg: String
