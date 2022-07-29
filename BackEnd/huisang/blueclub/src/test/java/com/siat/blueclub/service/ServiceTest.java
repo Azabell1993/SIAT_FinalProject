@@ -49,15 +49,10 @@ public class ServiceTest {
 		System.out.println(categoryMap.toString());
 	}
 	
-	@Disabled
+	
 	@Test
 	public void proTest() {
-		List<Long> test = new ArrayList<>();
-		List<Integer> data = new ArrayList<>();
-		data.add(1);
-		data.add(3);
-		test = proService.getRecommend(data);
-		System.out.println(test);
+		System.out.println(proService.getProInfo((long) 1).toString());
 	}
 	
 	@Disabled

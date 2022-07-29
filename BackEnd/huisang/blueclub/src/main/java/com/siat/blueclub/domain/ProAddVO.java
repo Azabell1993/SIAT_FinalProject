@@ -1,5 +1,7 @@
 package com.siat.blueclub.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +18,6 @@ public class ProAddVO {
 	private Integer proStock; //재고
 	private String proDetail; //상세 설명
 	private Integer proCount;
-	private String proImage;
-
 
 	private String categoryLargeName;
 	private String categorySmallName;
@@ -30,10 +30,10 @@ public class ProAddVO {
 	@Override
 	public String toString() {
 		return "ProAddVO [proCode=" + proCode + ", proName=" + proName + ", proPrice=" + proPrice + ", proStock="
-				+ proStock + ", proDetail=" + proDetail + ", proCount=" + proCount + ", proImage=" + proImage
-				+ ", categoryLargeName=" + categoryLargeName + ", categorySmallName=" + categorySmallName
-				+ ", genderName=" + genderName + ", colorName=" + colorName + ", materialName=" + materialName
-				+ ", ageName=" + ageName + ", priceRangeName=" + priceRangeName + ", seasonName=" + seasonName + "]";
+				+ proStock + ", proDetail=" + proDetail + ", proCount=" + proCount + ", categoryLargeName="
+				+ categoryLargeName + ", categorySmallName=" + categorySmallName + ", genderName=" + genderName
+				+ ", colorName=" + colorName + ", materialName=" + materialName + ", ageName=" + ageName
+				+ ", priceRangeName=" + priceRangeName + ", seasonName=" + seasonName + "]";
 	}
 	
 	

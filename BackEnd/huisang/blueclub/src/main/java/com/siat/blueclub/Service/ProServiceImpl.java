@@ -1,5 +1,7 @@
 package com.siat.blueclub.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,9 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.siat.blueclub.domain.Age;
 import com.siat.blueclub.domain.Color;
@@ -19,12 +23,14 @@ import com.siat.blueclub.domain.Material;
 import com.siat.blueclub.domain.PriceRange;
 import com.siat.blueclub.domain.ProAddVO;
 import com.siat.blueclub.domain.ProCategory;
+import com.siat.blueclub.domain.ProImage;
 import com.siat.blueclub.domain.Product;
 import com.siat.blueclub.domain.ProductVO;
 import com.siat.blueclub.domain.Season;
 import com.siat.blueclub.persistence.AgeRepository;
 import com.siat.blueclub.persistence.ColorRepository;
 import com.siat.blueclub.persistence.GenderRepository;
+import com.siat.blueclub.persistence.ImageRepository;
 import com.siat.blueclub.persistence.MaterialRepository;
 import com.siat.blueclub.persistence.PriceRangeRepository;
 import com.siat.blueclub.persistence.ProCategoryRepository;
@@ -56,7 +62,9 @@ public class ProServiceImpl implements ProService {
 	private ProductDao productDao;
 	@Autowired
 	private CategoryService categoryService;
-
+	
+	@Autowired
+	private ImageRepository imageRepository;
 
 	@Override
 	public List<Long> getRecommend(List<Integer> proCodeList) {
@@ -92,7 +100,8 @@ public class ProServiceImpl implements ProService {
 	}
 
 	@Override
-	public List<Long> getRecommendByCategory(List<Integer> proCodeList, String categoryLargeName, String categorySmallName) { 
+	public List<Long> getRecommendByCategory(List<Integer> proCodeList, String categoryLargeName,
+			String categorySmallName) {
 		// 카테고리 별 상품 리스트 -> MyBatis 사용
 		// 카테고리 이름이 대분류면 범위 지정, 카테고리 이름이 소분류면 단독으로 탐색
 		// 코드 목록이 비어있으면 이름순, 코드 목록이 비어있지 않으면 추천순으로 상품 목록을 전송
@@ -105,7 +114,9 @@ public class ProServiceImpl implements ProService {
 					recommend.add(i.getPro_Code()); // 상품 리스트에 저장
 				}
 			} else { // 카테고리 이름이 소분류 일 경우 -> 단일 탐색
-				for (ProductVO i : productDao.getProductsByCategoryNames(categoryLargeName, categorySmallName)) { // 소분류에 해당하는 상품(이름순)
+				for (ProductVO i : productDao.getProductsByCategoryNames(categoryLargeName, categorySmallName)) { // 소분류에
+																													// 해당하는
+																													// 상품(이름순)
 					recommend.add(i.getPro_Code()); // 상품 리스트에 저장
 				}
 			}
@@ -124,8 +135,9 @@ public class ProServiceImpl implements ProService {
 					siilarityMap.put(i.getPro_Code(), cosineSimilarity(aver, statusArrayForVO(i))); // 코사인 유사도 맵에 저장
 				}
 			} else { // 카테고리 이름이 소분류 일 경우 -> 단일 탐색
-				List<ProductVO> allProductsinCategory = productDao.getProductsByCategoryNames(categoryLargeName, categorySmallName); // 소분류에 해당하는
-																											// 상품(이름순);
+				List<ProductVO> allProductsinCategory = productDao.getProductsByCategoryNames(categoryLargeName,
+						categorySmallName); // 소분류에 해당하는
+				// 상품(이름순);
 				for (ProductVO i : allProductsinCategory) { // 전체 상품 목록 조회
 					// 사용자가 조회한 상품 스테이터스의 평균과 전체 상품 스테이터스의 코사인 유사도 계산
 					siilarityMap.put(i.getPro_Code(), cosineSimilarity(aver, statusArrayForVO(i))); // 코사인 유사도 맵에 저장
@@ -156,7 +168,9 @@ public class ProServiceImpl implements ProService {
 		Product product = new Product();
 		// vo객체의 데이터를 통해 Product 객체 데이터 set
 		product.setProAge(ageRepository.findByAgeName(vo.getAgeName()).get());
-		product.setProCategory(proCategoryRepository.findByCategoryLargeNameAndCategorySmallName(vo.getCategoryLargeName(), vo.getCategorySmallName()).get());
+		product.setProCategory(proCategoryRepository
+				.findByCategoryLargeNameAndCategorySmallName(vo.getCategoryLargeName(), vo.getCategorySmallName())
+				.get());
 		product.setProColor(colorRepository.findByColorName(vo.getColorName()).get());
 		product.setProCount(0);
 		product.setProDetail(vo.getProDetail());
@@ -167,8 +181,6 @@ public class ProServiceImpl implements ProService {
 		product.setProPriceRange(priceRangeRepository.findByPriceRangeName(vo.getPriceRangeName()).get());
 		product.setProSeason(seasonRepository.findBySeasonName(vo.getSeasonName()).get());
 		product.setProStock(vo.getProStock());
-		
-		product.setProImage("top1"); //임시 이미지 추후 vo 객체의 값으로 set
 
 		productRepository.save(product); // DB에 상품 저장
 		if (productRepository.findById(product.getProCode()).isEmpty()) { // 상품이 정상적으로 등록되지 않았을 경우
@@ -178,11 +190,11 @@ public class ProServiceImpl implements ProService {
 		}
 
 	}
-	
+
 	@Override
-	public boolean proView(Long product) { //상품 조회 -> 조회수 증가
+	public boolean proView(Long product) { // 상품 조회 -> 조회수 증가
 		Optional<Product> optional = productRepository.findById(product);
-		if(optional.isEmpty()) {
+		if (optional.isEmpty()) {
 			return false;
 		} else {
 			Product temp = optional.get();
@@ -194,32 +206,74 @@ public class ProServiceImpl implements ProService {
 	}
 
 	@Override
-	public List<Age> ageInfo() { //age 테이블 정보
+	public boolean imageUpload(String proName, MultipartFile[] proImage) {
+		String path = "D:\\study\\blueclub\\src\\main\\resources\\images";
+		List<ProImage> list = new ArrayList<>();
+		int check = 0;
+
+		
+		for (MultipartFile file : proImage) {
+			if (!file.isEmpty()) {
+				ProImage image = new ProImage();
+				Product product = productRepository.findByProName(proName).get();
+				image.setImageID(UUID.randomUUID().toString());
+				image.setOriginName(file.getOriginalFilename());
+				image.setContentType(file.getContentType());
+				image.setSavaPath(path);
+				image.setSaveName(image.getImageID() + "_" + image.getOriginName());
+
+				list.add(image);
+
+				File newFile = new File(path, image.getSaveName());
+				try {
+					file.transferTo(newFile);
+					imageRepository.save(image);
+					if(!imageRepository.findBySaveName(image.getSaveName()).isEmpty()) {
+						product.setImageID(image);
+						productRepository.save(product);
+						check++;
+					}
+				} catch (IllegalStateException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		if(check == proImage.length) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
+	@Override
+	public List<Age> ageInfo() { // age 테이블 정보
 		return (List<Age>) ageRepository.findAll();
 	}
 
 	@Override
-	public List<Color> colorInfo() { //color 테이블 정보
+	public List<Color> colorInfo() { // color 테이블 정보
 		return (List<Color>) colorRepository.findAll();
 	}
 
 	@Override
-	public List<Gender> genderInfo() { //gender 테이블 정보
+	public List<Gender> genderInfo() { // gender 테이블 정보
 		return (List<Gender>) genderRepository.findAll();
 	}
 
 	@Override
-	public List<Material> materialInfo() { //material 테이블 정보
+	public List<Material> materialInfo() { // material 테이블 정보
 		return (List<Material>) materialRepository.findAll();
 	}
 
 	@Override
-	public List<PriceRange> priceRangeInfo() { //priceRange 테이블 정보
+	public List<PriceRange> priceRangeInfo() { // priceRange 테이블 정보
 		return (List<PriceRange>) priceRangeRepository.findAll();
 	}
 
 	@Override
-	public List<Season> seasonInfo() { //season 테이블 정보
+	public List<Season> seasonInfo() { // season 테이블 정보
 		return (List<Season>) seasonRepository.findAll();
 	}
 
@@ -309,7 +363,5 @@ public class ProServiceImpl implements ProService {
 		}
 		return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
 	}
-
-	
 
 }

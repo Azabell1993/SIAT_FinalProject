@@ -19,13 +19,13 @@ $(document).ready(function(){
 		var files = inputFile[0].files;		
 		console.log(files);
 		for(var i = 0 ; i < files.length; i++){
-			formData.append("files", files[i]);
+			formData.append("proImage", files[i]);
 		}
-		formData.append("text", "sample1");		
+		formData.append("proName", "sample1");		
 		
 		$.ajax({
 			type : 'post',
-			url : 'upload',
+			url : '/pro/imageUpload',
 			data : formData,
 			processData: false,
 			contentType:false,
