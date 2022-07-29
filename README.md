@@ -7,12 +7,12 @@
 - this repo is final project 
 
 ## project team
-|이름|팀원 역할|분담|깃 허브|
+|이름|팀원 역할|씨앗 내 범용성|깃 허브|
 |------|---|---|---|
 |박지우|팀장|풀 스택|https://github.com/Azabell1993|
 |이대관|프론트엔드 팀원|프론트 엔드|https://github.com/CodingBeginnerLDK|
-|김호중|CSS 적용 팀원|디자인|https://github.com/HeartByte|
 |채희상|백엔드 팀원|백엔드|https://github.com/ds3569|
+|김호중|CSS 적용 팀원|디자인|https://github.com/HeartByte|
 
 
 ## 팀원 소개
