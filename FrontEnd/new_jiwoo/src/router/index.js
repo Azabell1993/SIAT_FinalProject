@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TopView from '../views/product/TopView.vue'
 import PantsView from '../views/product/PantsView.vue'
-import OuterView from '../views/product/OuterView.vue'
+import ShoesView from '../views/product/ShoesView.vue'
 import AccessoryView from '../views/product/AccessoryView.vue'
+import SkirtView from '../views/product/SkirtView.vue'
 import ProductDetail from '../components/ProductDetail.vue'
 import Admin from '../components/AdminMain.vue'
 import MyPage from '../views/MyPage.vue'
@@ -37,23 +38,28 @@ const routes = [
   },
   {
     path: '/topview',
-    name: 'TopView',
+    name: '상의',
     component: TopView
   },
   {
     path: '/pantsview',
-    name: 'PantsView',
+    name: '바지',
     component: PantsView
   },
   {
-    path: '/outerview',
-    name: 'OuterView',
-    component: OuterView
+    path: '/shoesview',
+    name: '신발',
+    component: ShoesView
   },
   {
     path: '/accessoryview',
-    name: 'AccessoryView',
+    name: '모자',
     component: AccessoryView
+  },
+  {
+    path: '/skirtview',
+    name: '치마',
+    component: SkirtView
   },
   {
     path: '/productdetail',

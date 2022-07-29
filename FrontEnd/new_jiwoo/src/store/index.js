@@ -15,6 +15,7 @@ export default createStore({
       memPhone: '',
       memEmail: '',
       memBirth: '',
+      memRole: ''
     },
   },
   getters: {
@@ -22,8 +23,30 @@ export default createStore({
   mutations: {
     updateloginUserID (state, loginUserID) {
       state.loginUser.memID = loginUserID
-    }
+    },
+    updateloginUserPW(state, loginUserPW) {
+      state.loginUser.memPW = loginUserPW
+    },
+    updateloginUserName(state, loginUserName) {
+      state.loginUser.memName = loginUserName
+    },
+    updateloginUserAddr(state, loginUserAddr) {
+      state.loginUser.memAddr = loginUserAddr
+    },
+    updateloginUserPhone(state, loginUserPhone) {
+      state.loginUser.memPhone = loginUserPhone
+    },
+    updateloginUserBirth(state, loginUserBirth) {
+      state.loginUser.memBirth = loginUserBirth
+    },
+    updateloginUserRole(state, loginUserRole) {
+      state.loginUser.memRole = loginUserRole
+    },
+    updateloginUserEmail(state, loginUserEmail) {
+      state.loginUser.memEmail = loginUserEmail
+    },
   },
+
   actions: {
   },
   modules: {

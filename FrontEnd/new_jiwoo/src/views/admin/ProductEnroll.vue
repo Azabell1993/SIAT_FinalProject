@@ -213,7 +213,7 @@ export default {
     /* 1 */
     /* Category large name */
     if(vm.categoryLargeNameIndex) {
-        axios.post('http://192.168.0.88:9292/pro/categoryData')
+        axios.post('http://192.168.0.81:9292/pro/categoryData')
         .then(function (response) {
           vm.categoryLargeNameIndex = response.data
           console.log('상품 대분류 데이터 : ',response.data)
@@ -227,7 +227,7 @@ export default {
     /* 1 */
     /* Category small name */
     if(vm.categorySmallNameIndex) {
-        axios.post('http://192.168.0.88:9292/pro/categoryData')
+        axios.post('http://192.168.0.81:9292/pro/categoryData')
         .then(function (response) {
           vm.categorySmallNameIndex = response.data
           console.log('상품 소분류 데이터 : ',response.data)
@@ -241,7 +241,7 @@ export default {
     /* 2 */
     /* genderSelecter */
     if(vm.genderIndex) {
-        axios.post('http://192.168.0.88:9292/pro/genderInfo')
+        axios.post('http://192.168.0.81:9292/pro/genderInfo')
         .then(function (response) {
           vm.genderIndex = response.data
           console.log('상품 성별 데이터 : ',response.data)
@@ -254,7 +254,7 @@ export default {
     /* 3 */
     /* colorSelecter */
     if(vm.colorIndex) {
-        axios.post('http://192.168.0.88:9292/pro/colorInfo')
+        axios.post('http://192.168.0.81:9292/pro/colorInfo')
         .then(function (response) {
           vm.colorIndex = response.data
           console.log('상품 색깔 데이터 : ',response.data)
@@ -267,7 +267,7 @@ export default {
     /* 4 */
     /* material Selector*/
     if(vm.meterialIndex) {
-      axios.post('http://192.168.0.88:9292/pro/materialInfo')
+      axios.post('http://192.168.0.81:9292/pro/materialInfo')
       .then(function (response) {
             vm.meterialIndex = response.data
             console.log('상품 재질 데이터 : ',response.data)
@@ -280,7 +280,7 @@ export default {
     /* 5 */
     /* age Selector*/
     if(vm.ageIndex) {
-        axios.post('http://192.168.0.88:9292/pro/ageInfo')
+        axios.post('http://192.168.0.81:9292/pro/ageInfo')
         .then(function (response) {
               vm.ageIndex = response.data
               console.log('상품 나이 데이터 : ',response.data)
@@ -293,7 +293,7 @@ export default {
     /* 6 */
     /* priceRangeName Selector*/
     if(vm.meterialIndex) {
-        axios.post('http://192.168.0.88:9292/pro/priceRangeInfo')
+        axios.post('http://192.168.0.81:9292/pro/priceRangeInfo')
         .then(function (response) {
               vm.priceIndex = response.data
               console.log('상품 가격대 데이터 : ',response.data)
@@ -306,7 +306,7 @@ export default {
     /* 7 */
     /* seasonName Selector*/
     if(vm.seasonIndex) {
-        axios.post('http://192.168.0.88:9292/pro/seasonInfo')
+        axios.post('http://192.168.0.81:9292/pro/seasonInfo')
         .then(function (response) {
               vm.seasonIndex = response.data
               console.log('상품 계절 데이터 : ',response.data)
@@ -383,7 +383,7 @@ export default {
         return false;
       } else {
         alert("전송이 완료 되었습니다!");
-        axios.post('http://192.168.0.88:9292/pro/proAdd', {
+        axios.post('http://192.168.0.81:9292/pro/proAdd', {
           proName: this.product.proName,
           proPrice: this.product.proPrice,
           proStock: this.product.proStock,
