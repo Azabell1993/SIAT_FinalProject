@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<body>
+<h1>Hello!!!!</h1>
+<div>
+	<input type="file" id="form1" multiple="multiple"/><br />
+</div>
+<button  id="submit">제출하기</button>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#submit').on("click", function(e){
+		var formData = new FormData();
+		var inputFile = $("#form1");
+		var files = inputFile[0].files;		
+		console.log(files);
+		for(var i = 0 ; i < files.length; i++){
+			formData.append("proImage", files[i]);
+		}
+		formData.append("proName", "sample1");		
+		
+		$.ajax({
+			type : 'post',
+			url : '/pro/imageUpload',
+			data : formData,
+			processData: false,
+			contentType:false,
+			success : function(data){
+				console.log(data);
+			},
+			error : function(request, status, error){
+				console.log(request.status + " | " + request.responseText + " | " + error);
+			}
+		});
+	});
+});
+
+</script>
+
+</body>
+</html>
