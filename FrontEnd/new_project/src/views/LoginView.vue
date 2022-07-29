@@ -23,7 +23,7 @@ export default {
       const userId = this.memID; //변수 선언 이 값을 그대로 쓰겠다. 자스 내에선 this 선언 부분이 다를 수있음. 당분간 이게 좀 안전할 듯
       console.log(userId);
 
-      axios.post('http://192.168.0.88:9292/mem/loginProc', {
+      axios.post('http://192.168.0.81:9292/mem/loginProc', {
         memID: this.memID,
         memPW: this.memPW
       })
@@ -31,9 +31,9 @@ export default {
           console.log(response.data)
           if(response.data.mem.memID == userId){
             console.log("ID가 일치합니다.")
-            // location.href = "http://localhost:8080/"
+            location.href = "http://localhost:8080/"
             
-            axios.post('http://192.168.0.88:9292/mem/memberInfo', 
+            axios.post('http://192.168.0.81:9292/mem/memberInfo', 
             {
               memID: userId
             })
@@ -41,8 +41,10 @@ export default {
               // console.log(response.data)
               // console.log('memPW : ',response.data.data.memPW)
               // store.commit('updateloginUserID', userId) //로그인이 성공하는 과정에서 memID를 조회해서 정보를 가져오는건가?
+              store.commit('updateloginUserID', response.data.data.memID)
               store.commit('updateloginUserPW', response.data.data.memPW)
-              // console.log('store에 있는 PW : ',store.state.loginUser.memPW)
+              store.commit('updateloginUserName', response.data.data.memName)
+              console.log('store에 있는 Name : ',store.state.loginUser.memName)
             })
           }
           else{
@@ -53,7 +55,6 @@ export default {
         }).catch(function (error) { // 뭔가 실패할때 쓰는 함수
           console.log(error);
         })
-        console.log("end")
     }
   }
 }

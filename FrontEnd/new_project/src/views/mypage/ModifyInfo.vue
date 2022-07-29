@@ -5,10 +5,12 @@
 
 <script>
 import MypageCategoryVue from '@/components/MypageCategory.vue'
+
 export default {
   components: {
     MypageCategoryVue
   }
+
 }
 </script>
 

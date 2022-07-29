@@ -39,7 +39,7 @@ import axios from 'axios'
 import storeProduct from '@/store/recommendProducts'
 
 const productCodeList = Object.values(storeProduct.state.originProductList)
-
+const url = 'http://192.168.0.81:9292'
 export default {
   data () {
     return {
@@ -49,7 +49,7 @@ export default {
 
   mounted () {
     var vm = this
-    axios.post('http://192.168.0.88:9292/pro/categoryData')
+    axios.post(url+'/pro/categoryData')
         .then(function (response) {
           vm.categoryIndex = response.data
           // console.log('상품 데이터 : ',response.data)
@@ -61,7 +61,7 @@ export default {
    methods: {
     topdata () {
       var topCodeList = []
-      axios.post('http://192.168.0.88:9292/pro/proListByCategory',
+      axios.post(url+'/pro/proListByCategory',
       {
         proList: productCodeList,
         categoryLargeName : '상의',
@@ -84,7 +84,7 @@ export default {
       },
       pantdata () {
       var pantCodeList = []
-      axios.post('http://192.168.0.88:9292/pro/proListByCategory',
+      axios.post(url+'/pro/proListByCategory',
       {
         proList: productCodeList,
         categoryLargeName : '바지',
@@ -101,7 +101,7 @@ export default {
       },
       shoesdata () {
         var shoesCodeList = []
-        axios.post('http://192.168.0.88:9292/pro/proListByCategory',
+        axios.post(url+'/pro/proListByCategory',
         {
           proList: productCodeList,
           categoryLargeName : '신발',
@@ -118,7 +118,7 @@ export default {
       },
       skirtdata () {
         var skirtCodeList = []
-        axios.post('http://192.168.0.88:9292/pro/proListByCategory',
+        axios.post(url+'/pro/proListByCategory',
         {
           proList: productCodeList,
           categoryLargeName : '치마',
@@ -136,7 +136,7 @@ export default {
       },
       hatdata () {
         var hatCodeList = []
-        axios.post('http://192.168.0.88:9292/pro/proListByCategory',
+        axios.post(url+'/pro/proListByCategory',
         {
           proList: productCodeList,
           categoryLargeName : '모자',

@@ -15,7 +15,7 @@ import axios from 'axios'
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 console.log(`login home : ${store.state.loginUser.memID}`)
-console.log('productStore : ',storeProduct.state.products.productsList.data)
+console.log('productStore : ',storeProduct.state.products.productsList)
 const productCodeList = Object.values(storeProduct.state.originProductList)
 
 export default {
@@ -34,14 +34,14 @@ export default {
       const vm = this
       const num = this.num
       // console.log('productCodeList : ', productCodeList)
-      axios.post('http://192.168.0.88:9292/pro/proListByCategory',
+      axios.post('http://192.168.0.81:9292/pro/proListByCategory',
       {
         proList: productCodeList,
         categoryLargeName : '상의',
         categorySmallName : '반소매'
       })
         .then(function (response) {
-          // console.log(response.data)
+          console.log(response.data)
           vm.sentence = response.data
         })
         .catch(function (error) {
