@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,13 +29,13 @@ public class CartController {
 	@CrossOrigin
 	@PostMapping("cartInfo")
 	@ResponseBody
-	public Map<String, Object> cartInfo(Member mem, HttpServletRequest req) { //해당 member의 장바구니 목록
+	public Map<String, Object> cartInfo(@RequestBody Member mem, HttpServletRequest req) { //해당 member의 장바구니 목록
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + "| cartInfo");
+		System.out.println(new Date() + " | " + ip + "| cartInfo | "  + mem.toString());
 		List<Cart> list = cartService.getCartBymemID(mem); //해당 member의 장바구니 목록 서비스
 		data.put("data", list);
 		return data;
@@ -42,14 +43,15 @@ public class CartController {
 	@CrossOrigin
 	@PostMapping("addCart")
 	@ResponseBody
-	public Map<String, Object> addCart(Map<String, Object> cartMap, HttpServletRequest req) { 
+	public Map<String, Object> addCart(@RequestBody Map<String, Object> cartMap, HttpServletRequest req) { 
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
 		System.out.println(new Date() + " | " + ip + " | addCart | " + cartMap);
-		Long proCode = (Long) cartMap.get("proCode");
+		Integer proCodeTemp = (Integer) cartMap.get("proCode");
+		Long proCode = new Long(proCodeTemp);
 		Integer cartCount = (Integer) cartMap.get("cartCount");
 		String memID = (String) cartMap.get("memID");
 		if( cartService.addCart(proCode, cartCount, memID)) { //장바구니 추가 서비스
@@ -62,7 +64,7 @@ public class CartController {
 	@CrossOrigin
 	@PostMapping("deleteCart")
 	@ResponseBody
-	public Map<String, Object> deleteCart(Map<String, Object> cartMap, HttpServletRequest req) { 
+	public Map<String, Object> deleteCart(@RequestBody Map<String, Object> cartMap, HttpServletRequest req) { 
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {

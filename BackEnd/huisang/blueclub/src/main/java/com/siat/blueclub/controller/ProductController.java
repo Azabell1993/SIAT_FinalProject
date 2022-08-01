@@ -157,12 +157,12 @@ public class ProductController {
 	@PostMapping(value = "imageUpload",  consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	@ResponseBody
 	public Map<String, Object> iamgeUpload(@RequestParam String proName, MultipartFile[] proImage, HttpServletRequest req) {
-		String path = "D:\\study\\springboot\\fileUploadTest";
+		String path = "D:\\study\\blueclub\\src\\main\\resources\\images";
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + " | imageUpload");
+		System.out.println(new Date() + " | " + ip + " | imageUpload | " + proName + " |" + proImage);
 		Map<String, Object> data = new HashMap<>();
 		if( proService.imageUpload(proName, proImage)) {
 			data.put("data", "true");
@@ -176,7 +176,7 @@ public class ProductController {
 	@CrossOrigin
 	@GetMapping("proView")
 	@ResponseBody
-	public Map<String, Object> proAdd(@RequestParam Long product, HttpServletRequest req) {
+	public Map<String, Object> proView(@RequestParam Long proID, HttpServletRequest req) {
 		// 상품 조회 -> 조회수 증가
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
@@ -184,7 +184,7 @@ public class ProductController {
 			ip = req.getRemoteAddr();
 		}
 		System.out.println(new Date() + " | " + ip + " | proView");
-		if (proService.proView(product)) {
+		if (proService.proView(proID)) {
 			data.put("data", "true");
 		} else {
 			data.put("data", "false");
