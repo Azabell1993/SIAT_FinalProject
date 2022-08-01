@@ -159,15 +159,16 @@
       <!-- 7 -->
       <!-- 등록할 상품의 사진 업로드 -->
 
-      <form action="/pictureAdd" method="post" class="pictureAdd" @submit.prevent="pictureAdd">
+      <!-- <form action="/pictureAdd" method="post" class="pictureAdd" @submit.prevent="pictureAdd"> -->
         <div>
             <input type="file" id="form1" /> <br>
         </div>
         <div>
-            <input type="reset" value="초기화">
-            <input type="submit" id="product_submit" value="사진등록 완료">
+            <!-- <input type="reset" value="초기화"> -->
+            <!-- <input type="submit" id="product_submit" value="사진등록 완료"> -->
         </div>
-      </form><hr>
+      <!-- </form> -->
+      <hr>
       <!-- ---------------------- -->
 
 
@@ -199,7 +200,7 @@ export default {
   data() {
     return {
       product: {
-        proName: '울트라 모자',       // 상품명 
+        proName: 'test',       // 상품명 
         proPrice:'23000',      // 가격
         proStock: '23',      // 재고
         proDetail: '상세설명을 쓰세요',     // 상세설명
@@ -389,23 +390,63 @@ export default {
         
         alert("전송이 완료 되었습니다!");
         axios.post('http://192.168.0.81:9292/pro/proAdd', {
-          proName: this.product.proName,
-          proPrice: this.product.proPrice,
-          proStock: this.product.proStock,
-          proDetail: this.product.proDetail,
-          categoryLargeName: this.product.categoryLargeName,
-          categorySmallName: this.product.categorySmallName,
-          genderName: this.product.genderName,
-          colorName: this.product.colorName,
-          materialName: this.product.materialName,
-          ageName: this.product.ageName,
-          priceRangeName: this.product.priceRangeName,
-          seasonName : this.product.seasonName,
+          proName: ve.product.proName,
+          proPrice: ve.product.proPrice,
+          proStock: ve.product.proStock,
+          proDetail: ve.product.proDetail,
+          categoryLargeName: ve.product.categoryLargeName,
+          categorySmallName: ve.product.categorySmallName,
+          genderName: ve.product.genderName,
+          colorName: ve.product.colorName,
+          materialName: ve.product.materialName,
+          ageName: ve.product.ageName,
+          priceRangeName: ve.product.priceRangeName,
+          seasonName : ve.product.seasonName,
           //proImage: this.picProduct.proImage
       }).then(function (datatest) {
           if(datatest.data.data !== true) {
             alert("전송 완료");
+
             /* Image Form export Argc */
+            
+            
+            console.log('picture test')
+
+              /* proImage */
+              console.log("사진 전송 시작 ");
+
+              var inputFile = document.getElementById('form1');
+              var files = inputFile.files;
+              console.log('file 정보 넘어오기 확인',files[0].name);
+              console.log('proName : ', ve.product.proName);
+
+              let formData = new FormData();
+            
+              formData.append('proImage', files[0]);
+              formData.append('proName', ve.product.proName);
+              // FormData의 key 확인
+              for (let key of formData.keys()) {
+                console.log(key);
+              }
+
+              // FormData의 value 확인
+              for (let value of formData.values()) {
+                console.log(value);
+              }
+
+              axios.post('http://192.168.0.81:9292/pro/imageUpload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+              })
+                .then(function (response) {
+                  console.log(response.data)
+                  // response => (this.info = response)
+                })
+                .catch(function(error) {
+                console.log(error);
+          });
+
             /* 기본 품 전송이 모두 true일 때 */
             /* Image Form export Argc */
           } else {
@@ -418,49 +459,7 @@ export default {
   }, //productAddSpace
 
 
-  pictureAdd() {
-      var ve = this;
-      
-      console.log('picture test')
-
-        /* proImage */
-        console.log("사진 전송 시작 ");
-
-		    //var formData = new FormData();
-        var inputFile = document.getElementById('form1');
-        var files = inputFile.files;
-        console.log('file 정보 넘어오기 확인',files[0].name);
-        console.log('proName : ', ve.product.proName);
-
-        let formData = new FormData();
-      
-        //config.data {"proImage":"test 2 3.png","proName":"울트라 모자"}
-        formData.append('proImage', files[0]);
-        formData.append('proName', ve.product.proName);
-        // FormData의 key 확인
-        for (let key of formData.keys()) {
-          console.log(key);
-        }
-
-        // FormData의 value 확인
-        for (let value of formData.values()) {
-          console.log(value);
-        }
-
-        axios.post('http://192.168.0.81:9292/pro/imageUpload', formData, {
-          headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-        })
-          .then(response => (this.info = response))
-          .catch(function(error) {
-           console.log(error);
-          });
-        }
-
   }
-
-
 }
 </script>
 
