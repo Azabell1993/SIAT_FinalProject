@@ -41,7 +41,7 @@ export default {
           if(response.data.mem.memID == userId){
             alert("로그인이 되었습니다.");
             // console.log("ID가 일치합니다.")
-            //location.href = "http://localhost:8080/"
+            //location.href = "http://192.168.0.81:8080/"
             
             axios.post('http://192.168.0.81:9292/mem/memberInfo', 
             {

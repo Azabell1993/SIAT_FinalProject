@@ -49,7 +49,7 @@ export default {
     userlogout () {
       this.loginuserid = ''
       this.$store.commit('updateloginUserID', this.loginuserid)
-      location.href = "http://localhost:8081/"
+      location.href = "http://192.168.0.81:8081/"
     }
   }
 }
