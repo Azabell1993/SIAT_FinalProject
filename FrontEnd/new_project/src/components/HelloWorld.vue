@@ -1,8 +1,9 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-    <CategoryList></CategoryList>
-    <ProductList></ProductList>
+    <!-- Welcome to My BlueClub 홈페이지 이름-->
+    <CategoryList></CategoryList> <!-- 카테고리 부분 컴포넌트 -->
+    <ProductList></ProductList> <!-- 상품 리스트 컴포넌트 -->
   </div>
 </template>
 
