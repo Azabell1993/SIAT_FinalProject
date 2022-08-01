@@ -16,6 +16,7 @@ import com.siat.blueclub.domain.Member;
 import com.siat.blueclub.domain.Product;
 import com.siat.blueclub.persistence.CartRepository;
 import com.siat.blueclub.persistence.GenderRepository;
+import com.siat.blueclub.persistence.ImageRepository;
 import com.siat.blueclub.persistence.MemberRepository;
 import com.siat.blueclub.persistence.ProCategoryRepository;
 import com.siat.blueclub.persistence.ProductDao;
@@ -42,6 +43,8 @@ public class ServiceTest {
 	private MemberRepository memberRepository;
 	@Autowired
 	private GenderRepository genderRepository;
+	@Autowired
+	private ImageRepository imageRepository;
 	
 	@Disabled
 	@Test
@@ -51,10 +54,10 @@ public class ServiceTest {
 
 		System.out.println(categoryMap.toString());
 	}
-	
+	@Disabled
 	@Test
 	public void proTest() {
-		System.out.println(genderRepository.findByGenderName("유니섹스").get().toString());
+		System.out.println(imageRepository.findByProName(productRepository.findByProName("sample1").get()).get().toString());
 	}
 	
 	@Disabled

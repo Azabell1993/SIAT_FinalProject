@@ -71,7 +71,7 @@ public class ProServiceImpl implements ProService {
 	private ProductDao productDao;
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@Autowired
 	private ImageRepository imageRepository;
 
@@ -220,16 +220,20 @@ public class ProServiceImpl implements ProService {
 		List<ProImage> list = new ArrayList<>();
 		int check = 0;
 
-		
 		for (MultipartFile file : proImage) {
 			if (!file.isEmpty()) {
+				Optional<Product> optional =  productRepository.findByProName(proName);
+				if(!optional.isEmpty()) {
+					
+				}
+				Product product = optional.get();
 				ProImage image = new ProImage();
-				Product product = productRepository.findByProName(proName).get();
 				image.setImageID(UUID.randomUUID().toString());
 				image.setOriginName(file.getOriginalFilename());
 				image.setContentType(file.getContentType());
 				image.setSavaPath(path);
 				image.setSaveName(image.getImageID() + "_" + image.getOriginName());
+				image.setProName(product);
 
 				list.add(image);
 
@@ -237,23 +241,20 @@ public class ProServiceImpl implements ProService {
 				try {
 					file.transferTo(newFile);
 					imageRepository.save(image);
-					if(!imageRepository.findBySaveName(image.getSaveName()).isEmpty()) {
-						product.setImageID(image);
-						productRepository.save(product);
-						check++;
-					}
+					check++;
 				} catch (IllegalStateException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
-		if(check == proImage.length) {
+		if (check == proImage.length)
+
+		{
 			return true;
 		} else {
 			return false;
 		}
-		
 	}
 
 	@Override
@@ -374,23 +375,31 @@ public class ProServiceImpl implements ProService {
 	}
 
 	@Override
-	public ResponseEntity<Resource> imageLoad(String imageID) throws NotFoundException {
+	public ResponseEntity<Resource> imageLoad(Product proName) throws NotFoundException {
 
 		try {
-			ProImage image = imageRepository.findById(imageID).orElse(null);
-			System.out.println(image.toString());
-			FileSystemResource resource = new FileSystemResource(
-					image.getSavaPath() + "/" + image.getSaveName());
-			if (!resource.exists()) {
-				throw new NotFoundException();
+			Optional<Product> optional = productRepository.findByProName(proName.getProName());
+			if(optional.isEmpty()) {
+				return null;
 			}
+			else {
+				Product product = optional.get();
+				ProImage image = imageRepository.findByProName(product).get();
+				System.out.println(image.toString());
+				FileSystemResource resource = new FileSystemResource(image.getSavaPath() + "/" + image.getSaveName());
+				if (!resource.exists()) {
+					throw new NotFoundException();
+				}
 
-			System.out.println(resource);
-			HttpHeaders header = new HttpHeaders();
-			Path filePath = null;
-			filePath = Paths.get(image.getSavaPath() + "/" + image.getSaveName());
-			header.add("Content-Type", Files.probeContentType(filePath));
-			return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
+				System.out.println(resource);
+				HttpHeaders header = new HttpHeaders();
+				Path filePath = null;
+				filePath = Paths.get(image.getSavaPath() + "/" + image.getSaveName());
+				header.add("Content-Type", Files.probeContentType(filePath));
+				return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
+
+			}
+			
 		} catch (Exception e) {
 			throw new NotFoundException();
 		}

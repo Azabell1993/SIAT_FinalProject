@@ -44,7 +44,7 @@ public interface ProService {
 
 	public boolean imageUpload(String proName, MultipartFile[] proImage);
 
-	public ResponseEntity<Resource> imageLoad(String imageID) throws NotFoundException;
+	public ResponseEntity<Resource> imageLoad(Product proName) throws NotFoundException;
 
 
 
