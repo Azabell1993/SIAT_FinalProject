@@ -119,15 +119,14 @@ public class ProductController {
 	@CrossOrigin
 	@PostMapping("imageLoad")
 	@ResponseBody
-	public ResponseEntity<Resource> imageLoad(@RequestBody Map<String, Object> fileNameData,  HttpServletRequest req)
+	public ResponseEntity<Resource> imageLoad(@RequestBody Product proName,  HttpServletRequest req)
 			throws NotFoundException {
-		String imageID = (String) fileNameData.get("imageID");
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + " | imageLoad | " + imageID);
-		ResponseEntity<Resource> entity = proService.imageLoad(imageID);
+		System.out.println(new Date() + " | " + ip + " | imageLoad | " + proName);
+		ResponseEntity<Resource> entity = proService.imageLoad(proName);
 		
 		return entity;
 	}
@@ -156,7 +155,7 @@ public class ProductController {
 	@CrossOrigin
 	@PostMapping(value = "imageUpload",  consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	@ResponseBody
-	public Map<String, Object> iamgeUpload(@RequestParam String proName, MultipartFile[] proImage, HttpServletRequest req) {
+	public Map<String, Object> iamgeUpload	(@RequestParam String proName, MultipartFile[] proImage, HttpServletRequest req) {
 		String path = "D:\\study\\blueclub\\src\\main\\resources\\images";
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {

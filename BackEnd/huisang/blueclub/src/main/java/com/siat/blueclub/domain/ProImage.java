@@ -26,5 +26,9 @@ public class ProImage {
 	private String saveName;
 	private String contentType;
 	private String savaPath;
+	
+	@ManyToOne
+	@JoinColumn(name="proName")
+	private Product proName;
 
 }

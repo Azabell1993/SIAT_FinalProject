@@ -32,10 +32,6 @@ public class Product {
 	private Integer proCount;
 	
 	@ManyToOne
-	@JoinColumn(name="imageID")
-	private ProImage imageID;
-	
-	@ManyToOne
 	@JoinColumn(name="categoryCode")
 	private ProCategory proCategory;
 	@ManyToOne
@@ -59,10 +55,9 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [proCode=" + proCode + ", proName=" + proName + ", proPrice=" + proPrice + ", proStock="
-				+ proStock + ", proDetail=" + proDetail + ", proCount=" + proCount + ", imageID=" + imageID
-				+ ", proCategory=" + proCategory + ", proGender=" + proGender + ", proColor=" + proColor
-				+ ", proMaterial=" + proMaterial + ", proSeason=" + proSeason + ", proAge=" + proAge
-				+ ", proPriceRange=" + proPriceRange + "]";
+				+ proStock + ", proDetail=" + proDetail + ", proCount=" + proCount + ", proCategory=" + proCategory
+				+ ", proGender=" + proGender + ", proColor=" + proColor + ", proMaterial=" + proMaterial
+				+ ", proSeason=" + proSeason + ", proAge=" + proAge + ", proPriceRange=" + proPriceRange + "]";
 	}
 
 }
