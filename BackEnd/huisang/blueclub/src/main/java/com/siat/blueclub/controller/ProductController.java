@@ -173,9 +173,9 @@ public class ProductController {
 	}
 
 	@CrossOrigin
-	@GetMapping("proView")
+	@PostMapping("proView")
 	@ResponseBody
-	public Map<String, Object> proView(@RequestParam Long proID, HttpServletRequest req) {
+	public Map<String, Object> proView(@RequestBody Product proCode, HttpServletRequest req) {
 		// 상품 조회 -> 조회수 증가
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
@@ -183,7 +183,7 @@ public class ProductController {
 			ip = req.getRemoteAddr();
 		}
 		System.out.println(new Date() + " | " + ip + " | proView");
-		if (proService.proView(proID)) {
+		if (proService.proView(proCode.getProCode())) {
 			data.put("data", "true");
 		} else {
 			data.put("data", "false");
