@@ -1,82 +1,72 @@
 <template>
   <div>
-    <!-- <ul>
-      <nav v-bind:key="index" v-for="(item, index) in categoryIndex">
-        <li v-if="index==='상의'"><router-link to="/topview">{{index}}</router-link>
-          <select>
-            <option>{{index}}</option>
-            <option v-bind:key="small" v-for="small in item">{{small}}</option>
-          </select>
-        </li>
-        <li v-if="index==='바지'"><router-link :to="{name: '바지' }">바지</router-link></li>
-        <li v-if="index==='신발'"><router-link to="/shoesview">신발</router-link></li>
-        <li v-if="index==='치마'"><router-link to="/skirtview">치마</router-link></li>
-        <li v-if="index==='모자'"><router-link to="/accessoryview">모자</router-link></li>
-      </nav>
-    </ul> -->
-
+    <!-- 카테고리 메뉴 부분 -->
     <div class="btn-group" v-bind:key="index" v-for="(item, index) in categoryIndex">
       <button class="btn btn-secondary btn-lg" type="button">
+        <!-- 대분류 카테고리 클릭시 해당 카텍리 품목 페이지 이동 -->
         <router-link v-on:click="topdata" v-if="index=='상의'" :to="{name: '상의'}">{{ index }}</router-link>
         <router-link v-on:click="pantdata" v-if="index=='바지'" :to="{name: '바지'}">{{ index }}</router-link>
         <router-link v-on:click="shoesdata" v-if="index=='신발'" :to="{name: '신발'}">{{ index }}</router-link>
         <router-link v-on:click="skirtdata" v-if="index=='치마'" :to="{name: '치마'}">{{ index }}</router-link>
         <router-link v-on:click="hatdata" v-if="index=='모자'" :to="{name: '모자'}">{{ index }}</router-link>
-        </button>
+      </button>
+
+      <!-- 소분류 선택 메뉴, 정보 띄우기만 하고 선택시 기능 미구현 상태 -->
       <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="visually-hidden">Toggle Dropdown</span>
       </button>
-      <ul class="dropdown-menu">
-        <li v-bind:key="small" v-for="small in item"> {{ small }}</li>
-      </ul>
+      <!-- 소분류 메뉴 리스트 -->
+        <ul class="dropdown-menu">
+          <li v-bind:key="small" v-for="small in item"> {{ small }}</li>
+        </ul>
     </div>
-        <router-view></router-view>
-      </div>
+
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
 import storeProduct from '@/store/recommendProducts'
 
-const productCodeList = Object.values(storeProduct.state.originProductList)
 
+const productCodeList = Object.values(storeProduct.state.originProductList)
+const url = 'http://192.168.219.160:9292'
 export default {
   data () {
     return {
       categoryIndex : [],
     }
   },
-
+  // 백엔드의 카테고리 정보 갖고와서 활용
   mounted () {
     var vm = this
-    axios.post('http://192.168.0.81:9292/pro/categoryData')
+    axios.post(url+'/pro/categoryData')
         .then(function (response) {
           vm.categoryIndex = response.data
-          // console.log('상품 데이터 : ',response.data)
+          console.log('카테고리 데이터 : ',response.data)
         })
         .catch(function (error) {
           console.log(error)
         })
   },
+  // 각 카테고리 클릭시 카테고리 품목 페이지로 이동
    methods: {
     topdata () {
       var topCodeList = []
-      axios.post('http://192.168.0.81:9292/pro/proListByCategory',
+      axios.post(url+'/pro/proListByCategory',
       {
+        //백엔드에 원하는 정보 요청하기 (select 정보)
         proList: productCodeList,
         categoryLargeName : '상의',
         categorySmallName : 'none'
       })
         .then(function (response) {
+          //DB에서 조회한 정보를 프론트로 던져준다.
           // console.log(response.data)
-          topCodeList.push(response.data.data)
-          storeProduct.state.categoryTopList = topCodeList
           
-          // console.log('new Top code list',topCodeList)
-          // vm.$router.push({
-          // name: "상의",
-          // query: { data : topCodeList }
-          // })
+          topCodeList.push(response.data.data) //각 카테고리 품목별 상품 코드를 저장해주는 부분
+          storeProduct.state.categoryTopList = topCodeList //store에 각 상품 코드를 저장한다.
         })
         .catch(function (error) {
           console.log(error)
@@ -84,7 +74,7 @@ export default {
       },
       pantdata () {
       var pantCodeList = []
-      axios.post('http://192.168.0.81:9292/pro/proListByCategory',
+      axios.post(url+'/pro/proListByCategory',
       {
         proList: productCodeList,
         categoryLargeName : '바지',
@@ -101,7 +91,7 @@ export default {
       },
       shoesdata () {
         var shoesCodeList = []
-        axios.post('http://192.168.0.81:9292/pro/proListByCategory',
+        axios.post(url+'/pro/proListByCategory',
         {
           proList: productCodeList,
           categoryLargeName : '신발',
@@ -118,7 +108,7 @@ export default {
       },
       skirtdata () {
         var skirtCodeList = []
-        axios.post('http://192.168.0.81:9292/pro/proListByCategory',
+        axios.post(url+'/pro/proListByCategory',
         {
           proList: productCodeList,
           categoryLargeName : '치마',
@@ -136,7 +126,7 @@ export default {
       },
       hatdata () {
         var hatCodeList = []
-        axios.post('http://192.168.0.81:9292/pro/proListByCategory',
+        axios.post(url+'/pro/proListByCategory',
         {
           proList: productCodeList,
           categoryLargeName : '모자',

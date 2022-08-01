@@ -1,5 +1,5 @@
 <template>
-  <AdminCategory></AdminCategory> <!-- 관리자 메뉴 -->
+  <AdminCategory></AdminCategory>
     <div class="container">
       <h1>상품 등록 페이지</h1>
     </div>
@@ -16,9 +16,8 @@
       <label for="proPrice"> 등록할 상품 가격 : <input type="text" id="proPrice" v-model="product.proPrice" mexlength="20" ></label> 원 <br/> <hr>
       <label for="proStock"> 등록할 상품 재고 : <input type="text" id="proStock" v-model="product.proStock" mexlength="20" ></label> 개 <br/> <hr>
       <label for="proDetail"> 등록할 상품 상세 설명 :<textarea id="proDetail" v-model="product.proDetail" mexlength="40" > 40자 내외로 작성해주세요. </textarea></label><br/><hr>
-      
 
-    <form action="/productAdd" method="get" class="productAdd" @submit.prevent="productAddSpace">
+    <form action="/productAdd" method="post" class="productAdd" @submit.prevent="productAddSpace">
       <!-- ------------------- -->
       <!-- 1 -->
       <!-- 등록할 상품 카테고리 선택 -->
@@ -155,9 +154,31 @@
           </ul>
       </label><hr><br>
       <!-- ---------------------- -->
+
+      <!-- ---------------------- -->
+      <!-- 7 -->
+      <!-- 등록할 상품의 사진 업로드 -->
+
+      <!-- <form action="/pictureAdd" method="post" class="pictureAdd" @submit.prevent="pictureAdd"> -->
+        <div>
+            <input type="file" id="form1" /> <br>
+        </div>
+        <div>
+            <!-- <input type="reset" value="초기화"> -->
+            <!-- <input type="submit" id="product_submit" value="사진등록 완료"> -->
+        </div>
+      <!-- </form> -->
+      <hr>
+      <!-- ---------------------- -->
+
+
       <!-- -->
+      <div>
         <input type="reset" value="초기화">
         <input type="submit" id="product_submit" value="제출">
+      </div>
+
+
 
     
     </form>
@@ -179,7 +200,7 @@ export default {
   data() {
     return {
       product: {
-        proName: '울트라 모자',       // 상품명 
+        proName: 'test',       // 상품명 
         proPrice:'23000',      // 가격
         proStock: '23',      // 재고
         proDetail: '상세설명을 쓰세요',     // 상세설명
@@ -192,7 +213,10 @@ export default {
         materialName: null,  // 재질 속성 이름
         ageName: null,       // 나이 속성 이름
         priceRangeName: null, // 가격대 속성 이름
-        seasonName:null       // 계절 속성 이름
+        seasonName:null,       // 계절 속성 이름
+      },
+      picProduct: {
+        proImage : {}
       },
       categoryIndex : [],
       genderIndex: [],
@@ -204,7 +228,7 @@ export default {
       categoryLargeNameIndex:[],
       categorySmallNameIndex:[]
     };
-  },
+  }, //data() function
 
   mounted () {
     var vm = this
@@ -222,6 +246,7 @@ export default {
           console.log(error)
         })
     } // vm.categoryIndex
+
 
     /* import data code */
     /* 1 */
@@ -317,31 +342,11 @@ export default {
     } //  vm.meterialIndex
 
   }, // mounted
-// "{"proName":"울트라 모자","proPrice":"23000","proStock":"23","proDetail":"상세설명을 쓰세요","ccategorySmallName":"숏","genderName":"유니섹스","colorName":"블랙","materialName":"린넨","ageName":"청소년","priceRangeName":"6 ~ 9만원","seasonName":"가을"}"
-
   methods: {
+
     productAddSpace() {
       
       console.log('product test')
-      // var select = document.getElementById('categorySmallNameOption');
-      // var value = select.options[select.selectedIndex].value;
-      // console.log(value);
-
-      /*
-        proName: '울트라 모자',       // 상품명 
-        proPrice:'23000',      // 가격
-        proStock: '23',      // 재고
-        proDetail: '상세설명을 쓰세요',     // 상세설명
-
-        categoryLargeName: null,
-        categorySmallName: null, // 카테고리 소분류 이름
-        genderName: null,    //성별 속성 이름
-        colorName: null,     //색깔 속성 이름
-        materialName: null,  // 재질 속성 이름
-        ageName: null,       // 나이 속성 이름
-        priceRangeName: null, // 가격대 속성 이름
-        seasonName:null       // 계절 속성 이름
-      */
 
       /* export data code */
       var ve = this;
@@ -382,32 +387,77 @@ export default {
         alert("상품의 계절을 선택해주세요.");
         return false;
       } else {
+        
         alert("전송이 완료 되었습니다!");
         axios.post('http://192.168.0.81:9292/pro/proAdd', {
-          proName: this.product.proName,
-          proPrice: this.product.proPrice,
-          proStock: this.product.proStock,
-          proDetail: this.product.proDetail,
-          categoryLargeName: this.product.categoryLargeName,
-          categorySmallName: this.product.categorySmallName,
-          genderName: this.product.genderName,
-          colorName: this.product.colorName,
-          materialName: this.product.materialName,
-          ageName: this.product.ageName,
-          priceRangeName: this.product.priceRangeName,
-          seasonName : this.product.seasonName
-      })
-        .then(function (datatest) {
-          if(datatest.data !== 'true') {
-                  
+          proName: ve.product.proName,
+          proPrice: ve.product.proPrice,
+          proStock: ve.product.proStock,
+          proDetail: ve.product.proDetail,
+          categoryLargeName: ve.product.categoryLargeName,
+          categorySmallName: ve.product.categorySmallName,
+          genderName: ve.product.genderName,
+          colorName: ve.product.colorName,
+          materialName: ve.product.materialName,
+          ageName: ve.product.ageName,
+          priceRangeName: ve.product.priceRangeName,
+          seasonName : ve.product.seasonName,
+          //proImage: this.picProduct.proImage
+      }).then(function (datatest) {
+          if(datatest.data.data !== true) {
+            //alert("전송 완료");
+
+            /* Image Form export Argc */
+            console.log('picture test')
+
+              /* proImage */
+              console.log("사진 전송 시작 ");
+
+              var inputFile = document.getElementById('form1');
+              var files = inputFile.files;
+
+              console.log('file 정보 넘어오기 확인',files[0].name);
+              console.log('proName : ', ve.product.proName);
+
+              let formData = new FormData();
+            
+              formData.append('proImage', files[0]);
+              formData.append('proName', ve.product.proName);
+              // FormData의 key 확인
+              for (let key of formData.keys()) {
+                console.log(key);
+              }
+
+              // FormData의 value 확인
+              for (let value of formData.values()) {
+                console.log(value);
+              }
+
+              axios.post('http://192.168.0.81:9292/pro/imageUpload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+              })
+                .then(function (response) {
+                  console.log(response.data)
+                  // response => (this.info = response)
+                })
+                .catch(function(error) {
+                console.log(error);
+          });
+
+            /* 기본 품 전송이 모두 true일 때 */
+            /* Image Form export Argc */
           } else {
             alert("전송 오류. 다시 작성해서 제출해주십시오.");
           }
         }).catch(function (error) {
           console.log(error)
         })
-      }
-    }
+    } // product else end
+  }, //productAddSpace
+
+
   }
 }
 </script>
@@ -430,4 +480,3 @@ li { display:inline;
     line-height: 30px;
     margin-left: 10px;}
 </style>
-

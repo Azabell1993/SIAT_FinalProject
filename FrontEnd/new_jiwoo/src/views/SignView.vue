@@ -100,7 +100,7 @@ export default {
         alert("사용할 수 없는 조합의 아이디입니다.");
       } else{
          /* DB와 비교하기 */
-      axios.post('http://192.168.0.81:9292/mem/idCheckProc', {
+      axios.post('http://192.168.219.160:9292/mem/idCheckProc', {
         memID: this.signup.memID
       })
         .then(function (idchk) {
@@ -133,15 +133,18 @@ export default {
 
       if(!this.signup.memID) {
         alert("아이디를 입력해주세요!");
-        return false;
+        this.$refs.memIDck.focus(); //방식으로 선택자를 찾는다.
+        return;
       } else if(!this.signup.memPW) {
         alert("비밀번호를 입력해주세요!");
-        return false;
+        this.$refs.memPWck.focus(); //방식으로 선택자를 찾는다.
+        return;
       } else if(!this.memEmail) {
         alert("이메일을 입력해주세요!");
-        return false;
+        this.$refs.memEmailck.focus(); //방식으로 선택자를 찾는다.
+        return;
       } else {
-        axios.post('http://192.168.0.81:9292/mem/signUpProc', {
+        axios.post('http://192.168.219.160:9292/mem/signUpProc', {
           memID: this.signup.memID,
           //memIDCheck: this.signup.memIDCheck,
           memPW: this.signup.memPW,
@@ -154,7 +157,7 @@ export default {
         }) .then(function (datatest) {
             if(datatest.data.data === 'false') {
               alert("기존에 없는 아이디를 생성하시오.");
-            } else if(datatest.data.data === 'true'){
+            } else if(datatest.data.data !== 'true'){
               alert("회원가입 완료");
             }
             //console.log(datatest.data);
@@ -167,3 +170,4 @@ export default {
 
 } // export default
 </script>
+

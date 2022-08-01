@@ -1,5 +1,5 @@
 <template>
-  <AdminCategory></AdminCategory>
+  <AdminCategory></AdminCategory> <!-- 관리자 메뉴 -->
   <h1>주문 관리 페이지</h1>
 </template>
 
@@ -11,7 +11,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
