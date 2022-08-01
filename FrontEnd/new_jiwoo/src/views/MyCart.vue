@@ -11,7 +11,7 @@
 import axios from 'axios'
 import storeUser from '@/store/index'
 
-const url = 'http://192.168.219.160:9292'
+const url = 'http://192.168.0.81:9292'
 
 export default {
 

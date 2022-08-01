@@ -100,7 +100,7 @@ export default {
         alert("사용할 수 없는 조합의 아이디입니다.");
       } else{
          /* DB와 비교하기 */
-      axios.post('http://192.168.219.160:9292/mem/idCheckProc', {
+      axios.post('http://192.168.0.81:9292/mem/idCheckProc', {
         memID: this.signup.memID
       })
         .then(function (idchk) {
@@ -144,7 +144,7 @@ export default {
         this.$refs.memEmailck.focus(); //방식으로 선택자를 찾는다.
         return;
       } else {
-        axios.post('http://192.168.219.160:9292/mem/signUpProc', {
+        axios.post('http://192.168.0.81:9292/mem/signUpProc', {
           memID: this.signup.memID,
           //memIDCheck: this.signup.memIDCheck,
           memPW: this.signup.memPW,

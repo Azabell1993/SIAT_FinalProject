@@ -32,7 +32,7 @@ export default {
 
       //console.log(userId);
 
-      axios.post('http://192.168.219.160:9292/mem/loginProc', {
+      axios.post('http://192.168.0.81:9292/mem/loginProc', {
         memID: this.memID,
         memPW: this.memPW,
       })
@@ -43,7 +43,7 @@ export default {
             // console.log("ID가 일치합니다.")
             //location.href = "http://localhost:8080/"
             
-            axios.post('http://192.168.219.160:9292/mem/memberInfo', 
+            axios.post('http://192.168.0.81:9292/mem/memberInfo', 
             {
               memID : userId
             })

@@ -93,7 +93,7 @@ export default {
         alert("비밀번호 체크를 해주세요!");
         return false;
       } else {
-        axios.post('http://192.168.219.160:9292/mem/deleteProc', {          
+        axios.post('http://192.168.0.81:9292/mem/deleteProc', {          
           memID: this.deleteup.memID,
           memPW: this.deleteup.memPW,
           memName: this.deleteup.memName,
