@@ -98,7 +98,7 @@ public class HomeController {
 		return data;
 	}
 
-	@PostMapping("imageload")
+	@PostMapping(value = "imageload", produces = "application/json; charset=utf8" )
 	@ResponseBody
 	public ResponseEntity<Resource> getItemImageByName(@RequestBody Map<String, Object> fileNameData)
 			throws NotFoundException {
