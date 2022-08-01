@@ -3,6 +3,8 @@
     <router-link v-on:click="productInfoRelay(name.proCode)" to="/productdetail">
       <p>{{ name.proName }}</p>
     </router-link>
+      <!-- 이미지 부분은 아직 미구현, 
+      현재 백엔드에서 이미지 정보 주는 것 까진 확인. 프론트에서 어떻게 뿌리는지 연구해봐야 함 -->
       <!-- <img v-bind:src="require(`@/assets/image/${name.proImage}.png`)"> -->
       <p>{{ name.proPrice }}</p>
   </div>
@@ -24,26 +26,30 @@ export default {
       ],
       productInfos: [],
       recommendProduct: [],
-      productCode : ''
     }
   },
   computed: {
   
   },
   methods: {
+    //상품 코드를 인자로 받아서, 제품 상세 페이지로 이동시킨다.
     async productInfoRelay (newProCode) {
       console.log('값 확인 : ', newProCode)
-      const renewList = storeProduct.state.products.productsList
-      console.log(String(Object.values(renewList)).includes(newProCode))
+      const renewList = storeProduct.state.products.productsList //저장소에 있는 상품 리스트 값
+      console.log(String(Object.values(renewList)).includes(newProCode)) 
+      //=> Object형식으로 들어와서, 객체 내의 값을 String값으로 변환시켜서 맞는지 체크시킴,
+      //그 후, 인자 값을 받아서 그 배열 안에 해당 상품코드가 있는지 확인 시킨다.
       
       const oneCodeCheck = String(Object.values(renewList)).includes(newProCode)
 
-      if(oneCodeCheck == true) {
+      if(oneCodeCheck == true) { //상품코드가 있다면, 그 상품코드로 상품 정보 요청
         await axios.post(url+'/pro/proInfo', {
           proCode : newProCode
         })
         .then(function(response){
           storeProduct.commit('updateSelectOneProductCode',response.data.data.proCode)
+          //상품 한개만 요청하기 때문에, selectOne으로 지정하고, 각 상품이 클릭시 때마다 업데이트 시킴.
+          //한 상품 클릭 후, 다른 상품 클릭시 해당 상품으로 가는 것까지 확인 됨
           console.log('ProductList code : ',storeProduct.state.selectOneProductCode)
         })
       }
@@ -52,6 +58,7 @@ export default {
       }
     }
   },
+  //상품 리스트 부분, 페이지가 생성될 때 갖고있는 상품들을 불러와줘야한다.
   created () {
     var vm = this
     axios.post(url+'/pro/proList', //헤더 : url, value
