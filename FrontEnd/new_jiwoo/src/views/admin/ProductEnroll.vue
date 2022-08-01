@@ -161,7 +161,7 @@
 
       <form action="/pictureAdd" method="post" class="pictureAdd" @submit.prevent="pictureAdd">
         <div>
-            <input type="file" id="form1"/> <br>
+            <input type="file" id="form1" /> <br>
         </div>
         <div>
             <input type="reset" value="초기화">
@@ -433,34 +433,30 @@ export default {
         console.log('proName : ', ve.product.proName);
 
         let formData = new FormData();
-        
-
+      
         //config.data {"proImage":"test 2 3.png","proName":"울트라 모자"}
-        formData.append("proImage", files[0].name);
-        formData.append("proName",  ve.product.proName);
+        formData.append('proImage', files[0]);
+        formData.append('proName', ve.product.proName);
+        // FormData의 key 확인
+        for (let key of formData.keys()) {
+          console.log(key);
+        }
 
+        // FormData의 value 확인
+        for (let value of formData.values()) {
+          console.log(value);
+        }
 
-        axios.post('http://192.168.0.81:9292/pro/imageUpload', {
-            // formData : this.formData
-            proImage : files[0].name,
-            proName: ve.product.proName
+        axios.post('http://192.168.0.81:9292/pro/imageUpload', formData, {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+            }
         })
           .then(response => (this.info = response))
           .catch(function(error) {
            console.log(error);
           });
         }
-
-              // $.ajax({
-              //   type : 'post',
-              //   url : 'upload',
-              //   data : formData,
-              //   processData: false,
-              //   contentType:false,
-              //   success : function(data){
-              //     console.log(data);
-              //   }
-              // });
 
   }
 
