@@ -201,8 +201,8 @@ public class ProServiceImpl implements ProService {
 	}
 
 	@Override
-	public boolean proView(Long product) { // 상품 조회 -> 조회수 증가
-		Optional<Product> optional = productRepository.findById(product);
+	public boolean proView(Long proID) { // 상품 조회 -> 조회수 증가
+		Optional<Product> optional = productRepository.findById(proID);
 		if (optional.isEmpty()) {
 			return false;
 		} else {
