@@ -39,14 +39,13 @@ export default createStore({
     updateloginUserBirth(state, loginUserBirth) {
       state.loginUser.memBirth = loginUserBirth
     },
-    updateloginUserRole(state, loginUserRole) {
-      state.loginUser.memRole = loginUserRole
-    },
     updateloginUserEmail(state, loginUserEmail) {
       state.loginUser.memEmail = loginUserEmail
     },
+    updateloginUserRole(state, loginUserRole) {
+      state.loginUser.memRole = loginUserRole
+    }
   },
-
   actions: {
   },
   modules: {

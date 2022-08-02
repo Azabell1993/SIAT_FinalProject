@@ -20,11 +20,12 @@
       <router-link to="/login" id="login">login</router-link> |
     </nav>
   </div>
+
   <!-- 상품 검색 부분 미완료 -->
-  <form v-on:submit.prevent="productsubmit">
+  <!-- <form v-on:submit.prevent="productsubmit">
     <input type="text" v-model="productsearch" id="productsearch" placeholder="제품을 입력하세요">
     <button type="submit">검색</button>
-  </form>
+  </form> -->
   <br>
     <router-view></router-view>
 </div>
@@ -45,9 +46,9 @@ export default {
     }
   },
   methods: {
-    productsubmit () {
-      // console.log(this.productsearch)
-    },
+    // productsubmit () {
+    //   // console.log(this.productsearch)
+    // },
     userlogout () { //로그아웃 버튼 클릭시 loginuserid를 비우고 다시 저장 후, 메인 화면으로 이동시킨다. 
       this.loginuserid = ''
       this.$store.commit('updateloginUserID', this.loginuserid)
