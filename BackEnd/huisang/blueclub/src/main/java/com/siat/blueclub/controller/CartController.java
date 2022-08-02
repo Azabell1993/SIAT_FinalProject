@@ -71,7 +71,8 @@ public class CartController {
 			ip = req.getRemoteAddr();
 		}
 		System.out.println(new Date() + " | " + ip + " | deleteCart | " + cartMap );
-		Long proCode = (Long) cartMap.get("proCode");
+		Integer proCodeTemp = (Integer) cartMap.get("proCode");
+		Long proCode = new Long(proCodeTemp);
 		String memID = (String) cartMap.get("memID");
 		if( cartService.deleteCart(proCode, memID)) { //장바구니 삭제 서비스
 			data.put("data", "true"); //삭제 성공 시 true 전송
