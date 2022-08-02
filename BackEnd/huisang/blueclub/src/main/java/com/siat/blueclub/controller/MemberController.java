@@ -29,7 +29,7 @@ public class MemberController {
 	@CrossOrigin
 	@PostMapping("loginProc")
 	@ResponseBody
-	public Map<String, Object> loginProc(@RequestBody Member mem, HttpServletRequest req) { //로그인용 메소드
+	public Map<String, Object> loginProc(@RequestBody Member mem, HttpServletRequest req) { //로그인
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
@@ -48,7 +48,7 @@ public class MemberController {
 	@CrossOrigin
 	@PostMapping("idCheckProc")
 	@ResponseBody
-	public Map<String, Object> idCheckProc(@RequestBody Member mem, HttpServletRequest req) { //아이디 중복체크 메소드
+	public Map<String, Object> idCheckProc(@RequestBody Member mem, HttpServletRequest req) { //아이디 중복체크
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
@@ -65,7 +65,7 @@ public class MemberController {
 	@CrossOrigin
 	@PostMapping("signUpProc")
 	@ResponseBody
-	public Map<String, Object> signUpProc(@RequestBody Member mem, HttpServletRequest req) { //회원가입 메소드
+	public Map<String, Object> signUpProc(@RequestBody Member mem, HttpServletRequest req) { //회원가입
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
@@ -83,7 +83,7 @@ public class MemberController {
 	@CrossOrigin
 	@PostMapping("updateProc")
 	@ResponseBody
-	public Map<String, Object> updateProc(@RequestBody Member mem, HttpServletRequest req) { //회원 정보 수정 메소드
+	public Map<String, Object> updateProc(@RequestBody Member mem, HttpServletRequest req) { //회원 정보 수정
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
@@ -101,7 +101,7 @@ public class MemberController {
 	@CrossOrigin
 	@PostMapping("deleteProc")
 	@ResponseBody
-	public Map<String, Object> deleteProc(@RequestBody Member mem, HttpServletRequest req) { //회원 탈퇴 메소드
+	public Map<String, Object> deleteProc(@RequestBody Member mem, HttpServletRequest req) { //회원 탈퇴
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
@@ -119,7 +119,7 @@ public class MemberController {
 	@CrossOrigin
 	@PostMapping("memberInfo")
 	@ResponseBody
-	public Map<String, Object> memberInfo(@RequestBody Member memID, HttpServletRequest req) { //userInfo 테이블 정보
+	public Map<String, Object> memberInfo(@RequestBody Member memID, HttpServletRequest req) { //Member 정보
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {

@@ -45,6 +45,7 @@ public class ServiceTest {
 	private GenderRepository genderRepository;
 	@Autowired
 	private ImageRepository imageRepository;
+
 	
 	@Disabled
 	@Test
@@ -71,16 +72,11 @@ public class ServiceTest {
 //		System.out.println(proDao.getProductsByCategoryCodeRange(start, end));
 		System.out.println(proService.getRecommendByCategory(data, "상의", "반소매"));
 	}
-	
 	@Disabled
 	@Test
 	public void cartTest() {
 //		cartService.addCart(productRepository.findByProName("sample3").get().getProCode(), 3, "user3");
-		Member member = new Member();
-		member.setMemID("user3");
-		System.out.println(cartService.getCartBymemID(member));
-		cartService.deleteCart(productRepository.findByProName("sample4").get().getProCode(), "user3");
-		System.out.println(cartService.getCartBymemID(member));
+		cartService.buyCart("admin");
 
 	}
 	

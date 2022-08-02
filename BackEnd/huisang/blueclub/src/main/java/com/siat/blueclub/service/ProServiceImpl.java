@@ -215,7 +215,7 @@ public class ProServiceImpl implements ProService {
 	}
 
 	@Override
-	public boolean imageUpload(String proName, MultipartFile[] proImage) {
+	public boolean imageUpload(String proName, MultipartFile[] proImage) { //이미지 업로드
 		String path = "D:\\study\\blueclub\\src\\main\\resources\\images";
 		List<ProImage> list = new ArrayList<>();
 		int check = 0;
@@ -376,7 +376,7 @@ public class ProServiceImpl implements ProService {
 
 	@Override
 	public ResponseEntity<Resource> imageLoad(Product proName) throws NotFoundException {
-
+		// 이미지 전송
 		try {
 			Optional<Product> optional = productRepository.findByProName(proName.getProName());
 			if(optional.isEmpty()) {
