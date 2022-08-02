@@ -27,7 +27,7 @@ export default {
         memID : storeUser.state.loginUser.memID,
       })
       .then(function(response) {
-        console.log(response.data.data)
+        // console.log(response.data.data)
         vm.mycartInfo = response.data.data
       })
   }

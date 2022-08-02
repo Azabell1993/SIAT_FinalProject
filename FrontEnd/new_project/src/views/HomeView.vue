@@ -13,8 +13,8 @@ import axios from 'axios'
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
-console.log(`login home : ${store.state.loginUser.memID}`)
-console.log('productStore : ',storeProduct.state.products.productsList)
+// console.log(`login home : ${store.state.loginUser.memID}`)
+// console.log('productStore : ',storeProduct.state.products.productsList)
 const productCodeList = Object.values(storeProduct.state.originProductList)
 
 export default {
@@ -31,17 +31,14 @@ export default {
   methods: {
     fetchData () {
       const vm = this
-      const num = this.num
+
       // console.log('productCodeList : ', productCodeList)
-      axios.post('http://192.168.0.81:9292/pro/proListByCategory',
+      axios.post('http://192.168.0.81:9999/imageload',
       {
-        proList: productCodeList,
-        categoryLargeName : '상의',
-        categorySmallName : '반소매'
+        fileName:"testImage2.jpg"
       })
         .then(function (response) {
-          console.log(response.data)
-          vm.sentence = response.data
+          console.log(response)
         })
         .catch(function (error) {
           console.log(error)
