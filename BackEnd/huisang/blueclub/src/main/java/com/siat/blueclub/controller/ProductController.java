@@ -116,7 +116,7 @@ public class ProductController {
 
 		return data;
 	}
-	@CrossOrigin
+	@CrossOrigin(origins = "*", exposedHeaders = {"Cotnet-Dispsition"})
 	@PostMapping("imageLoad")
 	@ResponseBody
 	public ResponseEntity<Resource> imageLoad(@RequestBody Product proName,  HttpServletRequest req)
