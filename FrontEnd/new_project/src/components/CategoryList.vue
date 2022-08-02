@@ -20,7 +20,6 @@
           <li v-bind:key="small" v-for="small in item"> {{ small }}</li>
         </ul>
     </div>
-
     <router-view></router-view>
   </div>
 </template>
@@ -44,7 +43,7 @@ export default {
     axios.post(url+'/pro/categoryData')
         .then(function (response) {
           vm.categoryIndex = response.data
-          console.log('카테고리 데이터 : ',response.data)
+          // console.log('카테고리 데이터 : ',response.data)
         })
         .catch(function (error) {
           console.log(error)

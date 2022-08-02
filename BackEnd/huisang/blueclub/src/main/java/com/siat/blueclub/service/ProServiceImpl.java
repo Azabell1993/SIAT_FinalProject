@@ -216,7 +216,7 @@ public class ProServiceImpl implements ProService {
 	}
 
 	@Override
-	public boolean imageUpload(String proName, MultipartFile[] proImage) {
+	public boolean imageUpload(String proName, MultipartFile[] proImage) { //이미지 업로드
 		String path = "D:\\study\\blueclub\\src\\main\\resources\\images";
 		List<ProImage> list = new ArrayList<>();
 		int check = 0;
@@ -257,6 +257,37 @@ public class ProServiceImpl implements ProService {
 			return false;
 		}
 	}
+	
+	@Override
+	public ResponseEntity<Resource> imageLoad(Product proName) throws NotFoundException {
+		// 이미지 전송
+		try {
+			Optional<Product> optional = productRepository.findByProName(proName.getProName());
+			if(optional.isEmpty()) {
+				return null;
+			}
+			else {
+				Product product = optional.get();
+				ProImage image = imageRepository.findByProName(product).get();
+				System.out.println(image.toString());
+				FileSystemResource resource = new FileSystemResource(image.getSavaPath() + "/" + image.getSaveName());
+				if (!resource.exists()) {
+					throw new NotFoundException();
+				}
+
+				System.out.println(resource);
+				HttpHeaders header = new HttpHeaders();
+				Path filePath = null;
+				filePath = Paths.get(image.getSavaPath() + "/" + image.getSaveName());
+				header.add("Content-Type", Files.probeContentType(filePath));
+				return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
+
+			}
+			
+		} catch (Exception e) {
+			throw new NotFoundException();
+		}
+	}
 
 	@Override
 	public List<Age> ageInfo() { // age 테이블 정보
@@ -288,7 +319,7 @@ public class ProServiceImpl implements ProService {
 		return (List<Season>) seasonRepository.findAll();
 	}
 
-	public double[] averStatusArray(List<Integer> proCodeList) { // 사용자가 조회한 상품의 스테이터스 평균 배열 생성 메소드
+	public double[] averStatusArray(List<Integer> proCodeList) { // 사용자가 조회한 상품의 스테이터스 평균 배열 생성
 		double age = 0.0;
 		double color = 0.0;
 		double gender = 0.0;
@@ -319,7 +350,7 @@ public class ProServiceImpl implements ProService {
 		return aver;
 	}
 
-	public double[] statusArray(Product proTemp) { // 상품의 스테이터스 배열 생성 메소드
+	public double[] statusArray(Product proTemp) { // 상품의 스테이터스 배열 생성
 		double age;
 		double color;
 		double gender;
@@ -341,7 +372,7 @@ public class ProServiceImpl implements ProService {
 		return aver;
 	}
 
-	public double[] statusArrayForVO(ProductVO proTemp) { // 상품의 스테이터스 배열 생성 메소드
+	public double[] statusArrayForVO(ProductVO proTemp) { // 상품의 스테이터스 배열 생성 (ProductVO 용)
 		double age;
 		double color;
 		double gender;
@@ -363,7 +394,7 @@ public class ProServiceImpl implements ProService {
 		return aver;
 	}
 
-	public static double cosineSimilarity(double[] vectorA, double[] vectorB) { // vectorA와 vectorB 사이의 코사인 유사도를 구하는 메소드
+	public static double cosineSimilarity(double[] vectorA, double[] vectorB) { // vectorA와 vectorB 사이의 코사인 유사도
 		double dotProduct = 0.0;
 		double normA = 0.0;
 		double normB = 0.0;
@@ -373,37 +404,6 @@ public class ProServiceImpl implements ProService {
 			normB += Math.pow(vectorB[i], 2);
 		}
 		return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
-	}
-
-	@Override
-	public ResponseEntity<Resource> imageLoad(Product proName) throws NotFoundException {
-
-		try {
-			Optional<Product> optional = productRepository.findByProName(proName.getProName());
-			if(optional.isEmpty()) {
-				return null;
-			}
-			else {
-				Product product = optional.get();
-				ProImage image = imageRepository.findByProName(product).get();
-				System.out.println(image.toString());
-				FileSystemResource resource = new FileSystemResource(image.getSavaPath() + "/" + image.getSaveName());
-				if (!resource.exists()) {
-					throw new NotFoundException();
-				}
-
-				System.out.println(resource);
-				HttpHeaders header = new HttpHeaders();
-				Path filePath = null;
-				filePath = Paths.get(image.getSavaPath() + "/" + image.getSaveName());
-				header.add("Content-Type", Files.probeContentType(filePath));
-				return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
-
-			}
-			
-		} catch (Exception e) {
-			throw new NotFoundException();
-		}
 	}
 
 }

@@ -48,7 +48,7 @@ public class ProductController {
 	@CrossOrigin
 	@PostMapping("categoryData")
 	@ResponseBody
-	public Map<String, Object> categoryData(HttpServletRequest req) { // 카테고리 정보 메소드
+	public Map<String, Object> categoryData(HttpServletRequest req) { // 카테고리 정보
 		Map<String, Object> categoryMap = categoryService.getCategoryMap(); // 카테고리 정보 서비스 호출 -> {대분류 : [소분류]} 형식
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
@@ -62,15 +62,16 @@ public class ProductController {
 	@PostMapping("proList")
 	@ResponseBody
 	public Map<String, Object> proList(@RequestBody Map<String, Object> proList, HttpServletRequest req) {
-		// 상품 리스트 메소드 -> 매게변수는 사용자가 이전에 조회한 상품의 코드 목록
+		// 상품 리스트 -> 매게변수는 사용자가 이전에 조회한 상품의 코드 목록
 		// -> 코드 목록이 비어있으면 이름순, 비어있지 않으면 추천 순으로 상품 리스트 전송
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + " | proList");
 		List<Integer> proCodeList = (List<Integer>) proList.get("proList"); // 매게변수 Map에서 상품 코드 데이터만 추출
+		System.out.println(new Date() + " | " + ip + " | proList");
+
 		List<Long> recommendList = new ArrayList<>(); // 상품 리스트
 		recommendList = proService.getRecommend(proCodeList); // 상품 리스트 서비스 호출
 		data.put("data", recommendList);
@@ -116,11 +117,11 @@ public class ProductController {
 
 		return data;
 	}
-	@CrossOrigin(origins = "*", exposedHeaders = {"Cotnet-Dispsition"})
+	@CrossOrigin
 	@PostMapping("imageLoad")
 	@ResponseBody
 	public ResponseEntity<Resource> imageLoad(@RequestBody Product proName,  HttpServletRequest req)
-			throws NotFoundException {
+			throws NotFoundException { //이미지 전송
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
 			ip = req.getRemoteAddr();
@@ -155,7 +156,9 @@ public class ProductController {
 	@CrossOrigin
 	@PostMapping(value = "imageUpload",  consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	@ResponseBody
-	public Map<String, Object> iamgeUpload	(@RequestParam String proName, MultipartFile[] proImage, HttpServletRequest req) {
+	public Map<String, Object> iamgeUpload(@RequestParam String proName, MultipartFile[] proImage, HttpServletRequest req) {
+		//이미지 업로드 
+		//이미지 파일 path 경로에 저장, 저장 경로 및 이름 DB에 입력
 		String path = "D:\\study\\blueclub\\src\\main\\resources\\images";
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
