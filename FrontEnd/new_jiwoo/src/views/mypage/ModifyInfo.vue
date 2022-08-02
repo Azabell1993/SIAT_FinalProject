@@ -105,7 +105,7 @@ export default {
         alert("비밀번호 체크를 해주세요!");
         return false;
       } else {
-        axios.post('http://192.168.0.81:9292/mem/updateProc', {          
+        axios.post('http://192.168.219.162:9292/mem/updateProc', {          
           memID: this.modifyup.memID,
           memPW: this.modifyup.memPW,
           memName: this.modifyup.memName,

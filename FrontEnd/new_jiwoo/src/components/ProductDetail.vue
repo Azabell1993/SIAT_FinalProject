@@ -53,7 +53,7 @@ import storeProduct from '@/store/recommendProducts'
 import storeUser from '@/store/index'
 import axios from 'axios'
 
-const url = 'http://192.168.0.81:9292'
+const url = 'http://192.168.219.162:9292'
 
 export default {
   data () {
@@ -95,8 +95,12 @@ export default {
           cartCount : this.proCount
         })
       .then(function(response) {
-        console.log(response.data)
-        alert('해당 상품이 장바구니에 담겼습니다.')
+        console.log('true false 여부 : ', response.data.data);
+        if(response.data.data !== 'false') {
+          alert('해당 상품이 장바구니에 담겼습니다.')
+        } else if(response.data.data !== 'true') {
+          alert('재고수량보다 많습니다.')
+        }
       })
       }else {   //취소
           alert('장바구니 담기가 취소되었습니다.')

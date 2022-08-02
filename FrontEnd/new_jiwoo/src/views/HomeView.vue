@@ -33,7 +33,7 @@ export default {
       const vm = this
       const num = this.num
       // console.log('productCodeList : ', productCodeList)
-      axios.post('http://192.168.0.81:9292/pro/proListByCategory',
+      axios.post('http://192.168.219.162:9292/pro/proListByCategory',
       {
         proList: productCodeList,
         categoryLargeName : '상의',

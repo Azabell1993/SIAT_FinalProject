@@ -32,7 +32,7 @@ export default {
 
       //console.log(userId);
 
-      axios.post('http://192.168.0.81:9292/mem/loginProc', {
+      axios.post('http://192.168.219.162:9292/mem/loginProc', {
         memID: this.memID,
         memPW: this.memPW,
       })
@@ -43,7 +43,7 @@ export default {
             // console.log("ID가 일치합니다.")
             //location.href = "http://localhost:8080/"
             
-            axios.post('http://192.168.0.81:9292/mem/memberInfo', 
+            axios.post('http://192.168.219.162:9292/mem/memberInfo', 
             {
               memID : userId
             })
@@ -78,7 +78,7 @@ export default {
 
               store.commit('updateloginUserEmail', response.data.data.memEmail)
               // console.log('memEmail : ', response.data.data.memEmail)
-             
+              
             })
           } else{
             console.log('error test');

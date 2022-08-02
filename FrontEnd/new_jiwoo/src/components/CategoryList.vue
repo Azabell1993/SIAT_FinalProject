@@ -31,7 +31,7 @@ import storeProduct from '@/store/recommendProducts'
 
 
 const productCodeList = Object.values(storeProduct.state.originProductList)
-const url = 'http://192.168.0.81:9292'
+const url = 'http://192.168.219.162:9292'
 export default {
   data () {
     return {
