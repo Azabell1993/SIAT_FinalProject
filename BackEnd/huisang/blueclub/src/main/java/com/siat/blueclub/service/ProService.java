@@ -42,9 +42,9 @@ public interface ProService {
 
 	public boolean proView(Long proID); //상품 조회 -> 조회수 증가
 
-	public boolean imageUpload(String proName, MultipartFile[] proImage);
+	public boolean imageUpload(String proName, MultipartFile[] proImage); //이미지 업로드
 
-	public ResponseEntity<Resource> imageLoad(Product proName) throws NotFoundException;
+	public ResponseEntity<Resource> imageLoad(Product proName) throws NotFoundException; //이미지 전송
 
 
 

@@ -24,6 +24,6 @@ public interface MemService {
 
 	public List<Role> roleInfo(); //role 정보
 
-	public Member memberInfo(String memID);
+	public Member memberInfo(String memID); //Member 정보
 
 }

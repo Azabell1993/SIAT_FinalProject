@@ -121,7 +121,7 @@ public class MemServiceImpl implements MemService {
 	}
 	
 	@Override
-	public Member memberInfo(String memID) {
+	public Member memberInfo(String memID) { //Member 정보
 		return memberRepository.findById(memID).get();
 	}
 

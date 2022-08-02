@@ -14,4 +14,6 @@ public interface CartService {
 
 	boolean deleteCart(Long proCode, String memID); //장바구니 삭제
 
+	boolean buyCart(String memID); //구매하기 -> 임시로 해당 Member 장바구니 비우는 동작으로 구현
+
 }
