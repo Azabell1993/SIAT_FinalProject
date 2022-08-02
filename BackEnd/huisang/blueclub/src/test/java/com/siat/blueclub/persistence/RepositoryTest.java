@@ -58,7 +58,7 @@ public class RepositoryTest {
 	@Autowired
 	private CartRepository cartRepository;
 	@Disabled
-	@BeforeEach
+	@Test
 	public void init() {
 		Role code0 = new Role();
 		code0.setRoleCode(0);
@@ -200,6 +200,51 @@ public class RepositoryTest {
 		RequestState ordercode4 = new RequestState(4, "주문완료");
 		requestSateRepository.save(ordercode4);
 			
+		
+		Member mem1 = new Member();
+		mem1.setMemID("admin");
+		mem1.setMemName("홍길동");
+		mem1.setMemPW("1234");
+		mem1.setMemEmail("hong@naver.com");
+		mem1.setMemPhone("010-1111-1111");
+		mem1.setMemAddr("서울 노곡동");
+		mem1.setMemDate(new Date(2022, 7, 21));
+		mem1.setMemBirth(new Date(1995, 2, 20));
+		mem1.setMemRole(roleRepository.findById(0).get());
+		memberRepository.save(mem1);
+		Member mem2 = new Member();
+		mem2.setMemID("user1");
+		mem2.setMemName("채희상");
+		mem2.setMemPW("1234");
+		mem2.setMemEmail("chae@naver.com");
+		mem2.setMemPhone("010-0000-1111");
+		mem2.setMemAddr("서울 영등포");
+		mem2.setMemDate(new Date(2022, 7, 15));
+		mem2.setMemBirth(new Date(1999, 2, 2));
+		mem2.setMemRole(roleRepository.findById(1).get());
+		memberRepository.save(mem2);
+		Member mem3 = new Member();
+		mem3.setMemID("user2");
+		mem3.setMemName("이대관");
+		mem3.setMemPW("1234");
+		mem3.setMemEmail("lee@naver.com");
+		mem3.setMemPhone("010-0101-1111");
+		mem3.setMemAddr("서울 정자동");
+		mem3.setMemDate(new Date(2022, 7, 15));
+		mem3.setMemBirth(new Date(1999, 8, 20));
+		mem3.setMemRole(roleRepository.findById(1).get());
+		memberRepository.save(mem3);
+		Member mem4 = new Member();
+		mem4.setMemID("user3");
+		mem4.setMemName("박지우");
+		mem4.setMemPW("1234");
+		mem4.setMemEmail("park@naver.com");
+		mem4.setMemPhone("010-0000-1111");
+		mem4.setMemAddr("서울 강남구");
+		mem4.setMemDate(new Date(2022, 7, 15));
+		mem4.setMemBirth(new Date(1999, 8, 20));
+		mem4.setMemRole(roleRepository.findById(1).get());
+		memberRepository.save(mem4);
 	}
 	@Disabled
 	@Test
