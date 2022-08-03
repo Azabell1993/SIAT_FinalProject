@@ -108,7 +108,6 @@ public class ProServiceImpl implements ProService {
 
 	}
 
-	
 	@Override
 	public List<Long> getRecommendByCategory(List<Integer> proCodeList, String categoryLargeName,
 			String categorySmallName) {
