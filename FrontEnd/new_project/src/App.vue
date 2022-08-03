@@ -32,6 +32,7 @@
 </template>
 <script>
 import store from '@/store/index'
+import ipconfig from './store/ipconfig'
 
 export default {
   data () {
@@ -52,7 +53,7 @@ export default {
     userlogout () { //로그아웃 버튼 클릭시 loginuserid를 비우고 다시 저장 후, 메인 화면으로 이동시킨다. 
       this.loginuserid = ''
       this.$store.commit('updateloginUserID', this.loginuserid)
-      location.href = "http://localhost:8080/"
+      location.href = ipconfig.state.networkip
     }
   }
 }

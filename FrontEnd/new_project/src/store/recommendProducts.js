@@ -11,7 +11,7 @@ export default createStore({
         products: {
             productsList: [],
         },
-        originProductList: [1,2,3,4],
+        originProductList: [],
         categoryTopList: [],
         categoryPantList: [],
         categoryShoesList: [],

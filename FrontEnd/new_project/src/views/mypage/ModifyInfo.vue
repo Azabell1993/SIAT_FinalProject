@@ -32,7 +32,12 @@
 import axios from 'axios'
 import store from '@/store/index'
 import MypageCategoryVue from '@/components/MypageCategory.vue'
+import ipconfig from '@/store/ipconfig'
+
+const url = ipconfig.state.ip
+
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+
 export default {
   components: {
     MypageCategoryVue
@@ -95,7 +100,7 @@ export default {
     
     /* 회원가입 정보 전체 넘기기 */
     modifyupProc() {    
-
+      const vm = this
       // console.log('ID test')
       
       if(!this.modifyup.memPW) {
@@ -105,7 +110,7 @@ export default {
         alert("비밀번호 체크를 해주세요!");
         return false;
       } else {
-        axios.post('http://192.168.0.88:9292/mem/updateProc', {          
+        axios.post(url+'/mem/updateProc', {          
           memID: this.modifyup.memID,
           memPW: this.modifyup.memPW,
           memName: this.modifyup.memName,
@@ -113,8 +118,16 @@ export default {
           memPhone: this.modifyup.memPhone,
           memEmail: this.modifyup.memEmail,
           memBirth : this.modifyup.memBirth
-        }) .then(function ( ) {
+        }).then(function ( ) {
             alert("정보 수정 완료");
+            store.commit('updateloginUserID', vm.modifyup.memID)
+            store.commit('updateloginUserPW', vm.modifyup.memPW)
+            store.commit('updateloginUserName', vm.modifyup.memName)
+            store.commit('updateloginUserAddr', vm.modifyup.memAddr)
+            store.commit('updateloginUserPhone', vm.modifyup.memPhone)
+            store.commit('updateloginUserEmail', vm.modifyup.memEmail)
+            store.commit('updateloginUserBirth', vm.modifyup.memBirth)
+            location.href = ipconfig.state.networkip+"/mypage"
           }).catch(function (error) {
             console.log(error)
           })
