@@ -28,6 +28,7 @@ import com.siat.blueclub.domain.Age;
 import com.siat.blueclub.domain.Color;
 import com.siat.blueclub.domain.Gender;
 import com.siat.blueclub.domain.Material;
+import com.siat.blueclub.domain.Member;
 import com.siat.blueclub.domain.PriceRange;
 import com.siat.blueclub.domain.ProAddVO;
 import com.siat.blueclub.domain.ProImage;
@@ -61,7 +62,7 @@ public class ProductController {
 	@CrossOrigin
 	@PostMapping("proList")
 	@ResponseBody
-	public Map<String, Object> proList(@RequestBody Map<String, Object> proList, HttpServletRequest req) {
+	public Map<String, Object> proList(@RequestBody Member mem, HttpServletRequest req) {
 		// 상품 리스트 -> 매게변수는 사용자가 이전에 조회한 상품의 코드 목록
 		// -> 코드 목록이 비어있으면 이름순, 비어있지 않으면 추천 순으로 상품 리스트 전송
 		Map<String, Object> data = new HashMap<>();
@@ -69,11 +70,11 @@ public class ProductController {
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		List<Integer> proCodeList = (List<Integer>) proList.get("proList"); // 매게변수 Map에서 상품 코드 데이터만 추출
-		System.out.println(new Date() + " | " + ip + " | proList");
+		System.out.println(new Date() + " | " + ip + " | proList | " + mem.getMemID());
 
 		List<Long> recommendList = new ArrayList<>(); // 상품 리스트
-		recommendList = proService.getRecommend(proCodeList); // 상품 리스트 서비스 호출
+		recommendList = proService.getRecommend(mem); // 상품 리스트 서비스 호출
+		System.out.println(recommendList);
 		data.put("data", recommendList);
 
 		return data;
@@ -88,16 +89,17 @@ public class ProductController {
 		// 카테고리 이름이 대분류면 범위 지정, 카테고리 이름이 소분류면 단독으로 탐색
 		// 코드 목록이 비어있으면 이름순, 코드 목록이 비어있지 않으면 추천순으로 상품 코드 목록을 전송
 		Map<String, Object> data = new HashMap<>();
+		String memID = (String) proListandCategory.get("memID");
+		String categoryLargeName = (String) proListandCategory.get("categoryLargeName");
+		String categorySmallName = (String) proListandCategory.get("categorySmallName");
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + " | proListByCategory");
-		List<Integer> proCodeList = (List<Integer>) proListandCategory.get("proList");
-		String categoryLargeName = (String) proListandCategory.get("categoryLargeName");
-		String categorySmallName = (String) proListandCategory.get("categorySmallName");
-		List<Long> proCodelist = proService.getRecommendByCategory(proCodeList, categoryLargeName, categorySmallName);
-		data.put("data", proCodelist);
+		System.out.println(new Date() + " | " + ip + " | proListByCategory | " + memID + " | " + categoryLargeName + " | " + categorySmallName);
+		List<Long> recommandlist = proService.getRecommendByCategory(memID, categoryLargeName, categorySmallName);
+		System.out.println(recommandlist);
+		data.put("data", recommandlist);
 
 		return data;
 	}
@@ -107,12 +109,12 @@ public class ProductController {
 	@ResponseBody
 	public Map<String, Object> proInfo(@RequestBody Product product, HttpServletRequest req) { // 상품 코드를 기반으로 한 상품 정보 조회
 		Map<String, Object> data = new HashMap<>();
-		Product result = proService.getProInfo(product.getProCode()); //// 상품 코드를 기반으로 한 상품 정보 조회 서비스 호출
 		String ip = req.getHeader("X-Forwarded-For");
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + " | proInfo");
+		System.out.println(new Date() + " | " + ip + " | proInfo | " + product.toString() );
+		Product result = proService.getProInfo(product.getProCode()); //// 상품 코드를 기반으로 한 상품 정보 조회 서비스 호출
 		data.put("data", result);
 
 		return data;
@@ -178,7 +180,7 @@ public class ProductController {
 	@CrossOrigin
 	@PostMapping("proView")
 	@ResponseBody
-	public Map<String, Object> proView(@RequestBody Product proCode, HttpServletRequest req) {
+	public Map<String, Object> proView(@RequestBody Map<String, Object> viewData, HttpServletRequest req) {
 		// 상품 조회 -> 조회수 증가
 		Map<String, Object> data = new HashMap<>();
 		String ip = req.getHeader("X-Forwarded-For");
@@ -186,10 +188,13 @@ public class ProductController {
 			ip = req.getRemoteAddr();
 		}
 		System.out.println(new Date() + " | " + ip + " | proView");
-		if (proService.proView(proCode.getProCode())) {
-			data.put("data", "true");
+		Integer proCodeTemp = (Integer) viewData.get("proCode");
+		Long proCode = new Long(proCodeTemp);
+		String memID = (String) viewData.get("memID");
+		if (proService.proView(proCode, memID)) {
+			data.put("data", proCodeTemp);
 		} else {
-			data.put("data", "false");
+			data.put("data", proCodeTemp);
 		}
 
 		return data;

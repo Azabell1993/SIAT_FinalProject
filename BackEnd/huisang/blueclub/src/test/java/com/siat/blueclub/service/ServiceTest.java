@@ -58,7 +58,10 @@ public class ServiceTest {
 	@Disabled
 	@Test
 	public void proTest() {
-		System.out.println(imageRepository.findByProName(productRepository.findByProName("sample1").get()).get().toString());
+		Long id = new Long(57);
+		productRepository.delete((productRepository.findById(id).get()));
+		id = new Long(59);
+		productRepository.deleteById(id);
 	}
 	
 	@Disabled
@@ -70,7 +73,7 @@ public class ServiceTest {
 //		System.out.println(start + " | " + end);
 //		System.out.println(proDao.getProductsByCategoryNames("상의", "반소매"));
 //		System.out.println(proDao.getProductsByCategoryCodeRange(start, end));
-		System.out.println(proService.getRecommendByCategory(data, "상의", "반소매"));
+		System.out.println(proService.getRecommendByCategory("admin", "상의", "반소매"));
 	}
 	@Disabled
 	@Test

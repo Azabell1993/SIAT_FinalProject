@@ -54,6 +54,10 @@ public class CartController {
 		Long proCode = new Long(proCodeTemp);
 		Integer cartCount = (Integer) cartMap.get("cartCount");
 		String memID = (String) cartMap.get("memID");
+		if(cartCount < 0 ) {
+			data.put("data", "false");
+			return data;
+		}
 		if( cartService.addCart(proCode, cartCount, memID)) { //장바구니 추가 서비스
 			data.put("data", "true"); //장바구니 추가 성공 시 true  전송
 		} else {

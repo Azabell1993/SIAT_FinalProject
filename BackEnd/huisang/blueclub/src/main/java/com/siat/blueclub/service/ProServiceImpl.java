@@ -23,12 +23,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.siat.blueclub.domain.Age;
 import com.siat.blueclub.domain.Color;
 import com.siat.blueclub.domain.Gender;
 import com.siat.blueclub.domain.Material;
+import com.siat.blueclub.domain.Member;
 import com.siat.blueclub.domain.PriceRange;
 import com.siat.blueclub.domain.ProAddVO;
 import com.siat.blueclub.domain.ProCategory;
@@ -36,16 +38,19 @@ import com.siat.blueclub.domain.ProImage;
 import com.siat.blueclub.domain.Product;
 import com.siat.blueclub.domain.ProductVO;
 import com.siat.blueclub.domain.Season;
+import com.siat.blueclub.domain.WatchedProduct;
 import com.siat.blueclub.persistence.AgeRepository;
 import com.siat.blueclub.persistence.ColorRepository;
 import com.siat.blueclub.persistence.GenderRepository;
 import com.siat.blueclub.persistence.ImageRepository;
 import com.siat.blueclub.persistence.MaterialRepository;
+import com.siat.blueclub.persistence.MemberRepository;
 import com.siat.blueclub.persistence.PriceRangeRepository;
 import com.siat.blueclub.persistence.ProCategoryRepository;
 import com.siat.blueclub.persistence.ProductDao;
 import com.siat.blueclub.persistence.ProductRepository;
 import com.siat.blueclub.persistence.SeasonRepository;
+import com.siat.blueclub.persistence.WatchedProductRepositroy;
 
 @Service
 public class ProServiceImpl implements ProService {
@@ -75,47 +80,63 @@ public class ProServiceImpl implements ProService {
 	@Autowired
 	private ImageRepository imageRepository;
 
+	@Autowired
+	private MemberRepository memberRepository;
+	@Autowired
+	private WatchedProductRepositroy watchedProductRepositroy;
+
 	@Override
-	public List<Long> getRecommend(List<Integer> proCodeList) {
+	public List<Long> getRecommend(Member memID) {
 		// 상품 리스트 -> 매게변수는 사용자가 이전에 조회한 상품의 코드 목록
 		// 코드 목록이 비어있으면 이름순, 비어있지 않으면 추천 순으로 상품 리스트 전송
+		Optional<Member> optional = memberRepository.findById(memID.getMemID());
 		List<Long> recommend = new ArrayList<>(); // 상품 리스트
-		if (proCodeList.size() == 0) { // 코드 목록이 비어있을 경우
+
+		if (optional.isEmpty()) {
 			for (Product i : (List<Product>) productRepository.findAllByOrderByProNameAsc()) { // 상품 이름 순으로 모든 데이터를
 				recommend.add(i.getProCode()); // 상품 리스트에 저장
 			}
-		} else { // 코드 목록이 비어있지 않을 경우
-			double aver[] = averStatusArray(proCodeList); // 사용자가 조회한 상품 스테이터스의 평균
-			Map<Long, Double> siilarityMap = new HashMap<>(); // 코사인 유사도 맵 -> {상품 코드 : 코사인 유사도} 형식
-			List<Product> allProducts = (List<Product>) productRepository.findAll(); // 전체 상품 목록
-			for (Product i : allProducts) { // 전체 상품 목록 조회
-				// 사용자가 조회한 상품 스테이터스의 평균과 전체 상품 스테이터스의 코사인 유사도 계산
-				siilarityMap.put(i.getProCode(), cosineSimilarity(aver, statusArray(i))); // 코사인 유사도 맵에 저장
-			}
-			// 코사인 유사도가 높은 순으로 코사인 유사도 맵 정렬
-			List<Entry<Long, Double>> entryList = new ArrayList<Entry<Long, Double>>(siilarityMap.entrySet());
-			Collections.sort(entryList, new Comparator<Entry<Long, Double>>() {
-				public int compare(Entry<Long, Double> obj1, Entry<Long, Double> obj2) {
-					return obj2.getValue().compareTo(obj1.getValue());
+		} else {
+			List<WatchedProduct> proCodeList = (List<WatchedProduct>) watchedProductRepositroy.findAllByMemID(memID);
+			if (proCodeList.size() == 0) { // 코드 목록이 비어있을 경우
+				for (Product i : (List<Product>) productRepository.findAllByOrderByProNameAsc()) { // 상품 이름 순으로 모든 데이터를
+					recommend.add(i.getProCode()); // 상품 리스트에 저장
 				}
-			});
-			for (Entry<Long, Double> entry : entryList) {
-				recommend.add(entry.getKey()); // 상품 리스트에 저장
-			}
+			} else { // 코드 목록이 비어있지 않을 경우
+				double aver[] = averStatusArray(proCodeList); // 사용자가 조회한 상품 스테이터스의 평균
+				Map<Long, Double> siilarityMap = new HashMap<>(); // 코사인 유사도 맵 -> {상품 코드 : 코사인 유사도} 형식
+				List<Product> allProducts = (List<Product>) productRepository.findAll(); // 전체 상품 목록
+				for (Product i : allProducts) { // 전체 상품 목록 조회
+					// 사용자가 조회한 상품 스테이터스의 평균과 전체 상품 스테이터스의 코사인 유사도 계산
+					siilarityMap.put(i.getProCode(), cosineSimilarity(aver, statusArray(i))); // 코사인 유사도 맵에 저장
+				}
+				// 코사인 유사도가 높은 순으로 코사인 유사도 맵 정렬
+				List<Entry<Long, Double>> entryList = new ArrayList<Entry<Long, Double>>(siilarityMap.entrySet());
+				Collections.sort(entryList, new Comparator<Entry<Long, Double>>() {
+					public int compare(Entry<Long, Double> obj1, Entry<Long, Double> obj2) {
+						return obj2.getValue().compareTo(obj1.getValue());
+					}
+				});
+				for (Entry<Long, Double> entry : entryList) {
+					recommend.add(entry.getKey()); // 상품 리스트에 저장
+				}
 
+			}
 		}
+
 		return recommend; // 상품 리스트 return
 
 	}
 
 	@Override
-	public List<Long> getRecommendByCategory(List<Integer> proCodeList, String categoryLargeName,
-			String categorySmallName) {
+	public List<Long> getRecommendByCategory(String memID, String categoryLargeName, String categorySmallName) {
 		// 카테고리 별 상품 리스트 -> MyBatis 사용
 		// 카테고리 이름이 대분류면 범위 지정, 카테고리 이름이 소분류면 단독으로 탐색
 		// 코드 목록이 비어있으면 이름순, 코드 목록이 비어있지 않으면 추천순으로 상품 목록을 전송
+		Optional<Member> optional = memberRepository.findById(memID);
 		List<Long> recommend = new ArrayList<>(); // 상품 리스트
-		if (proCodeList.size() == 0) { // 코드 목록이 비어있을 경우
+
+		if (optional.isEmpty()) {
 			if (categorySmallName.equals("none")) { // 카테고리 이름이 대분류일 경우 -> 범위 탐색
 				int start = categoryService.getCategoryRagneStart(categoryLargeName); // 카테고리 대분류 범위 시작 찾기
 				int end = categoryService.getCategoryRagneEnd(categoryLargeName); // 카테고리 대분류 범위 끝 찾기
@@ -129,41 +150,59 @@ public class ProServiceImpl implements ProService {
 					recommend.add(i.getPro_Code()); // 상품 리스트에 저장
 				}
 			}
-		} else { // 코드 목록이 비어있지 않을 경우
-			double aver[] = averStatusArray(proCodeList); // 사용자가 조회한 상품 스테이터스의 평균
-			Map<Long, Double> siilarityMap = new HashMap<>(); // 코사인 유사도 맵 -> {상품 코드 : 코사인 유사도} 형식
-			if (categorySmallName.equals("none")) { // 카테고리 이름이 대분류일 경우 -> 범위 탐색
-				int start = categoryService.getCategoryRagneStart(categoryLargeName); // 카테고리 대분류 범위 시작 찾기
-				int end = categoryService.getCategoryRagneEnd(categoryLargeName); // 카테고리 대분류 범위 끝 찾기
+		} else {
+			List<WatchedProduct> proCodeList = (List<WatchedProduct>) watchedProductRepositroy.findAllByMemID(optional.get());
+			if (proCodeList.size() == 0) { // 코드 목록이 비어있을 경우
+				if (categorySmallName.equals("none")) { // 카테고리 이름이 대분류일 경우 -> 범위 탐색
+					int start = categoryService.getCategoryRagneStart(categoryLargeName); // 카테고리 대분류 범위 시작 찾기
+					int end = categoryService.getCategoryRagneEnd(categoryLargeName); // 카테고리 대분류 범위 끝 찾기
+					for (ProductVO i : productDao.getProductsByCategoryCodeRange(start, end)) { // 대분류 범위 내의 상품(이름순)
+						recommend.add(i.getPro_Code()); // 상품 리스트에 저장
+					}
+				} else { // 카테고리 이름이 소분류 일 경우 -> 단일 탐색
+					for (ProductVO i : productDao.getProductsByCategoryNames(categoryLargeName, categorySmallName)) { // 소분류에
+																														// 해당하는
+																														// 상품(이름순)
+						recommend.add(i.getPro_Code()); // 상품 리스트에 저장
+					}
+				}
+			} else { // 코드 목록이 비어있지 않을 경우
+				double aver[] = averStatusArray(proCodeList); // 사용자가 조회한 상품 스테이터스의 평균
+				Map<Long, Double> siilarityMap = new HashMap<>(); // 코사인 유사도 맵 -> {상품 코드 : 코사인 유사도} 형식
+				if (categorySmallName.equals("none")) { // 카테고리 이름이 대분류일 경우 -> 범위 탐색
+					int start = categoryService.getCategoryRagneStart(categoryLargeName); // 카테고리 대분류 범위 시작 찾기
+					int end = categoryService.getCategoryRagneEnd(categoryLargeName); // 카테고리 대분류 범위 끝 찾기
 
-				List<ProductVO> allProductsinCategory = productDao.getProductsByCategoryCodeRange(start, end);// 대분류 범위
-																												// 내 상품
-																												// 상품 목록
-				for (ProductVO i : allProductsinCategory) { // 전체 상품 목록 조회
-					// 사용자가 조회한 상품 스테이터스의 평균과 전체 상품 스테이터스의 코사인 유사도 계산
-					siilarityMap.put(i.getPro_Code(), cosineSimilarity(aver, statusArrayForVO(i))); // 코사인 유사도 맵에 저장
+					List<ProductVO> allProductsinCategory = productDao.getProductsByCategoryCodeRange(start, end);// 대분류 범위
+																													// 내 상품
+																													// 상품 목록
+					for (ProductVO i : allProductsinCategory) { // 전체 상품 목록 조회
+						// 사용자가 조회한 상품 스테이터스의 평균과 전체 상품 스테이터스의 코사인 유사도 계산
+						siilarityMap.put(i.getPro_Code(), cosineSimilarity(aver, statusArrayForVO(i))); // 코사인 유사도 맵에 저장
+					}
+				} else { // 카테고리 이름이 소분류 일 경우 -> 단일 탐색
+					List<ProductVO> allProductsinCategory = productDao.getProductsByCategoryNames(categoryLargeName,
+							categorySmallName); // 소분류에 해당하는
+					// 상품(이름순);
+					for (ProductVO i : allProductsinCategory) { // 전체 상품 목록 조회
+						// 사용자가 조회한 상품 스테이터스의 평균과 전체 상품 스테이터스의 코사인 유사도 계산
+						siilarityMap.put(i.getPro_Code(), cosineSimilarity(aver, statusArrayForVO(i))); // 코사인 유사도 맵에 저장
+					}
 				}
-			} else { // 카테고리 이름이 소분류 일 경우 -> 단일 탐색
-				List<ProductVO> allProductsinCategory = productDao.getProductsByCategoryNames(categoryLargeName,
-						categorySmallName); // 소분류에 해당하는
-				// 상품(이름순);
-				for (ProductVO i : allProductsinCategory) { // 전체 상품 목록 조회
-					// 사용자가 조회한 상품 스테이터스의 평균과 전체 상품 스테이터스의 코사인 유사도 계산
-					siilarityMap.put(i.getPro_Code(), cosineSimilarity(aver, statusArrayForVO(i))); // 코사인 유사도 맵에 저장
+				// 코사인 유사도가 높은 순으로 코사인 유사도 맵 정렬
+				List<Entry<Long, Double>> entryList = new ArrayList<Entry<Long, Double>>(siilarityMap.entrySet());
+				Collections.sort(entryList, new Comparator<Entry<Long, Double>>() {
+					public int compare(Entry<Long, Double> obj1, Entry<Long, Double> obj2) {
+						return obj2.getValue().compareTo(obj1.getValue());
+					}
+				});
+				for (Entry<Long, Double> entry : entryList) {
+					recommend.add(entry.getKey()); // 상품 리스트에 저장
 				}
-			}
-			// 코사인 유사도가 높은 순으로 코사인 유사도 맵 정렬
-			List<Entry<Long, Double>> entryList = new ArrayList<Entry<Long, Double>>(siilarityMap.entrySet());
-			Collections.sort(entryList, new Comparator<Entry<Long, Double>>() {
-				public int compare(Entry<Long, Double> obj1, Entry<Long, Double> obj2) {
-					return obj2.getValue().compareTo(obj1.getValue());
-				}
-			});
-			for (Entry<Long, Double> entry : entryList) {
-				recommend.add(entry.getKey()); // 상품 리스트에 저장
-			}
 
+			}
 		}
+		
 		return recommend; // 상품 리스트 return
 	}
 
@@ -201,30 +240,39 @@ public class ProServiceImpl implements ProService {
 	}
 
 	@Override
-	public boolean proView(Long proID) { // 상품 조회 -> 조회수 증가
-		Optional<Product> optional = productRepository.findById(proID);
-		if (optional.isEmpty()) {
+	public boolean proView(Long proID, String memID) { // 상품 조회 -> 조회수 증가
+		Optional<Member> optional = memberRepository.findById(memID);
+		if (StringUtils.isEmpty(memID)) {
+			Product product = productRepository.findById(proID).get();
+			int count = product.getProCount() + 1;
+			product.setProCount(count);
+			productRepository.save(product);
 			return false;
 		} else {
-			Product temp = optional.get();
-			int count = temp.getProCount() + 1;
-			temp.setProCount(count);
-			productRepository.save(temp);
+			Product product = productRepository.findById(proID).get();
+			Member member = optional.get();
+			int count = product.getProCount() + 1;
+			product.setProCount(count);
+			productRepository.save(product);
+			WatchedProduct watchedProduct = new WatchedProduct();
+			watchedProduct.setMemID(member);
+			watchedProduct.setProCode(product);
+			watchedProductRepositroy.save(watchedProduct);
 			return true;
 		}
 	}
 
 	@Override
-	public boolean imageUpload(String proName, MultipartFile[] proImage) { //이미지 업로드
+	public boolean imageUpload(String proName, MultipartFile[] proImage) { // 이미지 업로드
 		String path = "D:\\study\\blueclub\\src\\main\\resources\\images";
 		List<ProImage> list = new ArrayList<>();
 		int check = 0;
 
 		for (MultipartFile file : proImage) {
 			if (!file.isEmpty()) {
-				Optional<Product> optional =  productRepository.findByProName(proName);
-				if(!optional.isEmpty()) {
-					
+				Optional<Product> optional = productRepository.findByProName(proName);
+				if (!optional.isEmpty()) {
+
 				}
 				Product product = optional.get();
 				ProImage image = new ProImage();
@@ -256,16 +304,15 @@ public class ProServiceImpl implements ProService {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public ResponseEntity<Resource> imageLoad(Product proName) throws NotFoundException {
 		// 이미지 전송
 		try {
 			Optional<Product> optional = productRepository.findByProName(proName.getProName());
-			if(optional.isEmpty()) {
+			if (optional.isEmpty()) {
 				return null;
-			}
-			else {
+			} else {
 				Product product = optional.get();
 				ProImage image = imageRepository.findByProName(product).get();
 				System.out.println(image.toString());
@@ -282,9 +329,24 @@ public class ProServiceImpl implements ProService {
 				return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
 
 			}
-			
+
 		} catch (Exception e) {
-			throw new NotFoundException();
+			FileSystemResource resource = new FileSystemResource("D:\\study\\blueclub\\src\\main\\resources\\images/noImage.png");
+			if (!resource.exists()) {
+				throw new NotFoundException();
+			}
+
+			System.out.println(resource);
+			HttpHeaders header = new HttpHeaders();
+			Path filePath = null;
+			filePath = Paths.get("D:\\study\\blueclub\\src\\main\\resources\\images/noImage.png");
+			try {
+				header.add("Content-Type", Files.probeContentType(filePath));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
 		}
 	}
 
@@ -318,7 +380,7 @@ public class ProServiceImpl implements ProService {
 		return (List<Season>) seasonRepository.findAll();
 	}
 
-	public double[] averStatusArray(List<Integer> proCodeList) { // 사용자가 조회한 상품의 스테이터스 평균 배열 생성
+	public double[] averStatusArray(List<WatchedProduct> proCodeList) { // 사용자가 조회한 상품의 스테이터스 평균 배열 생성
 		double age = 0.0;
 		double color = 0.0;
 		double gender = 0.0;
@@ -329,8 +391,8 @@ public class ProServiceImpl implements ProService {
 
 		double count = 0.0;
 
-		for (Integer i : proCodeList) { // 사용자가 조회한 상품 코드 리스트 조회
-			Long j = new Long(i);
+		for (WatchedProduct i : proCodeList) { // 사용자가 조회한 상품 코드 리스트 조회
+			Long j = i.getProCode().getProCode();
 			Product proTemp = productRepository.findById(j).get(); // 상품 코드를 통해 상품 데이터를 받아옴
 			age += proTemp.getProAge().getAgeCode();
 			color += proTemp.getProColor().getColorCode();

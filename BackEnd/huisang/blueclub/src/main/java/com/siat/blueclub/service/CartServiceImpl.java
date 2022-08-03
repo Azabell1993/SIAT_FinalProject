@@ -35,13 +35,12 @@ public class CartServiceImpl implements CartService {
 		Optional<Cart> optional = cartRepository.findByMemIDAndProCode(memberRepository.findById(memID).get(),
 				productRepository.findById(proCode).get());
 		Product product = productRepository.findById(proCode).get();
-		int count = product.getProCount();
+		int count = product.getProStock();
 		if (count - cartCount < 0) {
 			return false;
 		} else {
 			if (optional.isEmpty()) {
 				// 해당 사용자의 장바구니에 해당 상품이 이미 담겨 있지 않은 경우 -> 일반적인 장바구니 추가
-
 				cart.setMemID(memberRepository.findById(memID).get());
 				cart.setProCode(product);
 				cart.setCartCount(cartCount);
@@ -55,7 +54,7 @@ public class CartServiceImpl implements CartService {
 				cart = optional.get();
 				cart.setCartCount(cartCount);
 				cartRepository.save(cart);
-				
+
 				product.setProCount(count - cartCount);
 				productRepository.save(product);
 			}
