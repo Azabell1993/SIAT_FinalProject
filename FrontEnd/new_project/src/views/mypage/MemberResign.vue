@@ -21,6 +21,9 @@
 import axios from 'axios'
 import store from '@/store/index'
 import MypageCategoryVue from '@/components/MypageCategory.vue'
+import ipconfig from '@/store/ipconfig'
+
+const url = ipconfig.state.ip
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 export default {
@@ -93,7 +96,7 @@ export default {
         alert("비밀번호 체크를 해주세요!");
         return false;
       } else {
-        axios.post('http://192.168.0.88:9292/mem/deleteProc', {          
+        axios.post(url+'/mem/deleteProc', {          
           memID: this.deleteup.memID,
           memPW: this.deleteup.memPW,
           memName: this.deleteup.memName,
@@ -105,6 +108,9 @@ export default {
           //console.log(res.data.data);
           if(res.data.data === 'true') {
             alert("회원탈퇴 완료");
+            store.state.loginUser.memID = ''
+            store.commit('updateloginUserID',store.state.loginUser.memID)
+            location.href = ipconfig.state.networkip
           } 
 
         }).catch(function (error) {

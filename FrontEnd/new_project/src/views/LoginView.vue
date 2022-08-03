@@ -14,16 +14,20 @@
 <script>
 import axios from 'axios'
 import store from '@/store/index'
+import ipconfig from '@/store/ipconfig'
+
+const url = ipconfig.state.ip
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 export default {
   methods: {
     sendPost () {
+      const vm = this
       const userId = this.memID; //변수 선언 이 값을 그대로 쓰겠다. 자스 내에선 this 선언 부분이 다를 수있음. 당분간 이게 좀 안전할 듯
       console.log('input 값 : ',userId);
 
-      axios.post('http://192.168.0.81:9292/mem/loginProc', {
+      axios.post(url+'/mem/loginProc', {
         memID: this.memID,
         memPW: this.memPW
       })
@@ -32,10 +36,10 @@ export default {
           if(response.data.mem.memID == userId){
             console.log("ID가 일치합니다.")
             setTimeout(()=> {//일정시간 뒤 
-              location.href = "http://localhost:8080/" //페이지 새로고침 기능 임시 대체(주석 처리하면 당연히 페이지 렌더리이 안되므로 새로고침 눌러야 새로운 값이 들어가는 것)
+              location.href = ipconfig.state.networkip //페이지 새로고침 기능 임시 대체(주석 처리하면 당연히 페이지 렌더리이 안되므로 새로고침 눌러야 새로운 값이 들어가는 것)
             },500)
             
-            axios.post('http://192.168.0.81:9292/mem/memberInfo', 
+            axios.post(url+'/mem/memberInfo', 
             {
               memID: userId
             })
@@ -54,12 +58,8 @@ export default {
               console.log('store에 있는 Id : ',store.state.loginUser.memID)
             })
           }
-          else{
-            alert('ID 혹은 비밀번호가 틀렸습니다')
-          }
-          //store.commit('updateloginUserID',this.memID)
-        }).catch(function (error) { // 뭔가 실패할때 쓰는 함수
-          console.log(error);
+        }).catch(function () { // 뭔가 실패할때 쓰는 함수
+          alert('ID 혹은 비밀번호가 틀렸습니다')
         })
     }
   }

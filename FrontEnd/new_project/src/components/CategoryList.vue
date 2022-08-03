@@ -3,7 +3,7 @@
     <!-- 카테고리 메뉴 부분 -->
     <div class="btn-group" v-bind:key="index" v-for="(item, index) in categoryIndex">
       <button class="btn btn-secondary btn-lg" type="button">
-        <!-- 대분류 카테고리 클릭시 해당 카텍리 품목 페이지 이동 -->
+        <!-- 대분류 카테고리 클릭시 해당 카테고리 품목 페이지 이동 -->
         <router-link v-on:click="topdata" v-if="index=='상의'" :to="{name: '상의'}">{{ index }}</router-link>
         <router-link v-on:click="pantdata" v-if="index=='바지'" :to="{name: '바지'}">{{ index }}</router-link>
         <router-link v-on:click="shoesdata" v-if="index=='신발'" :to="{name: '신발'}">{{ index }}</router-link>
@@ -25,12 +25,15 @@
 </template>
 
 <script>
-import axios from 'axios'
+import storeUser from '@/store/index'
+import axios from 'axios' 
 import storeProduct from '@/store/recommendProducts'
+import ipconfig from '@/store/ipconfig'
 
+const url = ipconfig.state.ip
 
-const productCodeList = Object.values(storeProduct.state.originProductList)
-const url = 'http://192.168.0.81:9292'
+const productCodeList = Object.values(storeProduct.state.products.productsList)
+// const url = 'http://192.168.0.81:9292'
 export default {
   data () {
     return {
@@ -57,6 +60,7 @@ export default {
       {
         //백엔드에 원하는 정보 요청하기 (select 정보)
         proList: productCodeList,
+        memID : storeUser.state.loginUser.memID,
         categoryLargeName : '상의',
         categorySmallName : 'none'
       })
@@ -65,7 +69,8 @@ export default {
           // console.log(response.data)
           
           topCodeList.push(response.data.data) //각 카테고리 품목별 상품 코드를 저장해주는 부분
-          storeProduct.state.categoryTopList = topCodeList //store에 각 상품 코드를 저장한다.
+          storeProduct.commit('updateCategoryTopList', topCodeList) //store에 각 상품 코드를 저장한다.
+          location.reload()
         })
         .catch(function (error) {
           console.log(error)
@@ -76,6 +81,7 @@ export default {
       axios.post(url+'/pro/proListByCategory',
       {
         proList: productCodeList,
+        memID : storeUser.state.loginUser.memID,
         categoryLargeName : '바지',
         categorySmallName : 'none'
       })
@@ -83,6 +89,7 @@ export default {
           pantCodeList.push(response.data.data)
           storeProduct.commit('updateCategoryPantsList', pantCodeList)
           // storeProduct.state.categoryPantList = pantCodeList
+          location.reload()
         })
         .catch(function (error) {
           console.log(error)
@@ -93,6 +100,7 @@ export default {
         axios.post(url+'/pro/proListByCategory',
         {
           proList: productCodeList,
+          memID : storeUser.state.loginUser.memID,
           categoryLargeName : '신발',
           categorySmallName : 'none'
         })
@@ -100,6 +108,7 @@ export default {
             shoesCodeList.push(response.data.data)
             storeProduct.commit('updateCategoryShoesList', shoesCodeList)
             // storeProduct.state.categoryShoesList = shoesCodeList
+            location.reload()
           })
           .catch(function (error) {
             console.log(error)
@@ -110,6 +119,7 @@ export default {
         axios.post(url+'/pro/proListByCategory',
         {
           proList: productCodeList,
+          memID : storeUser.state.loginUser.memID,
           categoryLargeName : '치마',
           categorySmallName : 'none'
         })
@@ -118,6 +128,7 @@ export default {
             console.log('skirtCodeList : ',skirtCodeList)
             storeProduct.commit('updateCategorySkirtList', skirtCodeList)
             // storeProduct.state.categorySkirtList = skirtCodeList
+            location.reload()
           })
           .catch(function (error) {
             console.log(error)
@@ -128,6 +139,7 @@ export default {
         axios.post(url+'/pro/proListByCategory',
         {
           proList: productCodeList,
+          memID : storeUser.state.loginUser.memID,
           categoryLargeName : '모자',
           categorySmallName : 'none'
         })
@@ -135,6 +147,7 @@ export default {
             hatCodeList.push(response.data.data)
             // storeProduct.state.categoryHatList = hatCodeList
             storeProduct.commit('updateCategoryHatList', hatCodeList)
+            location.reload()
           })
           .catch(function (error) {
             console.log(error)

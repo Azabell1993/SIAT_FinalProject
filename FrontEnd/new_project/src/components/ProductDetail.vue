@@ -33,7 +33,7 @@
     <tr>
       <!-- 수량 증가 버튼 -->
       <th>상품 수량</th>
-      <td><input type="number" v-model="proCount"></td>
+      <td><input type="number" min="0" v-model="proCount"></td>
     </tr>
   </table>
 
@@ -50,8 +50,10 @@
 import storeProduct from '@/store/recommendProducts'
 import storeUser from '@/store/index'
 import axios from 'axios'
+import ipconfig from '@/store/ipconfig'
 
-const url = 'http://192.168.0.81:9292'
+const url = ipconfig.state.ip
+// const url = 'http://192.168.0.81:9292'
 
 export default {
   data () {
@@ -75,7 +77,7 @@ export default {
           
         await axios({
            method: 'post',
-           url: 'http://192.168.0.81:9292/pro/imageLoad',
+           url: url+'/pro/imageLoad',
            responseType: 'blob',
            data: {proName: response.data.data.proName }
          })
@@ -118,12 +120,14 @@ export default {
           cartCount : this.proCount
         })
       .then(function(response) {
-        // console.log(response.data)
-        alert('해당 상품이 장바구니에 담겼습니다.')
-      })
-      }else {   //취소
+        console.log(response.data)
+        console.log('true false 여부 : ', response.data.data);
+            if(response.data.data !== 'false') {
+              alert('해당 상품이 장바구니에 담겼습니다.')
+            }
+        })
+      }else if (response.data.data !== 'true'){   //취소
           alert('장바구니 담기가 취소되었습니다.')
-          return;
       }
 
       //memID, proCount, proCode
