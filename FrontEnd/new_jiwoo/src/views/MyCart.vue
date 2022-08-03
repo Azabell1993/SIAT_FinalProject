@@ -16,8 +16,8 @@
           <tr v-for="(item, index) in mycartInfo" :key="item">
             <th scope="row" > {{ index + 1 }} </th>
             <th scope="row" > {{ item.proCode.proName }} </th>
-            <th  scope="row"> {{ item.proCode.proPrice }} </th>
-            <th  scope="row"> {{ item.proCode.proCount }} </th>
+            <th scope="row"> {{ item.proCode.proPrice }} </th>
+            <th scope="row"> {{ item.proCode.proCount }} </th>
             <th scope="row" > 
               <div v-bind:key="item" v-if="(index) in mycartInfo">
                 <button v-on:click="deleteCartProc(index)" > 삭제 </button>
@@ -42,7 +42,7 @@ axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 // import { response } from 'express'
 
-const url = 'http://192.168.219.162:9292'
+const url = 'http://192.168.202.11:9292'
 
 export default {
 
@@ -80,7 +80,7 @@ export default {
       // console.log(storeUser.state.loginUser.memID);
       // console.log(vm.mycartInfo[index].proCode.proCode);
 
-      axios.post('http://192.168.219.162:9292/cart/deleteCart', {
+      axios.post('http://192.168.202.11:9292/cart/deleteCart', {
 
         memID : storeUser.state.loginUser.memID,
         proCode : vm.mycartInfo[index].proCode.proCode  
@@ -95,7 +95,7 @@ export default {
     },
 
     buycartProc () {
-      axios.post('http://192.168.219.162:9292/cart/buyCart', {
+      axios.post('http://192.168.202.11:9292/cart/buyCart', {
 
         memID : storeUser.state.loginUser.memID,
 
