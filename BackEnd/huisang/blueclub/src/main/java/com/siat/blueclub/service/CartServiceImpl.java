@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.siat.blueclub.domain.Cart;
 import com.siat.blueclub.domain.Member;
+import com.siat.blueclub.domain.Product;
 import com.siat.blueclub.persistence.CartRepository;
 import com.siat.blueclub.persistence.MemberRepository;
 import com.siat.blueclub.persistence.ProductRepository;
@@ -33,24 +34,37 @@ public class CartServiceImpl implements CartService {
 		Cart cart = new Cart();
 		Optional<Cart> optional = cartRepository.findByMemIDAndProCode(memberRepository.findById(memID).get(),
 				productRepository.findById(proCode).get());
-		if (optional.isEmpty()) {
-			// 해당 사용자의 장바구니에 해당 상품이 이미 담겨 있지 않은 경우 -> 일반적인 장바구니 추가
-			cart.setMemID(memberRepository.findById(memID).get());
-			cart.setProCode(productRepository.findById(proCode).get());
-			cart.setCartCount(cartCount);
-			cartRepository.save(cart);
-
-		} else {
-			// 헤당 사용자의 장바구니에 해당 상품이 이미 담겨 있는 경우 -> cartCount 필드 update
-			cart = optional.get();
-			cart.setCartCount(cartCount);
-			cartRepository.save(cart);
-		}
-
-		if (cartRepository.findById(cart.getSeq()).isEmpty()) { // 장바구니 저장이 잘 됬는 지 확인
+		Product product = productRepository.findById(proCode).get();
+		int count = product.getProCount();
+		if (count - cartCount < 0) {
 			return false;
 		} else {
-			return true;
+			if (optional.isEmpty()) {
+				// 해당 사용자의 장바구니에 해당 상품이 이미 담겨 있지 않은 경우 -> 일반적인 장바구니 추가
+
+				cart.setMemID(memberRepository.findById(memID).get());
+				cart.setProCode(product);
+				cart.setCartCount(cartCount);
+				cartRepository.save(cart);
+
+				product.setProCount(count - cartCount);
+				productRepository.save(product);
+
+			} else {
+				// 헤당 사용자의 장바구니에 해당 상품이 이미 담겨 있는 경우 -> cartCount 필드 update
+				cart = optional.get();
+				cart.setCartCount(cartCount);
+				cartRepository.save(cart);
+				
+				product.setProCount(count - cartCount);
+				productRepository.save(product);
+			}
+
+			if (cartRepository.findById(cart.getSeq()).isEmpty()) { // 장바구니 저장이 잘 됬는 지 확인
+				return false;
+			} else {
+				return true;
+			}
 		}
 
 	}
