@@ -1,11 +1,13 @@
 <template>
-    <div>
-    <h1>Login 페이지입니다.</h1>
-    
+    <div id="loginview">
+    <h1>Login</h1>
+    <br>
     <form @submit.prevent="sendPost">  <!-- sendPost 함수 실행 -->
-        <label for="memID">ID : <input id="memID" v-model="memID" type="text"></label><br><br>
-        <label for="memPW">PW : <input id="memPW" v-model="memPW" type="password"></label><br><br>
-        <button>Send</button><br>
+        <label for="memID">
+          <td>ID&nbsp;</td><td><b-form-input id="memID" v-model="memID" type="text"/></td></label><br><br>
+        <label for="memPW">
+          <td>PW&nbsp;</td><td><b-form-input id="memPW" v-model="memPW" type="password"/></td></label><br><br>
+        <button class="btn btn-outline-secondary">Login</button><br>
         <!-- @click="onClickRedirect()" 로그인 성공시 화면 이동 -->
         {{ memID }}
     </form>
@@ -65,3 +67,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#loginview{
+  margin-top:100px;
+}
+</style>

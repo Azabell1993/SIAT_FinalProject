@@ -1,10 +1,10 @@
 <template>
   <div id="productList" v-bind:key="item" v-for="(item) in proinfo">
-  <router-link v-on:click="productInfoRelay(item.proCode)" to="/productdetail">
-    <img :src="item.imageURL">
-  </router-link>
-    <p>{{item.proName}}</p>
-    <p>{{item.proPrice}}</p>
+    <router-link v-on:click="productInfoRelay(item.proCode)" to="/productdetail">
+      <img :src="item.imageURL">
+    </router-link>
+      <p id="productName">{{item.proName}}</p>
+      <p>￦ {{item.proPrice}}</p>
   </div>  
 </template>
 
@@ -41,7 +41,7 @@ export default {
           memID : storeUser.state.loginUser.memID
         })
         .then(function(response){
-          console.log('Detail data : ',response)
+          // console.log('Detail data : ',response)
           storeProduct.commit('updateSelectOneProductCode',response.data.data)
           
           //상품 한개만 요청하기 때문에, selectOne으로 지정하고, 각 상품이 클릭시 때마다 업데이트 시킴.
@@ -103,8 +103,6 @@ export default {
                     var url = window.URL.createObjectURL(new Blob([res.data], { type: res.headers['content-type'] } ))
                     // document.getElementById('proImage').src = url
                     // vm.imageURL = url
-                    console.log('image Data : ',res)
-                    console.log('image Data : ',url)
                     vm.imageURL.push(url)
                     //보여줄 상품 객체(이미지)
                     proObject.imageURL = url
@@ -114,10 +112,10 @@ export default {
                     console.log(error)
                   })
               })
-              console.log('객체 생성 확인 : ', proObject)
+              // console.log('객체 생성 확인 : ', proObject)
               vm.proinfo.push(proObject)
           }
-          console.log('출력 확인 : ',vm.proinfo)
+          // console.log('출력 확인 : ',vm.proinfo)
         })
         .catch(function (error) {
           console.log(error)
@@ -126,13 +124,22 @@ export default {
   }
 </script>
 
-<style>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
   img {
-    width : 180px;
-    height: 180px;
+    width : 200px;
+    height: 200px;
   }
   #productList {
+    width : 300px;
+    height : 300px;
     display: inline-block;
     padding : 10px;
+  }
+  
+  #productName{
+    margin-top : 10px;
+    font-family: 'Ubuntu', sans-serif;
   }
 </style>

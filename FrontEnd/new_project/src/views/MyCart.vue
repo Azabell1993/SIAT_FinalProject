@@ -1,4 +1,5 @@
 <template>
+<div id="mycartview">
   <h1>My Cart 입니다.</h1>
 
     <table class="table table-striped">
@@ -20,7 +21,7 @@
             <th scope="row"> {{ item.cartCount }} </th>
             <th scope="row" > 
               <div v-bind:key="item" v-if="(index) in mycartInfo">
-                <button v-on:click="deleteCartProc(index)" > 삭제 </button>
+                <b-button v-on:click="deleteCartProc(index)" > 삭제 </b-button>
               </div>
             </th>
           </tr>
@@ -29,9 +30,9 @@
        
       </table>
 
-   <button v-on:click="buycartProc()" > 구매하기 </button>
+   <b-button v-on:click="buycartProc()" > 구매하기 </b-button>
               
-
+</div>
 </template>
 
 <script>
@@ -115,6 +116,8 @@ export default {
 
 </script>
 
-<style>
-
+<style scoped>
+#mycartview{
+  margin-top : 100px;
+}
 </style>

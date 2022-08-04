@@ -1,24 +1,24 @@
 <template>
-  <div>
+  <div id="categoryList">
     <!-- 카테고리 메뉴 부분 -->
     <div class="btn-group" v-bind:key="index" v-for="(item, index) in categoryIndex">
-      <button class="btn btn-secondary btn-lg" type="button">
         <!-- 대분류 카테고리 클릭시 해당 카테고리 품목 페이지 이동 -->
         <router-link v-on:click="topdata" v-if="index=='상의'" :to="{name: '상의'}">{{ index }}</router-link>
         <router-link v-on:click="pantdata" v-if="index=='바지'" :to="{name: '바지'}">{{ index }}</router-link>
         <router-link v-on:click="shoesdata" v-if="index=='신발'" :to="{name: '신발'}">{{ index }}</router-link>
         <router-link v-on:click="skirtdata" v-if="index=='치마'" :to="{name: '치마'}">{{ index }}</router-link>
         <router-link v-on:click="hatdata" v-if="index=='모자'" :to="{name: '모자'}">{{ index }}</router-link>
-      </button>
+      <!-- <button class="btn btn-secondary btn-lg" type="button">
+      </button> -->
 
       <!-- 소분류 선택 메뉴, 정보 띄우기만 하고 선택시 기능 미구현 상태 -->
-      <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <!-- <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="visually-hidden">Toggle Dropdown</span>
-      </button>
+      </button> -->
       <!-- 소분류 메뉴 리스트 -->
-        <ul class="dropdown-menu">
+        <!-- <ul class="dropdown-menu">
           <li v-bind:key="small" v-for="small in item"> {{ small }}</li>
-        </ul>
+        </ul> -->
     </div>
     <router-view></router-view>
   </div>
@@ -159,6 +159,15 @@ export default {
 </script>
   
 <style scoped>
+
+a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #2c3e50;
+  /* z-index: -1; */
+  position: sticky;
+}
+
 ul nav {
   display:inline-block;
 }
