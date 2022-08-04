@@ -2,11 +2,11 @@
 <div>
   <CategoryList></CategoryList>
   <h1>하의 페이지입니다.</h1>
-  <div id="productList" v-bind:key="item" v-for="item in productPantsInfos">
+  <div id="productList" v-bind:key="item" v-for="item in proinfo">
     <router-link v-on:click="productInfoRelay(item.proCode)" to="/productdetail">
-      <p>{{item.proName}}</p>
-      <!-- <img v-bind:src="require(`@/assets/image/${item.proImage}.png`)"> -->
+      <img :src="item.imageURL">
     </router-link>
+    <p>{{item.proName}}</p>
     <p>{{item.proPrice}}</p>
   </div>
 </div>
@@ -16,8 +16,9 @@
 import CategoryList from '@/components/CategoryList.vue'
 import storeProduct from '@/store/recommendProducts'
 import axios from 'axios'
+import ipconfig from '@/store/ipconfig'
 
-const url = 'http://192.168.0.88:9292'
+const url = ipconfig.state.ip
 
 export default {
   components: {
@@ -25,8 +26,10 @@ export default {
   },
   data () {
     return {
-      productPantsInfos: [],
-      pantsCodeList: []
+      pantsCodeList: [],
+      imageProName : '',
+      proinfo: []
+
     }
   },
   async created () {
@@ -37,21 +40,46 @@ export default {
     if (this.pantsCodeList == "") {
       console.log('Data가 없습니다.')
     }
+
     else {
       console.log(Object.values(Object.values(this.pantsCodeList)[0]))
       var pantsList = Object.values(Object.values(this.pantsCodeList)[0])
     
       for (var i=0 ;i < pantsList.length; i++) {
-        console.log(pantsList[i])
+        var proObject = {
+              proCode : '',
+              proName : '',
+              proPrice : '',
+              imageURL : ''
+        }
+
         await axios.post(url+'/pro/proInfo', 
-        {proCode : pantsList[i]})
-        .then(function (response) {
+        {
+          proCode : pantsList[i]
+        })
+        .then(async function (response) {
           console.log(response.data.data);
-          vm.productPantsInfos.push(response.data.data)
+          proObject.proCode = response.data.data.proCode
+          proObject.proName = response.data.data.proName
+          proObject.proPrice = response.data.data.proPrice
+          vm.imageProName = response.data.data.proName
+
+          await axios({
+            method: 'post',
+            url: url+'/pro/imageLoad',
+            responseType: 'blob',
+            data: {proName: vm.imageProName }
+            })
+            .then((res) => {
+              var url = window.URL.createObjectURL(new Blob([res.data], { type: res.headers['content-type'] } ))
+              proObject.imageURL = url
+              console.log('카테고리 이미지 데이터', proObject.imageURL)
+            })
         })
         .catch(function (error) {
           console.log(error);
         })
+        vm.proinfo.push(proObject)
       }
      }
     },

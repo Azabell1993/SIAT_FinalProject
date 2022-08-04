@@ -12,13 +12,13 @@
             <button>아이디 사용 가능 체크</button>
         </form>
 
-      <form action="/PwTest" class="userpwcheck" @submit.prevent="checkPw">
-        <p>8 ~ 16자 대/소 영문, 숫자, 특수문자를 최소 한가지씩 조합하세요.</p>
-        <label for="memPW">비밀번호 : 
-        <input type="password" id="memPW" v-model="signup.memPW" @blur="passwordValid" ref="memPWck"></label><br>
-        <label for="memPWCheck">비밀번호 확인 : <input type="password" id="memPWCheck" v-model="signup.memPWCheck" maxlength="16" @blur="passwordCheckValid" ref="signup.memPW"></label><br>
-        <div v-if="!passwordValidFlag">유효하지 않은 비밀번호 입니다.</div>
-        <!-- <button>비밀번호 체크</button> -->
+        <form action="/PwTest" class="userpwcheck" @submit.prevent="checkPw">
+          <p>8 ~ 16자 대/소 영문, 숫자, 특수문자를 최소 한가지씩 조합하세요.</p>
+          <label for="memPW">비밀번호 : 
+          <input type="password" id="memPW" v-model="signup.memPW" @blur="passwordValid" ref="memPWck"></label><br>
+          <label for="memPWCheck">비밀번호 확인 : <input type="password" id="memPWCheck" v-model="signup.memPWCheck" maxlength="16" @blur="passwordCheckValid" ref="signup.memPW"></label><br>
+          <div v-if="!passwordValidFlag">유효하지 않은 비밀번호 입니다.</div>
+          <!-- <button>비밀번호 체크</button> -->
         </form>
         
         <label for="memName">이름 : <input type="text" id="memName" v-model="signup.memName"></label><br>
@@ -29,12 +29,15 @@
         <input type="reset" value="초기화">
         <input type="submit" id="login_submit" value="가입">
       </form>
+
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import ipconfig from '@/store/ipconfig'
 
+const url = ipconfig.state.ip
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 export default {
@@ -93,14 +96,13 @@ export default {
     },
     /* 아이디 중복 체크 */
     checkId () {
-      console.log('ID test')
 
       /* 정규식 검사 */
       if(!(this.idValidFlag)) {
         alert("사용할 수 없는 조합의 아이디입니다.");
       } else{
          /* DB와 비교하기 */
-      axios.post('http://192.168.0.88:9292/mem/idCheckProc', {
+      axios.post(url+'/mem/idCheckProc', {
         memID: this.signup.memID
       })
         .then(function (idchk) {
@@ -128,34 +130,33 @@ export default {
     
     /* 회원가입 정보 전체 넘기기 */
     signUpProc() {
-      if(!this.signup.memID) {
+      const vm = this
+      if(!vm.signup.memID) {
         alert("아이디를 입력해주세요!");
-        this.$refs.memIDck.focus(); //방식으로 선택자를 찾는다.
         return;
-      } else if(!this.signup.memPW) {
+      } else if(!vm.signup.memPW) {
         alert("비밀번호를 입력해주세요!");
-        this.$refs.memPWck.focus(); //방식으로 선택자를 찾는다.
         return;
-      } else if(!this.memEmail) {
+      } else if(!vm.memEmail) {
         alert("이메일을 입력해주세요!");
-        this.$refs.memEmailck.focus(); //방식으로 선택자를 찾는다.
         return;
       } else {
-        axios.post('http://192.168.0.88:9292/mem/signUpProc', {
-          memID: this.signup.memID,
-          //memIDCheck: this.signup.memIDCheck,
-          memPW: this.signup.memPW,
-          memPWCheck: this.signup.memPWCheck,
-          memName: this.signup.memName,
-          memAddr: this.signup.memAddr,
-          memPhone: this.signup.memPhone,
-          memEmail: this.memEmail,
-          memBirth: this.memBirth  
+        axios.post(url+'/mem/signUpProc', {
+          memID: vm.signup.memID,
+          memPW: vm.signup.memPW,
+          memPWCheck: vm.signup.memPWCheck,
+          memName: vm.signup.memName,
+          memAddr: vm.signup.memAddr,
+          memPhone: vm.signup.memPhone,
+          memEmail: vm.memEmail,
+          memBirth: vm.memBirth  
         }) .then(function (datatest) {
-            if(datatest.data.data === 'false') {
+            console.log('가입 후 유저 정보 : ',datatest.data)
+            if(datatest.data.data === false) {
               alert("기존에 없는 아이디를 생성하시오.");
-            } else if(datatest.data.data !== 'true'){
-              alert("회원가입 완료");
+            } else if(datatest.data.data !== true){
+              alert("회원가입 완료")
+              location.href = ipconfig.state.networkip
             }
             //console.log(datatest.data);
           }).catch(function (error) {

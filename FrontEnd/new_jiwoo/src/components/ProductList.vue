@@ -14,7 +14,7 @@
 import storeProduct from '@/store/recommendProducts'
 import axios from 'axios'
 
-const url = 'http://192.168.219.162:9292'
+const url = 'http://192.168.202.11:9292'
 
 export default {
   data () {

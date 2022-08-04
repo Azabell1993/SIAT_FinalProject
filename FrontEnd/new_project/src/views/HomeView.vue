@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <button v-on:click="fetchData">DataTest</button> <!-- 데이터 어떻게 날아오는지 테스트 -->
+    <!-- <button v-on:click="fetchData">DataTest</button> -->
+     <!-- 데이터 어떻게 날아오는지 테스트 -->
     <HelloWorld msg="Welcome to My BlueClub"/> <!-- HelloWorld 컴포넌트로 이동 삭제 금지!, HelloWorld.vue인데 헷갈리면 다른 이름으로 변경 예정 HelloWorld => ??? --> 
   </div>
 </template>

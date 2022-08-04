@@ -9,10 +9,11 @@
 </template>
 
 <script>
+import storeUser from '@/store/index'
 import storeProduct from '@/store/recommendProducts'
 import axios from 'axios'
-
-const url = 'http://192.168.0.81:9292'
+import ipconfig from '@/store/ipconfig'
+const url = ipconfig.state.ip
 
 export default {
   data () {
@@ -35,11 +36,14 @@ export default {
       const oneCodeCheck = String(Object.values(renewList)).includes(newProCode)
 
       if(oneCodeCheck == true) { //상품코드가 있다면, 그 상품코드로 상품 정보 요청
-        await axios.post(url+'/pro/proInfo', {
-          proCode : newProCode
+        await axios.post(url+'/pro/proView', {
+          proCode : newProCode,
+          memID : storeUser.state.loginUser.memID
         })
         .then(function(response){
-          storeProduct.commit('updateSelectOneProductCode',response.data.data.proCode)
+          console.log('Detail data : ',response)
+          storeProduct.commit('updateSelectOneProductCode',response.data.data)
+          
           //상품 한개만 요청하기 때문에, selectOne으로 지정하고, 각 상품이 클릭시 때마다 업데이트 시킴.
           //한 상품 클릭 후, 다른 상품 클릭시 해당 상품으로 가는 것까지 확인 됨
           // console.log('ProductList code : ',storeProduct.state.selectOneProductCode)
@@ -53,9 +57,11 @@ export default {
   //상품 리스트 부분, 페이지가 생성될 때 갖고있는 상품들을 불러와줘야한다.
   created () {
     var vm = this
+    console.log('login ID :',storeUser.state.loginUser.memID)
     axios.post(url+'/pro/proList', //헤더 : url, value
     {
-      proList: storeProduct.state.products.productsList
+      proList: storeProduct.state.products.productsList, //memId
+      memID : storeUser.state.loginUser.memID
     }) //추천 알고리즘을 만든 곳으로 전달
         .then(async function (response) {
           vm.productInfos = response.data
@@ -80,7 +86,8 @@ export default {
                 // console.log('이미지 정보 : ',response.data.data.imageID)
                 // console.log(vm.recommendProduct)
                 vm.recommendProduct.push(response.data.data)
-
+                
+                //보여줄 상품 객체(상품코드, 상품명, 상품 가격)
                 proObject.proCode = response.data.data.proCode
                 proObject.proName = response.data.data.proName
                 proObject.proPrice = response.data.data.proPrice
@@ -88,7 +95,7 @@ export default {
                 vm.imageProName = response.data.data.proName
                   await axios({
                     method: 'post',
-                    url: 'http://192.168.0.81:9292/pro/imageLoad',
+                    url: url+'/pro/imageLoad',
                     responseType: 'blob',
                     data: {proName: vm.imageProName }
                   })
@@ -99,6 +106,7 @@ export default {
                     console.log('image Data : ',res)
                     console.log('image Data : ',url)
                     vm.imageURL.push(url)
+                    //보여줄 상품 객체(이미지)
                     proObject.imageURL = url
                     // console.log('image Data List : ',vm.imageList)
                   })
