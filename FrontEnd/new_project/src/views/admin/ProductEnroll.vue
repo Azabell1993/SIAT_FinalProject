@@ -1,188 +1,169 @@
 <template>
   <AdminCategory></AdminCategory>
+  <div id="allmenu">
     <div class="container">
-      <h1>상품 등록 페이지</h1>
+      <br>
+      <h1>상품 등록</h1>
     </div>
-
-
-    <!-- <form action="/productAdd" method="get" class="productAddSpaceCheck" @submit.prevent="productAddSpace">
-      <label for="priceRangeName"> 등록할 상품의 가격대 범위 선택 : <input type="text" id="proName" v-model="product.proName" mexlength="20" ></label><br/>
-      <input type="reset" value="초기화">
-      <input type="submit" id="product_submit" value="제출">
-      
-    </form> -->
       <hr>
-      <label for="proName"> 등록할 상품 이름 : <input type="text" id="proName" v-model="product.proName" mexlength="20" ></label><br/><hr>
-      <label for="proPrice"> 등록할 상품 가격 : <input type="text" id="proPrice" v-model="product.proPrice" mexlength="20" ></label> 원 <br/> <hr>
-      <label for="proStock"> 등록할 상품 재고 : <input type="text" id="proStock" v-model="product.proStock" mexlength="20" ></label> 개 <br/> <hr>
-      <label for="proDetail"> 등록할 상품 상세 설명 :<textarea id="proDetail" v-model="product.proDetail" mexlength="40" > 40자 내외로 작성해주세요. </textarea></label><br/><hr>
+      <label for="proName"> 
+        <td>등록할 상품 이름&nbsp;&nbsp;</td>
+        <td><b-form-input size="sm" type="text" id="proName" v-model="product.proName" mexlength="20" /></td>
+      </label><hr>
+      <label for="proPrice"> 
+        <td>등록할 상품 가격&nbsp;&nbsp;</td>
+        <td><b-form-input size="sm" type="text" id="proPrice" v-model="product.proPrice" mexlength="20" /></td>원
+      </label><hr>
+      <label for="proStock">
+        <td>등록할 상품 재고&nbsp;&nbsp;</td>
+        <td><b-form-input size="sm" type="text" id="proStock" v-model="product.proStock" mexlength="20" /></td>개
+      </label><hr>
+      <label for="proDetail">
+         <td>등록할 상품 상세 설명&nbsp;&nbsp;</td>
+         <td><b-form-textarea id="proDetail" v-model="product.proDetail" mexlength="40" > 40자 내외로 작성해주세요. </b-form-textarea></td>
+      </label><hr>
 
     <form action="/productAdd" method="post" class="productAdd" @submit.prevent="productAddSpace">
       <!-- ------------------- -->
       <!-- 1 -->
       <!-- 등록할 상품 카테고리 선택 -->
-      <label for="categorySmallName" ><strong>등록할 상품 카테고리 선택</strong>
-          <ul class="ul">
-            <nav v-bind:key="index" v-for="(item, index) in categorySmallNameIndex" >
-
-
-              <li class="li" v-if=" index==='상의'">
-                <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
-                  <input type="radio" v-model="product.categoryLargeName" value="상의" id="상의" />상의 
-                </nav>
+          <label for="categorySmallName">
+          <strong>등록할 상품 카테고리 선택</strong>
+          <ul>  
+            <div id="categoryul" v-bind:key="index" v-for="(item, index) in categorySmallNameIndex" >
+              <li  v-if=" index==='상의'">
+                <p v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >&nbsp;
+                  <input type="radio" v-model="product.categoryLargeName" value="상의" id="상의" />상의&nbsp;
+                </p>
               </li>
 
-              <li class="li" v-if=" index==='바지'">
-                <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
-                  <input type="radio" v-model="product.categoryLargeName" value="바지" id="바지" />바지
-                </nav>
+              <li  v-if=" index==='바지'">
+                <p v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >&nbsp;
+                  <input type="radio" v-model="product.categoryLargeName" value="바지" id="바지" />바지&nbsp;
+                </p>
               </li>
               
-              <li class="li" v-if=" index==='치마'">
-                <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
-                  <input type="radio" v-model="product.categoryLargeName" value="치마" id="치마" />치마 
-                </nav>
+              <li  v-if=" index==='치마'">
+                <p v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >&nbsp;
+                  <input type="radio" v-model="product.categoryLargeName" value="치마" id="치마" />치마&nbsp;
+                </p>
               </li>
 
-              <li class="li" v-if=" index==='신발'">
-                <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
-                  <input type="radio" v-model="product.categoryLargeName" value="신발" id="신발" />신발 
-                </nav>
+              <li  v-if=" index==='신발'">
+                <p v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >&nbsp;
+                  <input type="radio" v-model="product.categoryLargeName" value="신발" id="신발" />신발&nbsp;
+                </p>
               </li>
 
-              <li class="li" v-if=" index==='모자'">
-                <nav v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >
-                  <input type="radio" v-model="product.categoryLargeName" value="모자" id="모자" />모자 
-                </nav>
+              <li  v-if=" index==='모자'">
+                <p v-bind:key="index" v-if="(index) in categoryLargeNameIndex" >&nbsp;
+                  <input type="radio" v-model="product.categoryLargeName" value="모자" id="모자" />모자&nbsp;
+                </p>
               </li>
 
-              <select name="count" v-model="product.categorySmallName" id="categorySmallNameOption">
+              <select size="sm" name="count" v-model="product.categorySmallName" id="categorySmallNameOption">
                 <option v-bind:key="small" v-for="small in item">{{small}}</option>
               </select>
-
-            </nav>
+            </div>
           </ul>
-      </label><hr><br>
-      <!-- ------------------- -->
+      </label><hr>
       
-      <!-- ---------------------- -->
       <!-- 2 -->
       <!-- 등록할 상품의 주 성별 층 선택 -->
-          <label for="genderName" ><strong>등록할 상품의 주 성별 층 선택</strong>
-          <ul class="ul">
-            <nav v-bind:key="index" v-for="(item, index) in genderIndex" >
-              <li class="li" v-if=" index==='남자'">성별 선택</li>
-                  <select name="count" v-model="product.genderName" id="genderNameOption">
-                    <option v-bind:key="small" v-for="small in item">{{small.genderName}}</option>
-                  </select>
-            </nav>
-          </ul>
-      </label><hr><br>
-      <!-- ---------------------- -->
 
-      <!-- ---------------------- -->
+          <label for="genderName" ><strong>등록할 상품의 주 성별 층 선택</strong>
+          <ul>
+            <div v-bind:key="index" v-for="(item, index) in genderIndex" >
+              <li  v-if=" index==='남자'">성별 선택</li>
+                  <b-form-select size="sm" name="count" v-model="product.genderName" id="genderNameOption">
+                    <option v-bind:key="small" v-for="small in item">{{small.genderName}}</option>
+                  </b-form-select>
+            </div>
+          </ul>
+      </label><hr>
+
       <!-- 3 -->
       <!-- 등록할 상품의 색깔 층 선택 -->
-          <label for="colorName" ><strong>등록할 상품의 색깔 선택</strong>
-          <ul class="ul">
-            <nav v-bind:key="index" v-for="(item, index) in colorIndex" >
-              <li class="li" v-if=" index==='화이트'">색깔 선택</li>
-                  <select name="count" v-model="product.colorName" id="colorNameOption">
-                    <option v-bind:key="small" v-for="small in item">{{small.colorName}}</option>
-                  </select>
-            </nav>
-          </ul>
-      </label><hr><br>
-      <!-- ---------------------- -->
 
-      <!-- ---------------------- -->
+          <label for="colorName" ><strong>등록할 상품의 색깔 선택</strong>
+          <ul>
+            <div v-bind:key="index" v-for="(item, index) in colorIndex" >
+              <li  v-if=" index==='화이트'">색깔 선택</li>
+                  <b-form-select size="sm" name="count" v-model="product.colorName" id="colorNameOption">
+                    <option v-bind:key="small" v-for="small in item">{{small.colorName}}</option>
+                  </b-form-select>
+            </div>
+          </ul>
+      </label><hr>
+
       <!-- 4 -->
       <!-- 등록할 상품의 재질 층 선택 -->
           <label for="materialName" ><strong>등록할 상품의 재질 선택</strong>
-          <ul class="ul">
-            <nav v-bind:key="index" v-for="(item, index) in meterialIndex" >
-              <li class="li" v-if=" index==='면'">재질 선택</li>
-                  <select name="count" v-model="product.materialName" id="materialNameOption">
+          <ul>
+            <div v-bind:key="index" v-for="(item, index) in meterialIndex" >
+              <li  v-if=" index==='면'">재질 선택</li>
+                  <b-form-select size="sm" name="count" v-model="product.materialName" id="materialNameOption">
                     <option v-bind:key="small" v-for="small in item">{{small.materialName}}</option>
-                  </select>
-            </nav>
+                  </b-form-select>
+            </div>
           </ul>
-      </label><hr><br>
-      <!-- ---------------------- -->
+          </label><hr>
 
-      <!-- ---------------------- -->
       <!-- 5 -->
       <!-- 등록할 상품의 주 연령대 선택 -->
-          <label for="ageName" ><strong>등록할 상품의 연령대 선택</strong>
-          <ul class="ul">
-            <nav v-bind:key="index" v-for="(item, index) in ageIndex" >
-              <li class="li" v-if=" index==='유아'">연령대 선택</li>
-                  <select name="count" v-model="product.ageName" id="ageNameOption">
-                    <option v-bind:key="small" v-for="small in item">{{small.ageName}}</option>
-                  </select>
-            </nav>
-          </ul>
-      </label><hr><br>
-      <!-- ---------------------- -->
 
-      <!-- ---------------------- -->
+          <label for="ageName" ><strong>등록할 상품의 연령대 선택</strong>
+          <ul>
+            <div v-bind:key="index" v-for="(item, index) in ageIndex" >
+              <li  v-if=" index==='유아'">연령대 선택</li>
+                  <b-form-select size="sm" name="count" v-model="product.ageName" id="ageNameOption">
+                    <option v-bind:key="small" v-for="small in item">{{small.ageName}}</option>
+                  </b-form-select>
+            </div>
+          </ul>
+      </label><hr>
+
       <!-- 6 -->
       <!-- 등록할 상품의 주 가격대 책정 -->
-          <label for="priceRangeName" ><strong>등록할 상품의 가격대 책정</strong>
-          <ul class="ul">
-            <nav v-bind:key="index" v-for="(item, index) in priceIndex" >
-              <li cl0ass="li" v-if=" index==='~ 2만원'">가격대 선택</li>
-                  <select name="count" v-model="product.priceRangeName" id="priceRangeNameOption">
-                    <option v-bind:key="small" v-for="small in item">{{small.priceRangeName}}</option>
-                  </select>
-            </nav>
-          </ul>
-      </label><hr><br>
-      <!-- ---------------------- -->
 
-      <!-- ---------------------- -->
+          <label for="priceRangeName" ><strong>등록할 상품의 가격대 책정</strong>
+          <ul>
+            <div v-bind:key="index" v-for="(item, index) in priceIndex" >
+              <li  v-if=" index==='~ 2만원'">가격대 선택</li>
+                  <b-form-select size="sm" name="count" v-model="product.priceRangeName" id="priceRangeNameOption">
+                    <option v-bind:key="small" v-for="small in item">{{small.priceRangeName}}</option>
+                  </b-form-select>
+            </div>
+          </ul>
+      </label><hr>
+
       <!-- 6 -->
       <!-- 등록할 상품의 주 계절 책정 -->
-          <label for="seasonName" ><strong>등록할 상품의 계절대 선택</strong>
-          <ul class="ul">
-            <nav v-bind:key="index" v-for="(item, index) in seasonIndex" >
-              <li cl0ass="li" v-if=" index==='봄'">계절 선택</li>
-                  <select name="count" v-model="product.seasonName" id="seasonNameOption">
-                    <option v-bind:key="small" v-for="small in item">{{small.seasonName}}</option>
-                  </select>
-            </nav>
-          </ul>
-      </label><hr><br>
-      <!-- ---------------------- -->
 
-      <!-- ---------------------- -->
+          <label for="seasonName" ><strong>등록할 상품의 계절대 선택</strong>
+          <ul>
+            <div v-bind:key="index" v-for="(item, index) in seasonIndex" >
+              <li  v-if=" index==='봄'">계절 선택</li>
+                  <b-form-select size="sm" name="count" v-model="product.seasonName" id="seasonNameOption">
+                    <option v-bind:key="small" v-for="small in item">{{small.seasonName}}</option>
+                  </b-form-select>
+            </div>
+          </ul>
+      </label><hr>
+
       <!-- 7 -->
       <!-- 등록할 상품의 사진 업로드 -->
 
-      <!-- <form action="/pictureAdd" method="post" class="pictureAdd" @submit.prevent="pictureAdd"> -->
-        <div>
-            <input type="file" id="form1" /> <br>
-        </div>
-        <div>
-            <!-- <input type="reset" value="초기화"> -->
-            <!-- <input type="submit" id="product_submit" value="사진등록 완료"> -->
-        </div>
-      <!-- </form> -->
-      <hr>
-      <!-- ---------------------- -->
-
-
-      <!-- -->
       <div>
-        <input type="reset" value="초기화">
-        <input type="submit" id="product_submit" value="제출">
+          <input class="btn btn-light" type="file" id="form1" /> <br>
       </div>
-
-
-
-    
+      <hr>
+      <div>
+        <input class="btn btn-secondary" type="reset" value="초기화">&nbsp;
+        <input class="btn btn-secondary" type="submit" id="product_submit" value="제출">
+      </div>
     </form>
-
+  </div>
     
 </template>
 
@@ -202,9 +183,9 @@ export default {
   data() {
     return {
       product: {
-        proName: 'test',       // 상품명 
-        proPrice:'23000',      // 가격
-        proStock: '23',      // 재고
+        proName: '',       // 상품명 
+        proPrice:'',      // 가격
+        proStock: '',      // 재고
         proDetail: '상세설명을 쓰세요',     // 상세설명
 
         /* selector option value name */
@@ -465,20 +446,31 @@ export default {
 </script>
 
 <style scoped>
-ul nav {
-  display: inline-block;
+b-form-input {
+  width: 100px;
+}
+label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#allmenu {
+  width: 100%;
+  margin: auto;
 }
 
-ul { list-style-type:none;
-      margin : 1px; 
-      display: inline-block;}
-li { display:inline;     
-    width: 5px;
-    margin: 10px;
-    height: 0.1px;
-    background: linear-gradient(33deg, #d7d79f, #e5e5b9);
-    border: 2px solid #f8f8ea;
-    text-align: center;
-    line-height: 30px;
-    margin-left: 10px;}
+#categoryul{
+  display: inline;
+}
+
+form ul { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top : 25px;
+}
+
+li { 
+    display: inline-flex;
+}
 </style>

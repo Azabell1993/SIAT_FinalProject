@@ -1,18 +1,19 @@
 <template>
 <MypageCategoryVue></MypageCategoryVue>
-<hr>
-  <h1>회원 탈퇴 페이지</h1>
 
   <form @submit.prevent="deleteupProc">  <!-- sendPost 함수 실행 -->
   <hr>
-        <label for="memID">ID : <input id="memID" v-model="deleteup.memID" type="text" readonly></label><br><br>
-       <label for="memPW">비밀번호 : 
-         <input type="password" id="memPW" v-model="deleteup.memPW" @blur="passwordValid" ref="memPWck"></label><br>
-        <label for="memPWCheck">비밀번호 확인 : <input type="password" id="memPWCheck" v-model="deleteup.memPWCheck" maxlength="16" @blur="passwordCheckValid" ref="modifyup.memPW"></label><br>
+        <label for="memID">
+          <td>ID</td><td><b-form-input id="memID" v-model="deleteup.memID" type="text" readonly/></td></label><br>
+        <label for="memPW">
+          <td>비밀번호</td>
+          <td><b-form-input type="password" id="memPW" v-model="deleteup.memPW" @blur="passwordValid" ref="memPWck"/></td></label><br>
+        <label for="memPWCheck">
+          <td>비밀번호 확인</td>
+          <td><b-form-input type="password" id="memPWCheck" v-model="deleteup.memPWCheck" maxlength="16" @blur="passwordCheckValid" ref="modifyup.memPW"/></td></label>
         <div v-if="!passwordValidFlag">유효하지 않은 비밀번호 입니다.</div><hr>
-
-        <input type="reset" value="초기화">
-        <input type="submit" id="signout_submit" value="회원 탈퇴">
+        <input class="btn btn-outline-secondary" type="reset" value="초기화">&nbsp; &nbsp;
+        <input class="btn btn-outline-secondary" type="submit" id="signout_submit" value="회원 탈퇴">
 <hr>
     </form>
 </template>
@@ -126,6 +127,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+input{
+  margin : 10px;
+}
 </style>

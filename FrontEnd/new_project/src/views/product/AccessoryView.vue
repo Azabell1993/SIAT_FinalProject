@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="topview">
   <CategoryList></CategoryList>
   <h1>모자 페이지입니다.</h1>
   <div id="productList" v-bind:key="item" v-for="item in proinfo">
@@ -106,6 +106,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+#topview{
+  margin-top : 100px;
+}
 </style>

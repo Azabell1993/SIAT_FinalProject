@@ -1,24 +1,28 @@
 <template>
-<div>
+
   <!-- 로그인 : 유저가 로그인 성공시 뜨는 상단 화면 -->
-  <div class="login" v-if="loginuser">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/mycart">장바구니</router-link> |
-      <router-link to="/mypage">My Page</router-link>
-      <p>{{loginuserid}}님 환영합니다. <!-- 사용자 ID 출력 -->
-        <button @click="userlogout">logout</button>
+  <div id="loginheader" v-if="loginuser">
+    <div id="logo">
+        <router-link to="/"><img id="mainlogo" src="@/assets/logo.png"></router-link> 
+        <p id="userheader"> 
+         <!-- {{loginuserid}}님 환영합니다. 사용자 ID 출력 -->
+         <router-link to="/mycart"><img id="mycart" src="@/assets/mycart.png"></router-link> | 
+         <router-link to="/mypage"><img id="mypage" src="@/assets/mypage.png"></router-link> | 
+         <router-link to="/admin" v-if="loginuserid == 'admin'">Admin Page</router-link> <!-- 로그인 ID가 관리자 계정시 관리자 페이지가 생성 -->
+         <b-button variant="dark" @click="userlogout">logout</b-button>
       </p>
-      <router-link to="/admin" v-if="loginuserid == 'admin'">Admin Page</router-link> <!-- 로그인 ID가 관리자 계정시 관리자 페이지가 생성 -->
-    </nav>
+    </div> 
   </div>
+  
   <!-- 로그아웃: 유저가 로그아웃시 뜨는 상단 화면 -->
-  <div class="logout" v-else>
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/signup">Sign up</router-link> |
-      <router-link to="/login" id="login">login</router-link> |
-    </nav>
+  <div id="logoutheader" v-else>
+    <div id="logo">
+      <router-link to="/"><img id="mainlogo" src="@/assets/logo.png"></router-link>
+      <p id="userheader">
+        <router-link to="/signup">Sign up</router-link> |
+        <router-link to="/login" id="login">login</router-link> 
+      </p>
+    </div>
   </div>
 
   <!-- 상품 검색 부분 미완료 -->
@@ -28,7 +32,7 @@
   </form> -->
   <br>
     <router-view></router-view>
-</div>
+
 </template>
 <script>
 import store from '@/store/index'
@@ -59,24 +63,57 @@ export default {
 }
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: black;
 }
 
-nav {
-  padding: 30px;
+#mainlogo {
+  width: 250px;
+  height : 50px;
 }
 
-nav a {
+#userheader {
+ display: inline;
+ margin-left: 25px;
+ text-align : right;
+ float : right;
+}
+
+#userheader button {
+  margin-left : 10px;
+  margin-right : 20px;
+}
+
+#logo {
+  position: -webkit-sticky;
+  background-color : white;
+  width: 100%;
+  position : fixed;
+  padding : 30px;
+  text-align: left;
+}
+
+#logo a {
   font-weight: bold;
+  text-decoration: none;
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
+#mycart {
+  width : 100px;
+  height: 40px;
+}
+
+#mypage {
+  width : 135px;
+  height: 40px;
+}
+#logo a.router-link-exact-active {
   color: #42b983;
 }
 </style>
