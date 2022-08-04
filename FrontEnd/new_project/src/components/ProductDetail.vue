@@ -1,52 +1,68 @@
 <template>
-<div>
-  <h1>제품 상세 페이지입니다.</h1>
+
+<div id="prodetailHeader">
+<img id="mainlogo" src="@/assets/logo.png">
+    <p id="subtitle"> Made by SIAT</p>
+    <hr>
+  <CategoryList></CategoryList>
+</div>
+<div id="prodetailview">
   <img id="img" loading="lazy" src=""/>
+
   <table>
     <tr>
-      <th>상품명</th>
-      <td>{{productInfo.proName}}</td>
+      <!-- <th>상품명</th> -->
+      <th id="productName"><h4>{{productInfo.proName}}</h4></th>
+      <td>조회수 : {{productInfo.proCount}}</td>
     </tr>
 
     <tr>
-      <th>상세정보</th>
-      <td>{{productInfo.proDetail}}</td>
+      <td colspan="2">{{productInfo.proDetail}}</td>
     </tr>
 
-    <tr v-bind:key="item" v-for="(item, index) in productInfo.proCategory">
+    <!-- <tr v-bind:key="item" v-for="(item, index) in productInfo.proCategory">
       <th v-if="index == 'categoryLargeName'">카테고리 대분류</th>
         <td v-if="index == 'categoryLargeName'">{{ item }}</td>
       <th v-if="index == 'categorySmallName'">카테고리 소분류</th>
         <td v-if="index == 'categorySmallName'">{{ item }}</td>
-    </tr>
+    </tr> -->
 
     <tr>
       <th>상품가격</th>
-      <td>{{productInfo.proPrice}}</td>
+      <td>￦ {{productInfo.proPrice}}</td>
     </tr>
+    <td></td>
+    <td>재고 수량 : {{productInfo.proStock}}</td>
 
-    <tr v-bind:key="item" v-for="(item, index) in productInfo.proColor">
+    <!-- <tr v-bind:key="item" v-for="(item, index) in productInfo.proColor">
       <th  v-if="index == 'colorName'">상품 색깔</th>
         <td v-if="index == 'colorName'">{{ item }}</td>
-    </tr>
+    </tr> -->
 
     <tr>
       <!-- 수량 증가 버튼 -->
       <th>상품 수량</th>
-      <td><input type="number" min="0" v-model="proCount"></td>
+      <td><b-form-input type="number" min="0" v-model="proCount"/></td>
     </tr>
+    
+    <div>재고 수량 : {{productInfo.proStock}}</div>
+    <b-button v-on:click="mycartToproInfo()">장바구니 담기</b-button>
   </table>
 
-  <div>재고 수량 : {{productInfo.proStock}}</div>
-  <button v-on:click="mycartToproInfo()">장바구니 담기</button>
 
   <!-- <div v-bind:key="index" v-for="(index, item) in productInfo">
     <p>{{ item }} : {{index}}</p>
   </div> -->
 </div>
+<div>
+  <br>
+  <h1>리뷰 게시판</h1>
+  <h4>추후 구현 예정</h4>
+</div>
 </template>
 
 <script>
+import CategoryList from '@/components/CategoryList.vue'
 import storeProduct from '@/store/recommendProducts'
 import storeUser from '@/store/index'
 import axios from 'axios'
@@ -56,6 +72,9 @@ const url = ipconfig.state.ip
 // const url = 'http://192.168.0.81:9292'
 
 export default {
+  components: {
+    CategoryList,
+  },
   data () {
     return {
       productInfo : [],
@@ -142,12 +161,41 @@ export default {
 </script>
 
 <style scoped>
-table {
-    margin-left:auto; 
-    margin-right:auto;
+hr {
+  border : none;
+  background-color: #0067A3;
+  height: 10px;
+  width: 5%;
+  align-content :  center;
+  margin-left : auto;
+  margin-right : auto;
+}
+
+#prodetailHeader{
+  margin-top : 150px;
+}
+#prodetailview{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+img, table {
+    display:inline-block;
+}
+#productName {
+  width : 50%;
 }
 img {
-  width: 180px;
-  height: 180px;
+  width : 500px;
+  height : 500px;
 }
+table {
+  border-top: 1px solid black;
+  padding : 30px;
+  margin-left : 150px;
+}
+th {
+  padding : 30px;
+}
+
 </style>

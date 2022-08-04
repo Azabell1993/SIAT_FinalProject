@@ -2,12 +2,9 @@
 <MypageCategoryVue></MypageCategoryVue>
   <div class="container">
     <hr>
-    <div>
-      <h3>회원 정보 수정 페이지입니다.</h3>
-     </div>
      
       <form action="/modifyup" method="get" class="usermodifyup" @submit.prevent="modifyupProc">
-        <p>{{ modifyup.memID }}님 회원정보 페이지.</p><hr>
+        <p>{{ modifyup.memID }}님 회원정보 페이지</p><hr>
       <form action="/PwTest" class="userpwcheck" @submit.prevent="checkPw">
         <p>8 ~ 16자 대/소 영문, 숫자, 특수문자를 최소 한가지씩 조합하세요.</p>
         <label for="memPW">비밀번호 : 
@@ -15,15 +12,15 @@
         <label for="memPWCheck">비밀번호 확인 : <input type="password" id="memPWCheck" v-model="modifyup.memPWCheck" maxlength="16" @blur="passwordCheckValid" ref="modifyup.memPW"></label><br>
         <div v-if="!passwordValidFlag">유효하지 않은 비밀번호 입니다.</div>
         <!-- <button>비밀번호 체크</button> -->
-        </form>
+      </form>
 
         <label for="memName">이름 : <input type="text" id="memName" v-model="modifyup.memName" > </label><br>
         <label for="memAddr">주소 : <input type="text" id="memAddr" v-model="modifyup.memAddr"></label><br>
         <label for="memPhone">전화번호 : <input type="text" id="memPhone" v-model="modifyup.memPhone"></label><br>
         <label for="memEmail">이메일  <input type="text" id="memEmail" v-model="modifyup.memEmail" ref="memEmailck"></label><br><hr>
 
-        <input type="reset" value="초기화">
-        <input type="submit" id="modify_submit" value="수정완료">
+        <input class="btn btn-outline-secondary" type="reset" value="초기화">&nbsp; &nbsp;
+        <input class="btn btn-outline-secondary" type="submit" id="modify_submit" value="수정완료">
       </form>
   </div>
 </template>
@@ -140,3 +137,9 @@ export default {
 
 } // export default
 </script>
+
+<style scoped>
+input {
+  margin : 10px;
+}
+</style>
