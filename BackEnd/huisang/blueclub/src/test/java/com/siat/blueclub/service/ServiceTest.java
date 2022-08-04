@@ -1,5 +1,7 @@
 package com.siat.blueclub.service;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -7,20 +9,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.siat.blueclub.domain.Member;
 import com.siat.blueclub.domain.Product;
 import com.siat.blueclub.persistence.CartRepository;
+import com.siat.blueclub.persistence.DeleteDao;
 import com.siat.blueclub.persistence.GenderRepository;
 import com.siat.blueclub.persistence.ImageRepository;
 import com.siat.blueclub.persistence.MemberRepository;
 import com.siat.blueclub.persistence.ProCategoryRepository;
 import com.siat.blueclub.persistence.ProductDao;
 import com.siat.blueclub.persistence.ProductRepository;
+import com.siat.blueclub.persistence.WatchedProductRepositroy;
 
 @SpringBootTest
 public class ServiceTest {
@@ -45,7 +51,10 @@ public class ServiceTest {
 	private GenderRepository genderRepository;
 	@Autowired
 	private ImageRepository imageRepository;
-
+	@Autowired
+	private WatchedProductRepositroy watchedProductRepositroy;
+	@Autowired
+	private DeleteDao deleteDao;
 	
 	@Disabled
 	@Test
@@ -55,13 +64,13 @@ public class ServiceTest {
 
 		System.out.println(categoryMap.toString());
 	}
+	
 	@Disabled
 	@Test
 	public void proTest() {
-		Long id = new Long(57);
-		productRepository.delete((productRepository.findById(id).get()));
-		id = new Long(59);
-		productRepository.deleteById(id);
+		proService.deleteProduct(" 머슬 핏 민소매");
+		proService.deleteProduct("모노그램 모티프 코튼 피케 폴로셔츠");
+		proService.deleteProduct("test");
 	}
 	
 	@Disabled

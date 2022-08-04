@@ -26,4 +26,6 @@ public interface MemService {
 
 	public Member memberInfo(String memID); //Member 정보
 
+	public List<Member> everyMemberInfo();
+
 }

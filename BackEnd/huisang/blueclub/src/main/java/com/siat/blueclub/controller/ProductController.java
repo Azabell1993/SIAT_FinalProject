@@ -289,5 +289,23 @@ public class ProductController {
 		data.put("data", list);
 		return data;
 	}
-
+	@CrossOrigin
+	@PostMapping("deleteProduct")
+	@ResponseBody
+	public Map<String, Object> deleteProduct(@RequestBody Product proName, HttpServletRequest req) { // season 테이블 정보
+		Map<String, Object> data = new HashMap<>();
+		String ip = req.getHeader("X-Forwarded-For");
+		if (ip == null) {
+			ip = req.getRemoteAddr();
+		}
+		System.out.println(new Date() + " | " + ip + " | deleteProduct");
+		if( proService.deleteProduct(proName.getProName())) {
+			data.put("data", "true");
+		}
+		else {
+			data.put("data", "false");
+		}
+		return data;
+	}
+	
 }

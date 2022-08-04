@@ -10,5 +10,4 @@ import com.siat.blueclub.domain.Product;
 
 public interface ImageRepository extends CrudRepository<ProImage, String>{
 	Optional<ProImage> findByProName(Product product);
-
 }

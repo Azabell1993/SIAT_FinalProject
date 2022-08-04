@@ -41,6 +41,7 @@ import com.siat.blueclub.domain.Season;
 import com.siat.blueclub.domain.WatchedProduct;
 import com.siat.blueclub.persistence.AgeRepository;
 import com.siat.blueclub.persistence.ColorRepository;
+import com.siat.blueclub.persistence.DeleteDao;
 import com.siat.blueclub.persistence.GenderRepository;
 import com.siat.blueclub.persistence.ImageRepository;
 import com.siat.blueclub.persistence.MaterialRepository;
@@ -84,6 +85,8 @@ public class ProServiceImpl implements ProService {
 	private MemberRepository memberRepository;
 	@Autowired
 	private WatchedProductRepositroy watchedProductRepositroy;
+	@Autowired
+	private DeleteDao deleteDao;
 
 	@Override
 	public List<Long> getRecommend(Member memID) {
@@ -151,7 +154,8 @@ public class ProServiceImpl implements ProService {
 				}
 			}
 		} else {
-			List<WatchedProduct> proCodeList = (List<WatchedProduct>) watchedProductRepositroy.findAllByMemID(optional.get());
+			List<WatchedProduct> proCodeList = (List<WatchedProduct>) watchedProductRepositroy
+					.findAllByMemID(optional.get());
 			if (proCodeList.size() == 0) { // 코드 목록이 비어있을 경우
 				if (categorySmallName.equals("none")) { // 카테고리 이름이 대분류일 경우 -> 범위 탐색
 					int start = categoryService.getCategoryRagneStart(categoryLargeName); // 카테고리 대분류 범위 시작 찾기
@@ -173,9 +177,12 @@ public class ProServiceImpl implements ProService {
 					int start = categoryService.getCategoryRagneStart(categoryLargeName); // 카테고리 대분류 범위 시작 찾기
 					int end = categoryService.getCategoryRagneEnd(categoryLargeName); // 카테고리 대분류 범위 끝 찾기
 
-					List<ProductVO> allProductsinCategory = productDao.getProductsByCategoryCodeRange(start, end);// 대분류 범위
-																													// 내 상품
-																													// 상품 목록
+					List<ProductVO> allProductsinCategory = productDao.getProductsByCategoryCodeRange(start, end);// 대분류
+																													// 범위
+																													// 내
+																													// 상품
+																													// 상품
+																													// 목록
 					for (ProductVO i : allProductsinCategory) { // 전체 상품 목록 조회
 						// 사용자가 조회한 상품 스테이터스의 평균과 전체 상품 스테이터스의 코사인 유사도 계산
 						siilarityMap.put(i.getPro_Code(), cosineSimilarity(aver, statusArrayForVO(i))); // 코사인 유사도 맵에 저장
@@ -202,7 +209,7 @@ public class ProServiceImpl implements ProService {
 
 			}
 		}
-		
+
 		return recommend; // 상품 리스트 return
 	}
 
@@ -331,7 +338,8 @@ public class ProServiceImpl implements ProService {
 			}
 
 		} catch (Exception e) {
-			FileSystemResource resource = new FileSystemResource("D:\\study\\blueclub\\src\\main\\resources\\images/noImage.png");
+			FileSystemResource resource = new FileSystemResource(
+					"D:\\study\\blueclub\\src\\main\\resources\\images/noImage.png");
 			if (!resource.exists()) {
 				throw new NotFoundException();
 			}
@@ -465,6 +473,19 @@ public class ProServiceImpl implements ProService {
 			normB += Math.pow(vectorB[i], 2);
 		}
 		return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+	}
+
+	@Override
+	public boolean deleteProduct(String proName) {
+		Product product = productRepository.findByProName(proName).get();
+		deleteDao.delImage(product.getProCode());
+		deleteDao.delWatched(product.getProCode());
+		deleteDao.delProduct(product.getProCode());
+		if (productRepository.findByProName(proName).isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

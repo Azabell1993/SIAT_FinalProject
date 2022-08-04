@@ -113,6 +113,7 @@ public class MemServiceImpl implements MemService {
 		Member member = memberRepository.findById(memID).get(); // 해당하는 member 객체 불러오기
 		Optional<Role> optional = roleRepository.findByRoleName(roleName); // 해당하는 role 객체 불러오기
 		member.setMemRole(optional.get());
+		memberRepository.save(member);
 	}
 
 	@Override
@@ -123,6 +124,12 @@ public class MemServiceImpl implements MemService {
 	@Override
 	public Member memberInfo(String memID) { //Member 정보
 		return memberRepository.findById(memID).get();
+	}
+
+	/* Member ID 전체 불러오기 */
+	@Override
+	public List<Member> everyMemberInfo() { //Member 정보
+		return (List<Member>) memberRepository.findAll();
 	}
 
 }

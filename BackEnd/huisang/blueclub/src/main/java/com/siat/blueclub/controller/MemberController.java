@@ -139,9 +139,9 @@ public class MemberController {
 		if (ip == null) {
 			ip = req.getRemoteAddr();
 		}
-		System.out.println(new Date() + " | " + ip + "| deleteProc | " + idAndRole.toString());
+		System.out.println(new Date() + " | " + ip + "| changeRoleProc | " + idAndRole.toString());
 		String memID = (String) idAndRole.get("memID");
-		String roleName = (String) idAndRole.get("roleName");
+		String roleName = (String) idAndRole.get("memRole");
 		memService.changeRoleProc(memID, roleName); //회원 정보 수정 서비스 호출
 		data.put("data", "true"); //true 전송 -> 반드시 성공 -> 데이터를 모두 db에서 받아 처리했기 때문
 		
@@ -161,6 +161,21 @@ public class MemberController {
 		List<Role> list = memService.roleInfo(); 
 		data.put("data", list);
 		
+		return data;
+	}
+	/* Member ID 전체 불러오기 */
+	@CrossOrigin
+	@PostMapping("everyMemberInfo")
+	@ResponseBody
+	public Map<String, Object> everyMemberInfo(HttpServletRequest req) {
+		Map<String, Object> data = new HashMap<>();
+		String ip = req.getHeader("X-Forwarded-For");
+		if (ip == null) {
+			ip = req.getRemoteAddr();
+		}
+		System.out.println(new Date() + " | " + ip + "| everyMemberInfo");
+		List<Member> list = memService.everyMemberInfo();
+		data.put("data", list);
 		return data;
 	}
 	

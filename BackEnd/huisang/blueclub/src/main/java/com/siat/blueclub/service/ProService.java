@@ -47,6 +47,8 @@ public interface ProService {
 
 	public boolean proView(Long proCode, String memID);
 
+	public boolean deleteProduct(String proName);
+
 
 
 }
