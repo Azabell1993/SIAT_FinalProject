@@ -1,4 +1,4 @@
-# TEAM : Blue Club
+# TEAM : Blue Club (MINI PROJECT)  
 - 개인 웹 쇼핑몰 SITE  
 - 핵심은 '추천 알고리즘 ==> '아이템 기반 협업 필터링 알고리즘을 사용해 추천 알고리즘을 구현
 
@@ -133,8 +133,13 @@ b) 08.05 최종 발표
 |이대관|프론트엔드-디자인|프론트 엔드|https://github.com/CodingBeginnerLDK|
 |채희상|백엔드-로직|백엔드|https://github.com/ds3569|
 |김호중|DB-Entity Test|백엔드|https://github.com/HeartByte|
-
-
+  
+### 기능 미구현  
+1. 상품 검색 기능  
+2. 상품 리뷰 기능  
+3. 배송 시스템 구축  
+  
+#    
 # C언어 ==> WebAssembly ==> Web   
 (아직 적용예정은 없지만 나중에 따로 BASE64구현 및 엔진 개발을 해보기 위해 만든 번외 파트입니다.)  
 [HTML 적용 예제보기]
@@ -149,12 +154,12 @@ https://github.com/Azabell1993/SIAT_FinalProject/blob/f6093cd5acd9b15e4fb4740571
 - 팀장의 단독적인 크로스 플랫폼을 위한 연습입니다.
 > * Frontend:C ↔ WebAssembly ↔  Javascript/Typescript  
 > * Backend:C ↔ WebAssembly ↔  Java  
+#    
   
   
-  
-    
+#    
 # 완성 이미지 샘플  
-  
+#    
 ### 사용자 별로 아이템 순서가 다르게 보여진다.     
 ![main](https://user-images.githubusercontent.com/75885992/183018932-21ad5e94-1398-4fb9-b6db-2db9fe863d9e.png)  
   
