@@ -147,18 +147,28 @@ https://github.com/Azabell1993/SIAT_FinalProject/blob/f6093cd5acd9b15e4fb4740571
 > * Frontend:C ↔ WebAssembly ↔  Javascript/Typescript  
 > * Backend:C ↔ WebAssembly ↔  Java  
   
+  
+# 완성 이미지 샘플    
+### 사용자 별로 아이템 순서가 다르게 보여진다.     
 ![main](https://user-images.githubusercontent.com/75885992/183018932-21ad5e94-1398-4fb9-b6db-2db9fe863d9e.png)  
   
-![sign-up](https://user-images.githubusercontent.com/75885992/183019207-c2565519-3e2b-48fd-9b68-56224213a38a.png)   
+### 회원가입 화면.  
+![signup2](https://user-images.githubusercontent.com/75885992/183019556-55b7a8b8-c106-4501-a6be-70a6e5dccb41.png)  
   
+### 로그인 화면.
 ![login](https://user-images.githubusercontent.com/75885992/183018955-4848ea33-467a-4d30-a116-fc71641dabab.png)  
   
+### 소분류 카테고리 화면.  
 ![main2](https://user-images.githubusercontent.com/75885992/183018995-962ee149-2b13-4149-9244-f7ee753352ee.png)  
   
-![jangbaguni](https://user-images.githubusercontent.com/75885992/183019069-17655e38-859e-4114-92e2-0b32fae98a5e.png)  
+### 장바구니 화면.  
+ 
 
+### 관리자의 상품등록 페이지 화면.  
 ![addProduct](https://user-images.githubusercontent.com/75885992/183019059-7bfc02e6-cd06-4d5f-9afa-9ffa2a15d906.png)  
     
+### 회원 관리 페이지 화면.  
+![jangbaguni](https://user-images.githubusercontent.com/75885992/183019069-17655e38-859e-4114-92e2-0b32fae98a5e.png) 
 
     
 
