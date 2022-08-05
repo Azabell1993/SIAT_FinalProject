@@ -1,12 +1,20 @@
 # TEAM : Blue Club
-- 개인 웹 쇼핑몰 Site
-- 핵심은 '추천 알고리즘'
+- 개인 웹 쇼핑몰 SITE  
+- 핵심은 '추천 알고리즘 ==> '아이템 기반 협업 필터링 알고리즘을 사용해 추천 알고리즘을 구현
 
 1) 아이템 : 모의 의류 상품 판매의 일반 기능을 기반 쇼핑몰. 
 2) 핵심 기술 : 유사어 기능을 적용한 다양한 상품 검색. 
 3) 고객 패턴 분석 : 고객의 쇼핑 행동 분석에 따른 다양한 방법(회원, 비회원, 선호도를 통한 인기 상품)을 적용한 패턴 분석(추천 알고리즘 코사인 유사도). 
 4) 가변 화면 정보 : 접속자의 패턴 분석에 따른 가변적인 화면 구성  
    
+## 블루클럽 - 씨앗 팀원 소개
+|이름|개발 특기사항|개발 특기언어|
+|------|---|---|
+|박지우|system개발|C언어|
+|이대관|Web개발|java|
+|채희상|Web개발|java|
+|김호중|Web개발|java|
+  
 ### 프로젝트 1주차 이슈  
 - 프로젝트 주제 선정  
 의료 쇼핑몰  
@@ -66,6 +74,7 @@ QnA 게시판
   
 ### 프로젝트 2주차 이슈  
 - DateBase 설계  
+![DB](https://user-images.githubusercontent.com/75885992/177923822-d4089267-5d6e-4448-8d25-7dd9e84974c9.png)  
 제 3 정규화까지 설계  
 - 클래스 설계  
 MVC 패턴  
@@ -113,27 +122,14 @@ BootStrap 사용해 직접 구현
 4. 발표자료 작성   
 a) 08.03 중간 발표   
 b) 08.05 최종 발표   
-
-# SIAT_FinalProject
-- siat full stack sw developer education
-- this repo is final project 
-
+  
 ## project team
-|이름|팀원 역할|씨앗 내 범용성|깃 허브|
+|이름|개발 담당|씨앗 내 범용성|깃 허브|
 |------|---|---|---|
-|박지우|팀장|(시스템,웹)풀 스택|https://github.com/Azabell1993|
-|이대관|프론트엔드 팀원|프론트 엔드|https://github.com/CodingBeginnerLDK|
-|채희상|백엔드 팀원|백엔드|https://github.com/ds3569|
-|김호중|CSS 적용 팀원|디자인|https://github.com/HeartByte|
-
-
-## 팀원 소개
-|이름|개발 특기사항|개발 특기언어|
-|------|---|---|
-|박지우|system개발|C언어|
-|이대관|Web개발|java|
-|채희상|Web개발|java|
-|김호중|-|-|
+|박지우|프론트 엔드 개발|(시스템, 웹) 풀 스택|https://github.com/Azabell1993|
+|이대관|프론트엔드-디자인|프론트 엔드|https://github.com/CodingBeginnerLDK|
+|채희상|백엔드-로직|백엔드|https://github.com/ds3569|
+|김호중|DB-Entity Test|백엔드|https://github.com/HeartByte|
 
 
 # 팀장의 C언어 ==> WebAssembly ==> Web 모듈 프론트엔드로의 연결을 테스트한 레포지토리(아직 적용예정은 없지만 나중에 따로 BASE64구현을 해보기 위해 만든 번외 파트입니다.)
@@ -146,17 +142,4 @@ b) 08.05 최종 발표
 > * Backend:C ↔ WebAssembly ↔  Java  
   
 ![스크린샷_2022-07-11_오후_10 40 40](https://user-images.githubusercontent.com/75885992/178281238-887bc9ab-0f7b-4b8a-99da-fdb693c74f98.png)  
-  
-
-# DB 설계
-![DB](https://user-images.githubusercontent.com/75885992/177923822-d4089267-5d6e-4448-8d25-7dd9e84974c9.png)
-
-
-# 팀원 각 개발파트 분담
-|이름|개발파트|기타|
-|------|---|---|
-|박지우|프론트엔드|JavaScript, Vue|
-|이대관|프론트엔드|JavaScript, Vue|
-|채희상|백엔드|Java, Spring|
-|김호중|CSS|-|
 
