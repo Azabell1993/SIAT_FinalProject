@@ -28,7 +28,7 @@
 의 쇼핑몰  
   
 - 프로젝트 업무 분장  
-|-|frontend|design|backend|database|
+|000|frontend|design|backend|database|
 |------|---|---|---|---|
 |주개발|박지우|이대관|채희상|김호중|
 |부1|이대관|이대관|채희상|김호중|
