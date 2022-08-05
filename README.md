@@ -18,7 +18,7 @@
 ## 팀원 기여도
 |이름|개발 담당|씨앗 내 범용성|기여도|깃 허브|
 |------|---|---|---|---|
-|박지우|프론트 엔드 개발|(시스템, 웹) 풀 스택|프론트 엔드 로직 주 개발 기여|https://github.com/Azabell1993|
+|박지우|프론트 엔드 개발|(시스템, 웹) 풀 스택|프론트 엔드 로직 주 개발 기여, 깃 허브 관리 자문, work flow 디자인|https://github.com/Azabell1993|
 |이대관|프론트엔드-디자인|프론트 엔드|이미지 동적 화면, 디자인 적용 기여|https://github.com/CodingBeginnerLDK|
 |채희상|백엔드-로직|백엔드|JPA 주 개발 기여|https://github.com/ds3569|
 |김호중|DB-Entity Test|백엔드|Entity 테스트 코드 기여|https://github.com/HeartByte|
