@@ -14,6 +14,14 @@
 |이대관|Web개발|js|블루클럽에서 js를 특기언어로 승화시켰다.|
 |채희상|Web개발|java|JPA를 활용하여 주어진 문제를 잘 해결할 수 있다.|
 |김호중|Web개발|java|-|
+    
+## project team
+|이름|개발 담당|씨앗 내 범용성|기여도|깃 허브|
+|------|---|---|---|---|
+|박지우|프론트 엔드 개발|(시스템, 웹) 풀 스택|프론트 엔드 로직 주 개발 기여|https://github.com/Azabell1993|
+|이대관|프론트엔드-디자인|프론트 엔드|이미지 동적 화면, 디자인 적용 기여|https://github.com/CodingBeginnerLDK|
+|채희상|백엔드-로직|백엔드|JPA 주 개발 기여|https://github.com/ds3569|
+|김호중|DB-Entity Test|백엔드|Entity 테스트 코드 기여|https://github.com/HeartByte|
   
 ### 프로젝트 1주차 이슈  
 - 프로젝트 주제 선정  
@@ -125,15 +133,7 @@ BootStrap 사용해 직접 구현
 4. 발표자료 작성   
 a) 08.03 중간 발표   
 b) 08.05 최종 발표   
-  
-## project team
-|이름|개발 담당|씨앗 내 범용성|깃 허브|
-|------|---|---|---|
-|박지우|프론트 엔드 개발|(시스템, 웹) 풀 스택|https://github.com/Azabell1993|
-|이대관|프론트엔드-디자인|프론트 엔드|https://github.com/CodingBeginnerLDK|
-|채희상|백엔드-로직|백엔드|https://github.com/ds3569|
-|김호중|DB-Entity Test|백엔드|https://github.com/HeartByte|
-  
+
 ### 기능 미구현  
 1. 상품 검색 기능  
 2. 상품 리뷰 기능  
