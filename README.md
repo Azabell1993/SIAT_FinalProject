@@ -134,8 +134,11 @@ b) 08.05 최종 발표
 
 # C언어 ==> WebAssembly ==> Web   
 (아직 적용예정은 없지만 나중에 따로 BASE64구현 및 엔진 개발을 해보기 위해 만든 번외 파트입니다.)  
-[HTML 적용 예제보기](https://github.com/Azabell1993/SIAT_FinalProject/tree/main/TeamLeader_Pratice_Test_Workspace/WEBASSEMBLY/TEST_JS_exam01/Suceess_)
-[C언어 덧셈 객체 코드 예제보기]
+[HTML 적용 예제보기]
+(https://github.com/Azabell1993/SIAT_FinalProject/tree/main/TeamLeader_Pratice_Test_Workspace/WEBASSEMBLY/TEST_JS_exam01/Suceess_)
+
+https://github.com/Azabell1993/SIAT_FinalProject/blob/84f24f1217951eafda6c4ec328bea03f7ca5b644/TeamLeader_Pratice_Test_Workspace/WEBASSEMBLY/TEST_JS_exam01/Suceess_/index.html#L29  
+[C언어 덧셈 객체 코드 예제보기]  
 https://github.com/Azabell1993/SIAT_FinalProject/blob/f6093cd5acd9b15e4fb4740571379058b1544a61/TeamLeader_Pratice_Test_Workspace/C/addFunction.h#L14-L77
   
 - Frontend, Backend에 있어서 WEB 서비스 전반에 사용할 엔진을 설계하고 구현할 방법을 C언어를 통해 설계하고자 하고 기반을 닦았습니다.
