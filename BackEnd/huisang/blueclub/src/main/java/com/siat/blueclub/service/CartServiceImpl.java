@@ -36,7 +36,7 @@ public class CartServiceImpl implements CartService {
 				productRepository.findById(proCode).get());
 		Product product = productRepository.findById(proCode).get();
 		int count = product.getProStock();
-		if (count - cartCount < 0) {
+		if (count - cartCount <= 0) {
 			return false;
 		} else {
 			if (optional.isEmpty()) {
