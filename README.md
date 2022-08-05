@@ -75,7 +75,7 @@ QnA 게시판
 ### 프로젝트 2주차 이슈  
 - DateBase 설계  
 <img width="1493" alt="다이아그램" src="https://user-images.githubusercontent.com/75885992/183022686-e4c9ba5e-8dda-40a8-9ae4-0cfb93298b45.png">  
-> JPA Libary를 사용헤 DB 구현  
+>> JPA Libary를 사용헤 DB 구현  
 https://github.com/Azabell1993/SIAT_FinalProject/blob/7689415ca55b515bafaef0de09ae639e8ebbefb9/BackEnd/src/main/java/com/siat/blueclub/domain/Product.java#L23-L54  
   
 제 3 정규화까지 설계  
