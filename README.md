@@ -10,7 +10,7 @@
 ## 블루클럽 - 씨앗 팀원 소개
 |이름|개발 특기사항|개발 특기언어|특이사항|
 |------|---|---|---|
-|박지우|system개발|C언어|printf 같은 내장함수, 객체지향을 비롯한 패러다임 구현, 웹 엔진 개발 기술이 있다.|
+|박지우|system개발|C언어|printf 같은 내장함수, 객체지향을 비롯한 패러다임 구현 기술이 있다.|
 |이대관|Web개발|js|블루클럽에서 js를 특기언어로 승화시켰다.|
 |채희상|Web개발|java|JPA를 활용하여 주어진 문제를 잘 해결할 수 있다.|
 |김호중|Web개발|java|-|
@@ -132,7 +132,8 @@ b) 08.05 최종 발표
 |김호중|DB-Entity Test|백엔드|https://github.com/HeartByte|
 
 
-# 팀장의 C언어 ==> WebAssembly ==> Web 모듈 프론트엔드로의 연결을 테스트한 레포지토리(아직 적용예정은 없지만 나중에 따로 BASE64구현을 해보기 위해 만든 번외 파트입니다.)
+# C언어 ==> WebAssembly ==> Web 모듈 프론트엔드로의 연결을 테스트한 레포지토리  
+(아직 적용예정은 없지만 나중에 따로 BASE64구현 및 엔진 개발을 해보기 위해 만든 번외 파트입니다.)  
 [예제보기](https://github.com/Azabell1993/SIAT_FinalProject/tree/main/TeamLeader_Pratice_Test_Workspace/WEBASSEMBLY/TEST_JS_exam01/Suceess_)
 - Frontend, Backend에 있어서 WEB 서비스 전반에 사용할 엔진을 설계하고 구현할 방법을 C언어를 통해 설계하고자 하고 기반을 닦았습니다.
 - C언어로 객체를 구현하였으며 캡슐화와 메모리 해제등이 객체지향 기반의 고급언어와 유사하게 적성되어 있습니다.
