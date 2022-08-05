@@ -52,7 +52,8 @@ public class CartController {
 		System.out.println(new Date() + " | " + ip + " | addCart | " + cartMap);
 		Integer proCodeTemp = (Integer) cartMap.get("proCode");
 		Long proCode = new Long(proCodeTemp);
-		Integer cartCount = (Integer) cartMap.get("cartCount");
+		String cartCountStr = (String) cartMap.get("cartCount");
+		Integer cartCount = Integer.parseInt(String.valueOf(cartCountStr));
 		String memID = (String) cartMap.get("memID");
 		if(cartCount < 0 ) {
 			data.put("data", "false");
