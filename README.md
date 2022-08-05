@@ -132,7 +132,7 @@ b) 08.05 최종 발표
 |김호중|DB-Entity Test|백엔드|https://github.com/HeartByte|
 
 
-# C언어 ==> WebAssembly ==> Web 모듈 프론트엔드로의 연결을 테스트한 레포지토리  
+# C언어 ==> WebAssembly ==> Web   
 (아직 적용예정은 없지만 나중에 따로 BASE64구현 및 엔진 개발을 해보기 위해 만든 번외 파트입니다.)  
 [예제보기](https://github.com/Azabell1993/SIAT_FinalProject/tree/main/TeamLeader_Pratice_Test_Workspace/WEBASSEMBLY/TEST_JS_exam01/Suceess_)
 - Frontend, Backend에 있어서 WEB 서비스 전반에 사용할 엔진을 설계하고 구현할 방법을 C언어를 통해 설계하고자 하고 기반을 닦았습니다.
