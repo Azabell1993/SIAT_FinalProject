@@ -74,7 +74,10 @@ QnA 게시판
   
 ### 프로젝트 2주차 이슈  
 - DateBase 설계  
-![DB](https://user-images.githubusercontent.com/75885992/177923822-d4089267-5d6e-4448-8d25-7dd9e84974c9.png)  
+<img width="1493" alt="다이아그램" src="https://user-images.githubusercontent.com/75885992/183022686-e4c9ba5e-8dda-40a8-9ae4-0cfb93298b45.png">  
+> JPA Libary를 사용헤 DB 구현  
+https://github.com/Azabell1993/SIAT_FinalProject/blob/7689415ca55b515bafaef0de09ae639e8ebbefb9/BackEnd/src/main/java/com/siat/blueclub/domain/Product.java#L23-L54  
+  
 제 3 정규화까지 설계  
 - 클래스 설계  
 MVC 패턴  
@@ -148,7 +151,10 @@ https://github.com/Azabell1993/SIAT_FinalProject/blob/f6093cd5acd9b15e4fb4740571
 > * Backend:C ↔ WebAssembly ↔  Java  
   
   
-# 완성 이미지 샘플    
+  
+    
+# 완성 이미지 샘플  
+  
 ### 사용자 별로 아이템 순서가 다르게 보여진다.     
 ![main](https://user-images.githubusercontent.com/75885992/183018932-21ad5e94-1398-4fb9-b6db-2db9fe863d9e.png)  
   
@@ -161,16 +167,20 @@ https://github.com/Azabell1993/SIAT_FinalProject/blob/f6093cd5acd9b15e4fb4740571
 ### 소분류 카테고리 화면.  
 ![main2](https://user-images.githubusercontent.com/75885992/183018995-962ee149-2b13-4149-9244-f7ee753352ee.png)  
   
-### 장바구니 화면.  
+### 제품 구매 화면.  
+<img width="1909" alt="제품구매1" src="https://user-images.githubusercontent.com/75885992/183021973-d8f920e2-284f-4579-89c3-a2117bf23b7b.png">  
+<img width="1892" alt="제품구매2" src="https://user-images.githubusercontent.com/75885992/183022029-536f1f51-e3cf-48d3-befe-c6c56d108a0a.png">  
  
-
+  
+### 장바구니 화면.  
+<img width="1917" alt="장바구니" src="https://user-images.githubusercontent.com/75885992/183022078-44c1470d-0084-4f3e-9bf7-032355cd8141.png">  
+  
 ### 관리자의 상품등록 페이지 화면.  
 ![addProduct](https://user-images.githubusercontent.com/75885992/183019059-7bfc02e6-cd06-4d5f-9afa-9ffa2a15d906.png)  
     
 ### 회원 관리 페이지 화면.  
-![jangbaguni](https://user-images.githubusercontent.com/75885992/183019069-17655e38-859e-4114-92e2-0b32fae98a5e.png) 
-
-    
+![회원관리](https://user-images.githubusercontent.com/75885992/183022156-8c203fa3-4bab-4db9-b627-b9ca4335657f.png)  
+   
 
 
   
