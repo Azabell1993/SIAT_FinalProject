@@ -25,7 +25,7 @@
   
 ### 프로젝트 1주차 이슈  
 - 프로젝트 주제 선정  
-의료 쇼핑몰  
+의 쇼핑몰  
   
 - 프로젝트 업무 분장  
 Frontend   
@@ -153,6 +153,7 @@ b) 08.05 최종 발표
 ![login](https://user-images.githubusercontent.com/75885992/183018955-4848ea33-467a-4d30-a116-fc71641dabab.png)  
   
 ### 소분류 카테고리 화면.  
+> 이 부분 역시 사용자별로 추천별로 순서가 달라진다.
 ![main2](https://user-images.githubusercontent.com/75885992/183018995-962ee149-2b13-4149-9244-f7ee753352ee.png)  
   
 ### 제품 구매 화면.  
