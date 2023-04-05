@@ -4,9 +4,10 @@ import createPersistedState from 'vuex-persistedstate'
 export default createStore({
  
   plugins: [
+    //vuex 사용시, 새로 고침시 데이터 초기화 되는 부분 방지 하기 위한 플러그인
     createPersistedState()
   ],
-  state: {
+  state: { //store.state.loginUser.memID
     loginUser: {
       memID: '',
       memPW: '',
